@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Makes logging output appear. Don't know why. May be useful to do additional research on this. -->
+<jboss-deployment-structure>
+    <deployment>
+        <exclusions>
+            <module name="logging"/>
+        </exclusions>
+    </deployment>
+</jboss-deployment-structure>
