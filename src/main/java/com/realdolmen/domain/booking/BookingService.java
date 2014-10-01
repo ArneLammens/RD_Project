@@ -1,7 +1,11 @@
 package com.realdolmen.domain.booking;
 
-/**
- * Created by BPTAT47 on 1/10/2014.
- */
-public class BookingService {
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+
+@Stateless
+public class BookingService
+{
+    @Inject
+    private BookingRepository bookingRepository;
 }
