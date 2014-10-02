@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 /**
@@ -18,10 +20,16 @@ public class Booking {
   @Id
   private Integer id;
   @ManyToOne
+  @NotNull
   private Trip trip;
+  @NotNull
+  @Min(1)
   private BigDecimal totalPrice;
   @ManyToOne
+  @NotNull
   private Person travellingPerson;
+    @NotNull
+    @Min(1)
   private int numberOfTickets;
 
     public Booking() {

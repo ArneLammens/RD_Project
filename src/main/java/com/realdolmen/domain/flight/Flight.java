@@ -3,8 +3,13 @@ package com.realdolmen.domain.flight;
 import com.realdolmen.domain.company.Company;
 import com.realdolmen.domain.location.Location;
 import com.realdolmen.domain.person.Person;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -16,24 +21,43 @@ public class Flight {
     @Id
     @GeneratedValue
     private Integer id;
+    @NotNull
+    @Length(min = 1)
     private String flightNumber;
     @ManyToOne
+    @NotNull
     private Location departure;
     @ManyToOne
+    @NotNull
     private Location destination;
+    @NotNull
+    @Min(2)
     private int seats;
+    @NotNull
     private int availableSeats;
     @ManyToOne
+    @NotNull
     private Company company;
+    @Min(0)
+    @Max(100)
     private double discountPercentage;
+    @Min(0)
     private int seatThreshold;
     @Temporal(TemporalType.TIME)
+    @NotNull
     private Date departureTime;
     @Temporal(TemporalType.TIME)
+    @NotNull
     private Date dateOfArrival;
+    @NotNull
+    @Min(0)
     private BigDecimal price;
+    @NotNull
+    @Min(0)
+    @Max(100)
     private double margin;
     @ManyToOne
+    @NotNull
     private Person flightAdmin;
 
     public Flight() {

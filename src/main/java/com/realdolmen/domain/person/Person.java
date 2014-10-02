@@ -3,8 +3,12 @@ package com.realdolmen.domain.person;
 import com.realdolmen.domain.*;
 import com.realdolmen.domain.company.Company;
 import com.realdolmen.domain.country.Country;
+import com.sun.istack.internal.Nullable;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 /**
@@ -15,20 +19,40 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private Integer id;
+    /*custom validator zie later*/
     private String email;
+    /*custom validator min length and requerments*/
     private String password;
+    @NotNull
+    @Length(min=1)
+    //@Pattern()
     private String homeNumber;
+    @NotNull
+    @Length(min=1)
+    //@Pattern()
     private String zipCode;
+    @NotNull
+    @Length(min=1)
     private String municipality;
     @ManyToOne
     private Country country;
+    @NotNull
+    @Enumerated(EnumType.STRING)
     private Enums.Region region;
+    @NotNull
+    @Length(min=1)
     private String name;
+    @NotNull
+    @Length(min = 1)
     private String lastName;
     @Temporal(TemporalType.DATE)
+    @NotNull
     private Date dateOfBirth;
+    @NotNull
+    @Enumerated(EnumType.STRING)
     private Enums.Roles roles;
     @ManyToOne
+    @Nullable
     private Company company;
 
     public Person() {

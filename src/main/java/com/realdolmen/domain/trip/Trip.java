@@ -3,24 +3,30 @@ package com.realdolmen.domain.trip;
 import com.realdolmen.domain.flight.Flight;
 import com.realdolmen.domain.person.Person;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.inject.Inject;
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
-/**
- * Created by BPTAT47 on 1/10/2014.
- */
+
 @Entity
 public class Trip {
+
     @Id @GeneratedValue
     private Integer id;
     @ManyToOne
+    @NotNull
     private Flight departureFlight;
     @ManyToOne
+    @NotNull(message = "{welcome.message}")
     private Flight returnFlight;
     @ManyToOne
+    @NotNull
     private Person travelAgent;
+    @NotNull
+    @Min(1)
     private int numberOfSeats;
 
     public Trip() {
