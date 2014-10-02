@@ -2,8 +2,10 @@ package com.realdolmen.domain.flight;
 
 import com.realdolmen.domain.AbstractRepositoy;
 
-/**
- * Created by BPTAT47 on 1/10/2014.
- */
+import javax.ejb.Stateless;
+import javax.inject.Named;
+
+@Named
+@Stateless
 public class FlightRepository extends AbstractRepositoy<Flight> {
 }
