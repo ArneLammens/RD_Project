@@ -4,7 +4,6 @@ import com.realdolmen.domain.*;
 import com.realdolmen.domain.company.Company;
 import com.realdolmen.domain.country.Country;
 import com.realdolmen.domain.validator.Email;
-import com.sun.istack.internal.Nullable;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -52,7 +51,7 @@ public class Person {
     @Enumerated(EnumType.STRING)
     private Enums.Roles roles;
     @ManyToOne
-    @Nullable
+    @Column(nullable = true)
     private Company company;
 
     public Person() {

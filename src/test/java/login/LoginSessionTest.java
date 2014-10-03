@@ -17,16 +17,16 @@ import org.junit.runner.RunWith;
 import javax.inject.Inject;
 
 @RunWith(Arquillian.class)
-public class LoginSessionTest extends AbstractArquillianTestCase {
+public class LoginSessionTest {
 
-    private LoginSession loginSession = new LoginSession();
+    @Inject
+    private LoginSession loginSession ;
 
     @Deployment
     public static JavaArchive createTestArchive() {
         return ShrinkWrap.create(JavaArchive.class)
-                .addPackage("com.realdolmen.session")
-                .addPackage("com.realdolmen.domain")
-                .addAsResource("META-INF/testPersistence.xml")
+                .addPackage("login")
+                .addAsResource("META-INF/testPersistence.xml","META-INF/persistence.xml")
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
     }
 
