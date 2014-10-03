@@ -14,7 +14,7 @@
 
    <servlet-mapping>
        <servlet-name>Faces Servlet</servlet-name>
-       <url-pattern>/*.xhtml</url-pattern>
+       <url-pattern>*.xhtml</url-pattern>
    </servlet-mapping>
 
     <!--SETTING THE LAYOUT FOR THE WEB PAGES-->
