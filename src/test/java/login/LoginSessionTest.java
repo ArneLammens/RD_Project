@@ -19,19 +19,13 @@ import javax.inject.Inject;
 @RunWith(Arquillian.class)
 public class LoginSessionTest extends AbstractArquillianTestCase {
 
-    private LoginSession loginSession = new LoginSession();
 
-    @Deployment
-    public static JavaArchive createTestArchive() {
-        return ShrinkWrap.create(JavaArchive.class)
-                .addPackage("com.realdolmen.session")
-                .addPackage("com.realdolmen.domain")
-                .addAsResource("META-INF/testPersistence.xml")
-                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
-    }
+
+    @Inject
+    private LoginSession loginSession;
 
     @Test
-    public void testAsync() throws Exception {
+    public void sessionLoginTester() throws Exception {
         Login insertedLogin = new Login("admin", "admin", Enums.Roles.ADMIN);
         loginSession.setLogin(insertedLogin);
         Login retrievedLoginFromSession = loginSession.getLogin();

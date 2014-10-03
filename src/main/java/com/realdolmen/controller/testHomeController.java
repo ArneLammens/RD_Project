@@ -19,7 +19,8 @@ public class testHomeController implements Serializable {
 
 
     private String tester;
-    Logger logger = LoggerFactory.getLogger(getClass());
+    @Inject
+    private Logger logger;
 
 
     public void init()

@@ -52,6 +52,18 @@
             </plugin>
         </plugins>
     </build>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.jboss.arquillian</groupId>
+                <artifactId>arquillian-bom</artifactId>
+                <version>1.1.5.Final</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <!--DEPENDENCIES-->
     <dependencies>
         <!--NECESSARY-->
@@ -120,21 +132,38 @@
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>
             <artifactId>arquillian-junit-container</artifactId>
-            <version>1.1.5.Final</version>
             <scope>test</scope>
         </dependency>
         <!-- Arquillian container adapter-->
         <dependency>
             <groupId>org.wildfly</groupId>
-            <artifactId>wildfly-arquillian-container-embedded</artifactId>
+            <artifactId>wildfly-arquillian-container-remote</artifactId>
             <version>8.1.0.Final</version>
             <scope>test</scope>
         </dependency>
-        <!-- Embedded (runtime) container -->
         <dependency>
-            <groupId>org.wildfly</groupId>
-            <artifactId>wildfly-embedded</artifactId>
-            <version>8.1.0.Final</version>
+            <groupId>io.undertow</groupId>
+            <artifactId>undertow-websockets-jsr</artifactId>
+            <version>1.0.0.Beta25</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-client</artifactId>
+            <version>3.0.5.Final</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxb-provider</artifactId>
+            <version>3.0.5.Final</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-json-p-provider</artifactId>
+            <version>3.0.5.Final</version>
+            <scope>test</scope>
         </dependency>
         <!--LOGGING-->
         <dependency>
@@ -142,26 +171,6 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.7.7</version>
             <scope>provided</scope>
-        </dependency>
-        <!--ARQUILLIAN-->
-        <!-- Arquillian JUnit integration -->
-        <dependency>
-            <groupId>org.jboss.arquillian.junit</groupId>
-            <artifactId>arquillian-junit-container</artifactId>
-            <version>1.1.5.Final</version>
-            <scope>test</scope>
-        </dependency>
-        <!-- Arquillian container adapter-->
-        <dependency>
-            <groupId>org.wildfly</groupId>
-            <artifactId>wildfly-arquillian-container-embedded</artifactId>
-            <version>8.1.0.Final</version>
-        </dependency>
-        <!-- Embedded (runtime) container -->
-        <dependency>
-            <groupId>org.wildfly</groupId>
-            <artifactId>wildfly-embedded</artifactId>
-            <version>8.1.0.Final</version>
         </dependency>
     </dependencies>
 

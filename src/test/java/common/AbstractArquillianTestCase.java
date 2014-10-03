@@ -18,7 +18,9 @@ public abstract class AbstractArquillianTestCase {
 		JavaArchive archive = ShrinkWrap
 				.create(JavaArchive.class, "test.jar")
 				.addPackages(true, "com.realdolmen")
-				.addAsResource("META-INF/test-persistence.xml",
+                .addPackages(true, "common")
+                .addPackages(true, "login")
+				.addAsResource("META-INF/testPersistence.xml",
 						"META-INF/persistence.xml")
 				//.addAsResource("import.sql", "import.sql")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
