@@ -1,5 +1,6 @@
 package com.realdolmen.domain.flight;
 
+import com.realdolmen.domain.Enums;
 import com.realdolmen.domain.company.Company;
 import com.realdolmen.domain.location.Location;
 import com.realdolmen.domain.person.Person;
@@ -11,6 +12,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
+import java.time.Period;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -43,12 +46,6 @@ public class Flight {
     private double discountPercentage;
     @Min(0)
     private int seatThreshold;
-    @Temporal(TemporalType.TIME)
-    @NotNull
-    private Date departureTime;
-    @Temporal(TemporalType.TIME)
-    @NotNull
-    private Date dateOfArrival;
     @NotNull
     @Min(0)
     private BigDecimal price;
@@ -59,6 +56,20 @@ public class Flight {
     @ManyToOne
     @NotNull
     private Person flightAdmin;
+
+    /*dates in flight working with period a flight flies every monday for a year at 12 a.m. for example*/
+    @Temporal(TemporalType.TIME)
+    @NotNull
+    private Date departureTime;
+    @Temporal(TemporalType.TIME)
+    @NotNull
+    private Date dateOfArrival;
+
+    @NotNull
+    private Period period;
+
+    @Enumerated(EnumType.STRING)
+    private Enums.DayOfTheWeek dayOfTheWeek;
 
     public Flight() {
     }

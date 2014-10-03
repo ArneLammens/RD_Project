@@ -3,6 +3,7 @@ package com.realdolmen.domain.person;
 import com.realdolmen.domain.*;
 import com.realdolmen.domain.company.Company;
 import com.realdolmen.domain.country.Country;
+import com.realdolmen.domain.validator.Email;
 import com.sun.istack.internal.Nullable;
 import org.hibernate.validator.constraints.Length;
 
@@ -19,17 +20,16 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private Integer id;
-    /*custom validator zie later*/
+    @Email
     private String email;
-    /*custom validator min length and requerments*/
+    @NotNull
+    @Length(min=5)
     private String password;
     @NotNull
-    @Length(min=1)
-    //@Pattern()
+    @Length(min=1,max = 8)
     private String homeNumber;
     @NotNull
-    @Length(min=1)
-    //@Pattern()
+    @Length(min=1, max=9)
     private String zipCode;
     @NotNull
     @Length(min=1)
