@@ -12,7 +12,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <!--REPOSITORIES-->
     <repositories>
         <repository>
@@ -21,8 +20,11 @@
             <url>http://repository.primefaces.org</url>
             <layout>default</layout>
         </repository>
+        <repository>
+            <id>JBoss Public Repository</id>
+            <url>https://repository.jboss.org/nexus/content/repositories/public</url>
+        </repository>
     </repositories>
-
     <!--PLUGINS-->
     <build>
         <plugins>
@@ -33,6 +35,20 @@
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.17</version>
+                <configuration>
+                    <!-- Fork every test because it will launch a separate AS instance -->
+                    <forkMode>always</forkMode>
+                    <systemPropertyVariables>
+                        <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+                        <module.path>${env.JBOSS_HOME}\modules</module.path>
+                    </systemPropertyVariables>
+                    <redirectTestOutputToFile>false</redirectTestOutputToFile>
                 </configuration>
             </plugin>
         </plugins>
@@ -68,7 +84,6 @@
             <artifactId>cdi-api</artifactId>
             <version>1.2</version>
         </dependency>
-
         <!--OPTIONAL-->
         <!--JSF PRIMEFACES IMPLEMENTATION-->
         <dependency>
@@ -88,7 +103,6 @@
             <version>5.1.2.Final</version>
             <scope>provided</scope>
         </dependency>
-
         <!--TESTING-->
         <!--MOCKITO-->
         <dependency>
@@ -103,7 +117,27 @@
             <version>4.11</version>
             <scope>test</scope>
         </dependency>
-
+        <!--ARQUILLIAN-->
+        <!-- Arquillian JUnit integration -->
+        <dependency>
+            <groupId>org.jboss.arquillian.junit</groupId>
+            <artifactId>arquillian-junit-container</artifactId>
+            <version>1.1.5.Final</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Arquillian container adapter-->
+        <dependency>
+            <groupId>org.wildfly</groupId>
+            <artifactId>wildfly-arquillian-container-embedded</artifactId>
+            <version>8.1.0.Final</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Embedded (runtime) container -->
+        <dependency>
+            <groupId>org.wildfly</groupId>
+            <artifactId>wildfly-embedded</artifactId>
+            <version>8.1.0.Final</version>
+        </dependency>
         <!--LOGGING-->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -111,9 +145,6 @@
             <version>1.7.7</version>
             <scope>provided</scope>
         </dependency>
-
-
-
     </dependencies>
 
 </project>
