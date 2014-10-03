@@ -51,7 +51,6 @@ public class Person {
     @Enumerated(EnumType.STRING)
     private Enums.Roles roles;
     @ManyToOne
-    @Column(nullable = true)
     private Company company;
 
     public Person() {

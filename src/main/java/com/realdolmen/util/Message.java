@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
  */
 public class Message {
 
-    @Inject
+/*    @Inject
     private Locale locale;
 
 
@@ -69,6 +69,6 @@ public class Message {
         FacesMessage facesMessage = new FacesMessage(MessageFormat.format(bundle.getString(key).replaceAll("'", "''"), parameters));
         facesMessage.setSeverity(severity);
         return facesMessage;
-    }
+    }*/
 
 }

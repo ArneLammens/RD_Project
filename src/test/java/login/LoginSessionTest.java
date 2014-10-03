@@ -20,18 +20,11 @@ import javax.inject.Inject;
 public class LoginSessionTest {
 
     @Inject
-    private LoginSession loginSession ;
+    private LoginSession loginSession;
 
-    @Deployment
-    public static JavaArchive createTestArchive() {
-        return ShrinkWrap.create(JavaArchive.class)
-                .addPackage("login")
-                .addAsResource("META-INF/testPersistence.xml","META-INF/persistence.xml")
-                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
-    }
 
     @Test
-    public void testAsync() throws Exception {
+    public void sessionLoginTester() throws Exception {
         Login insertedLogin = new Login("admin", "admin", Enums.Roles.ADMIN);
         loginSession.setLogin(insertedLogin);
         Login retrievedLoginFromSession = loginSession.getLogin();
