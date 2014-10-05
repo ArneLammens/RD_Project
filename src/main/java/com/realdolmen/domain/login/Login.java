@@ -2,30 +2,32 @@ package com.realdolmen.domain.login;
 
 import com.realdolmen.domain.Enums;
 
+import javax.persistence.NamedQuery;
+
 /**
  * Created by BPTAT47 on 3/10/2014.
  */
 public class Login {
 
-    private String name;
+    private String email;
     private String password;
     private Enums.Roles role;
 
     public Login() {
     }
 
-    public Login(String name, String password, Enums.Roles role) {
-        this.name = name;
+    public Login(String email, String password, Enums.Roles role) {
+        this.email = email;
         this.password = password;
         this.role = role;
     }
 
-    public String getName() {
-        return name;
+    public String getEmail() {
+        return email;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {

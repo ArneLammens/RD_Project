@@ -47,8 +47,5 @@ public abstract class AbstractRepositoy<T>
             return (Class<T>) genericSuperclass.getActualTypeArguments()[0];
         }
 
-        public EntityManager getEntityManager() {
-            return entityManager;
-        }
     }
 

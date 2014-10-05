@@ -14,14 +14,14 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 @RunWith(Arquillian.class)
-public class LoginSessionTest {
+public class LoginSessionTest extends AbstractArquillianTestCase {
 
     @Inject
     private LoginSession loginSession;
-
 
     @Test
     public void sessionLoginTester() throws Exception {
@@ -30,6 +30,4 @@ public class LoginSessionTest {
         Login retrievedLoginFromSession = loginSession.getLogin();
         Assert.assertEquals(insertedLogin, retrievedLoginFromSession);
     }
-
-
 }

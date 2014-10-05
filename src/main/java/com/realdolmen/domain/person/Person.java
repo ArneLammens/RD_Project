@@ -14,6 +14,7 @@ import java.util.Date;
 /**
  * Created by ALMAU78 on 1/10/2014.
  */
+@NamedQuery(name = "Person.retrievePersonWithGivenEmailAndPassword",query = "SELECT p FROM Person p WHERE p.email =:email and p.password  =:password")
 @Entity
 public class Person {
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -49,11 +50,25 @@ public class Person {
     private Date dateOfBirth;
     @NotNull
     @Enumerated(EnumType.STRING)
-    private Enums.Roles roles;
+    private Enums.Roles role;
     @ManyToOne
     private Company company;
 
     public Person() {
+    }
+
+    public Person(String email, String password, String homeNumber, String zipCode, String municipality, Country country, Enums.Region region, String name, String lastName, Date dateOfBirth, Enums.Roles role) {
+        this.email = email;
+        this.password = password;
+        this.homeNumber = homeNumber;
+        this.zipCode = zipCode;
+        this.municipality = municipality;
+        this.country = country;
+        this.region = region;
+        this.name = name;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.role = role;
     }
 
     public Integer getId() {
@@ -140,12 +155,12 @@ public class Person {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Enums.Roles getRoles() {
-        return roles;
+    public Enums.Roles getRole() {
+        return role;
     }
 
-    public void setRoles(Enums.Roles roles) {
-        this.roles = roles;
+    public void setRole(Enums.Roles role) {
+        this.role = role;
     }
 
     public Company getCompany() {

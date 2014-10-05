@@ -12,12 +12,12 @@
     <ui:define name="divMain">
 
         <h:selectOneMenu value="regions">
-            <f:selectItems value="#{testHomeController.regions}" var="status"
+            <f:selectItems value="#{TestHomeController.regions}" var="status"
                            itemValue="#{status}" itemLabel="#{status.label}"/>
         </h:selectOneMenu>
-        dit is een tester waard:  #{testHomeController.tester}
+        dit is een tester waard:  #{TestHomeController.tester}
 
-        <p:commandButton action="#{testHomeController.loggertest()}" value="testLogger"/>
+        <p:commandButton action="#{TestHomeController.loggertest()}" value="testLogger"/>
     </ui:define>
 
 </ui:composition>

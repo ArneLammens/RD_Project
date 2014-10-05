@@ -15,7 +15,7 @@ import java.io.Serializable;
 
 @Named
 @ViewScoped
-public class testHomeController implements Serializable {
+public class TestHomeController implements Serializable {
 
 
     private String tester;
