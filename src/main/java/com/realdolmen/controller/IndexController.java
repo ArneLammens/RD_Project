@@ -3,6 +3,7 @@ package com.realdolmen.controller;
 import com.realdolmen.domain.Enums;
 import com.realdolmen.domain.country.Country;
 import com.realdolmen.domain.country.CountryRepository;
+import com.realdolmen.session.CountrySession;
 import org.slf4j.Logger;
 
 import javax.faces.event.AjaxBehaviorEvent;
@@ -20,7 +21,7 @@ public class IndexController implements Serializable {
     @Inject
     private Logger logger;
     @Inject
-    private CountryRepository countryRepository;
+    private CountrySession countrySession;
 
     /*attributes and/or ejbs form server*/
     private Enums.Region destinationRegion;
@@ -46,11 +47,11 @@ public class IndexController implements Serializable {
 
     public void getCountyOfDepartureRegion(AjaxBehaviorEvent event) {
         logger.info("get approved countries for departure region: "+departureRegion.getLabel());
-        countryList = countryRepository.getAllApprovedCountriesOfARegion(departureRegion);
+        countryList = countrySession.getCorrectCountryListForAGivenRegion(departureRegion);
     }
     public void getCountyOfDestinationRegion(AjaxBehaviorEvent event) {
         logger.info("get approved countries for destination region: "+destinationRegion.getLabel());
-        countryList = countryRepository.getAllApprovedCountriesOfARegion(destinationRegion);
+        countryList = countrySession.getCorrectCountryListForAGivenRegion(destinationRegion);
     }
 
     /*Getters and Setters*/

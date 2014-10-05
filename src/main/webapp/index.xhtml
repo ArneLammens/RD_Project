@@ -1,12 +1,11 @@
 <ui:composition template="template/master.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:p="http://primefaces.org/ui"
-        >
+                xmlns:p="http://primefaces.org/ui">
     <f:metadata>
-        <f:event type="preRenderView" listener="#{indexController.init()}"/>
+        <f:viewAction action="#{indexController.init()}" onPostback="false"/>
     </f:metadata>
 
     <ui:define name="divTop">
@@ -43,7 +42,7 @@
                     <p:ajax event="change" execute="departureDate" render="returnDate"/>
                 </p:calendar>
                 <p:outputLabel for="returnDate" value="Return Date:" />
-                <p:calendar id="returnDate" value="#{indexController.returnDate}" pattern="dd/MM/yyyy" mindate="#{indexController.minDate}" required="true" />
+                <p:calendar id="returnDate" value="#{indexController.returnDate}" pattern="dd/MM/yyyy" mindate="#{indexController.departureDate}" required="true" />
             </h:panelGrid>
         </h:form>
     </ui:define>

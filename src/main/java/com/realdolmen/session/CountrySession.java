@@ -35,47 +35,92 @@ public class CountrySession {
     private List<Country> AUSTRALIA_Approved;
     private List<Country> AUSTRALIA_Disapproved;
 
-    @PostConstruct
+   @PostConstruct
     private void getAllCountries() {
         for (Enums.Region region : Enums.Region.values()) {
             if(region.equals(Enums.Region.AFRICA))
             {
-                logger.info("get all approved ");
+                logger.info("get all approved and disapproved countries of the region "+ region );
                 AFRICA_Approved=countryRepository.getAllApprovedCountriesOfARegion(region);
                 AFRICA_Disapproved=countryRepository.getAllDisapprovedCountriesOfARegion(region);
             }
             else if(region.equals(Enums.Region.EUROPE))
             {
+                logger.info("get all approved and disapproved countries of the region "+ region );
                 EUROPE_Approved=countryRepository.getAllApprovedCountriesOfARegion(region);
                 EUROPE_Disapproved=countryRepository.getAllDisapprovedCountriesOfARegion(region);
             }
             else if(region.equals(Enums.Region.ASIA))
             {
+                logger.info("get all approved and disapproved countries of the region "+ region );
                 ASIA_Approved=countryRepository.getAllApprovedCountriesOfARegion(region);
                 ASIA_Disapproved=countryRepository.getAllDisapprovedCountriesOfARegion(region);
             }
             else if(region.equals(Enums.Region.NORTH_AMERICA))
             {
+                logger.info("get all approved and disapproved countries of the region "+ region );
                 NORTH_AMERICA_Approved=countryRepository.getAllApprovedCountriesOfARegion(region);
                 NORTH_AMERICA_Disapproved=countryRepository.getAllDisapprovedCountriesOfARegion(region);
             }
             else if(region.equals(Enums.Region.SOUTH_AMERICA))
             {
+                logger.info("get all approved and disapproved countries of the region "+ region );
                 SOUTH_AMERICA_Approved=countryRepository.getAllApprovedCountriesOfARegion(region);
                 SOUTH_AMERICA_Disapproved=countryRepository.getAllDisapprovedCountriesOfARegion(region);
             }
             else if(region.equals(Enums.Region.ANTARCTICA))
             {
+                logger.info("get all approved and disapproved countries of the region "+ region );
                 ANTARCTICA_Approved=countryRepository.getAllApprovedCountriesOfARegion(region);
                 ANTARCTICA_Disapproved=countryRepository.getAllDisapprovedCountriesOfARegion(region);
             }
             else if(region.equals(Enums.Region.AUSTRALIA))
             {
+                logger.info("get all approved and disapproved countries of the region "+ region );
                 AUSTRALIA_Approved=countryRepository.getAllApprovedCountriesOfARegion(region);
                 AUSTRALIA_Disapproved=countryRepository.getAllDisapprovedCountriesOfARegion(region);
             }
         }
     }
+
+    public List<Country> getCorrectCountryListForAGivenRegion(Enums.Region region)
+    {
+        if(region.equals(Enums.Region.AFRICA))
+        {
+            return AFRICA_Approved;
+        }
+        else if(region.equals(Enums.Region.EUROPE))
+        {
+            return EUROPE_Approved;
+        }
+        else if(region.equals(Enums.Region.ASIA))
+        {
+            return ASIA_Approved;
+        }
+        else if(region.equals(Enums.Region.NORTH_AMERICA))
+        {
+            return NORTH_AMERICA_Approved;
+        }
+        else if(region.equals(Enums.Region.SOUTH_AMERICA))
+        {
+            return SOUTH_AMERICA_Approved;
+        }
+        else if(region.equals(Enums.Region.ANTARCTICA))
+        {
+            return ANTARCTICA_Approved ;
+        }
+        else if(region.equals(Enums.Region.AUSTRALIA))
+        {
+            return AUSTRALIA_Approved;
+        }
+        else
+        {
+            return null;
+        }
+
+
+    }
+
 
     public List<Country> getAFRICA_Approved() {
         return AFRICA_Approved;
