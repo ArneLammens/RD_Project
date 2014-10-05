@@ -22,7 +22,7 @@ public abstract class AbstractArquillianTestCase {
                 .addPackages(true, "login")
 				.addAsResource("META-INF/testPersistence.xml",
 						"META-INF/persistence.xml")
-				//.addAsResource("import.sql", "import.sql")
+				.addAsResource("testImport.sql", "import.sql")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 		return archive;
 	}
