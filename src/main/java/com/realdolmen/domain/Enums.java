@@ -6,13 +6,13 @@ package com.realdolmen.domain;
 public class Enums {
 
     public enum Region {
-        AFRICA("Africa"),
-        EUROPE("Europe"),
-        ASIA("ASIA"),
-        NORTH_AMERICA("North America"),
-        SOUTH_AMERICA("South America"),
-        ANTARCTICA("Antarctica"),
-        AUSTRALIA("Australia");
+        AFRICA("region.Africa"),
+        EUROPE("region.Europe"),
+        ASIA("region.Asia"),
+        NORTH_AMERICA("region.North_America"),
+        SOUTH_AMERICA("region.South_America"),
+        ANTARCTICA("region.Antarctica"),
+        AUSTRALIA("region.Australia");
 
         private final String label;
 

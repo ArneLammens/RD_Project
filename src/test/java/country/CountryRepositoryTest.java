@@ -3,7 +3,6 @@ package country;
 import com.realdolmen.domain.Enums;
 import com.realdolmen.domain.country.CountryRepository;
 import common.AbstractArquillianTestCase;
-import junit.framework.Assert;
 import org.jboss.arquillian.junit.Arquillian;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,8 +13,7 @@ import javax.inject.Inject;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Arquillian.class)
-public class CountryRepositoryTest extends AbstractArquillianTestCase
-{
+public class CountryRepositoryTest extends AbstractArquillianTestCase {
 
     @Inject
     private CountryRepository countryRepository;
@@ -23,13 +21,14 @@ public class CountryRepositoryTest extends AbstractArquillianTestCase
     private Logger logger;
 
     @Test
-         public void getApprovedCountriesOfARegion() throws Exception {
-        logger.info("Check approved Countries");
+    public void getApprovedCountriesOfARegion() throws Exception {
+        logger.info("Check approved countries");
+        assertEquals(countryRepository.getAllApprovedCountriesOfARegion(Enums.Region.EUROPE).size(), 3);
+    }
 
-    assertEquals(countryRepository.getAllApprovedCountriesOfARegion(Enums.Region.EUROPE).size(), 3);
-}
     @Test
     public void getDisapprovedCountriesOfARegion() throws Exception {
+        logger.info("Check disapproved countries");
         assertEquals(countryRepository.getAllDisapprovedCountriesOfARegion(Enums.Region.EUROPE).size(), 2);
     }
 }
