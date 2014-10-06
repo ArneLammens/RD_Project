@@ -10,13 +10,14 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
+import java.io.Serializable;
 
 /**
  * Created by BPTAT47 on 6/10/2014.
  */
 @Named
 @ViewScoped
-public class LoginController {
+public class LoginController implements Serializable {
 
 
     private Login login;

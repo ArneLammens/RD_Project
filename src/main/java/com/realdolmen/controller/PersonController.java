@@ -1,19 +1,24 @@
 package com.realdolmen.controller;
 
+import com.realdolmen.domain.person.PersonService;
 import com.realdolmen.util.LoggerResources;
 import com.realdolmen.util.Message;
 
 import javax.enterprise.event.Event;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
+import java.io.Serializable;
 
-/**
- * Created by ALMAU78 on 1/10/2014.
- */
-public class PersonController{
+@Named
+@ViewScoped
+public class PersonController implements Serializable{
 
     @Inject
     Event<Message> event;
 
+    @Inject
+    private PersonService personService;
 
 
 
