@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 @ViewScoped
 public class LoginController {
 
+
     private Login login;
 
     @Inject

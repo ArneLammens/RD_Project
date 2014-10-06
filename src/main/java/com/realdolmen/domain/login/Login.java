@@ -3,12 +3,10 @@ package com.realdolmen.domain.login;
 import com.realdolmen.domain.Enums;
 import com.realdolmen.domain.country.Country;
 
-import javax.persistence.NamedQuery;
 import java.io.Serializable;
 
-/**
- * Created by BPTAT47 on 3/10/2014.
- */
+
+
 public class Login implements Serializable {
     private Integer id;
     private String email;
@@ -20,7 +18,7 @@ public class Login implements Serializable {
     public Login() {
     }
 
-    public Login(Integer id,String email, String password, Enums.Roles role) {
+    public Login(Integer id, String email, String password, Enums.Roles role) {
         this.email = email;
         this.password = password;
         this.role = role;
@@ -70,4 +68,7 @@ public class Login implements Serializable {
         return id;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
 }
