@@ -12,12 +12,12 @@
         </locale-config>
 
         <resource-bundle>
-            <base-name>messages</base-name>
-            <var>msgs</var>
+            <base-name>resourceBundle.Label</base-name>
+            <var>lbl</var>
         </resource-bundle>
         <resource-bundle>
-            <base-name>labels</base-name>
-            <var>lbl</var>
+            <base-name>resourceBundle.Enums</base-name>
+            <var>enm</var>
         </resource-bundle>
     </application>
 </faces-config>

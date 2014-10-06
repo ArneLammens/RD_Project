@@ -26,10 +26,11 @@ public class IndexController implements Serializable {
     /*attributes and/or ejbs form server*/
     private Enums.Region destinationRegion;
     private Enums.Region departureRegion;
+    private List<Country> departureCountryList;
 
-    private List<Country> countryList;
     private Country departureCountry;
     private Country destinationCountry;
+    private List<Country> destinationCountryList;
 
     private Date departureDate;
     private Date returnDate;
@@ -47,13 +48,18 @@ public class IndexController implements Serializable {
 
     public void getCountyOfDepartureRegion(AjaxBehaviorEvent event) {
         logger.info("get approved countries for departure region: "+departureRegion.getLabel());
-        countryList = countrySession.getCorrectCountryListForAGivenRegion(departureRegion);
+        departureCountryList = countrySession.getCorrectCountryListForAGivenRegion(departureRegion);
     }
     public void getCountyOfDestinationRegion(AjaxBehaviorEvent event) {
         logger.info("get approved countries for destination region: "+destinationRegion.getLabel());
-        countryList = countrySession.getCorrectCountryListForAGivenRegion(destinationRegion);
+        destinationCountryList = countrySession.getCorrectCountryListForAGivenRegion(destinationRegion);
     }
 
+    public String redirectToTripPage()
+    {
+
+        return "trips?faces-redirect=true";
+    }
     /*Getters and Setters*/
 
     public Enums.Region getDestinationRegion() {
@@ -72,12 +78,12 @@ public class IndexController implements Serializable {
         this.departureRegion = departureRegion;
     }
 
-    public List<Country> getCountryList() {
-        return countryList;
+    public List<Country> getDepartureCountryList() {
+        return departureCountryList;
     }
 
-    public void setCountryList(List<Country> countryList) {
-        this.countryList = countryList;
+    public void setDepartureCountryList(List<Country> departureCountryList) {
+        this.departureCountryList = departureCountryList;
     }
 
     public Country getDepartureCountry() {
@@ -94,6 +100,14 @@ public class IndexController implements Serializable {
 
     public void setDestinationCountry(Country destinationCountry) {
         this.destinationCountry = destinationCountry;
+    }
+
+    public List<Country> getDestinationCountryList() {
+        return destinationCountryList;
+    }
+
+    public void setDestinationCountryList(List<Country> destinationCountryList) {
+        this.destinationCountryList = destinationCountryList;
     }
 
     public Date getDepartureDate() {
