@@ -8,8 +8,10 @@
     <ui:define name="divTop">
     </ui:define>
     <ui:define name="divMain">
-       <p:inputText />
-        <p:password />
+       <p:inputText binding="#{loginController.login.email}" />
+        <p:password binding="#{loginController.login.password}"/>
+
+        <p:commandButton action="#{loginController.loginTo}"/>
     </ui:define>
 
 </ui:composition>

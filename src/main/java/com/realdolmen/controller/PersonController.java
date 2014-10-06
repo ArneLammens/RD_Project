@@ -14,8 +14,7 @@ public class PersonController{
     @Inject
     Event<Message> event;
 
-    @Inject
-    private LoggerResources loggerResources;
+
 
 
 }

@@ -14,7 +14,7 @@ public class LoginRepositoryTest {
 
     @Test
     public void getUserWithGivenNameAndPassword(){
-        Login logintoBeRetrieved = new Login("admin","admin", Enums.Roles.ADMIN);
-        loginRepository.retrievePersonWithGivenNameAndPassword(logintoBeRetrieved);
+        Login logInToBeRetrieved = new Login("admin","admin", Enums.Roles.ADMIN);
+        loginRepository.retrievePersonWithGivenNameAndPassword(logInToBeRetrieved);
     }
 }

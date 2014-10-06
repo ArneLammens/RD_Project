@@ -1,11 +1,50 @@
 <ui:composition template="template/master.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:ui="http://java.sun.com/jsf/facelets">
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+        >
+    <f:metadata>
+        <f:viewAction onPostback="false" action="#{indexController.init}"/>
+    </f:metadata>
 
     <ui:define name="divTop">
         <ui:include src='template/top.xhtml'/>
     </ui:define>
 
+    <ui:define name="divMain">
+        <h:form>
+            <h:panelGrid columns="2" cellpadding="5">
+                <p:outputLabel for="DepartureRegion" value="Departure Region:" />
+                <p:selectOneMenu id="DepartureRegion" value="#{indexController.departureRegion}" required="true">
+                    <f:ajax event="change" execute="DepartureRegion" listener="#{indexController.getCountyOfDepartureRegion}" render="DepartureCountry"/>
+                    <f:selectItem itemLabel="Select Departure Region" itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{indexController.regions}" var="region" itemValue="#{region}" itemLabel="#{region.label}"/>
+                </p:selectOneMenu>
+                <p:outputLabel for="DepartureCountry" value="Departure Country:" />
+                <p:selectOneMenu id="DepartureCountry" value="#{indexController.departureCountry}" required="true">
+                    <f:selectItem itemLabel="Select Departure Country" itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{indexController.countryList}" var="country" itemValue="#{country}" itemLabel="#{country.name}"/>
+                </p:selectOneMenu>
+                <p:outputLabel for="DestinationRegion" value="Destination Region:" />
+                <p:selectOneMenu id="DestinationRegion" value="#{indexController.destinationRegion}" required="true">
+                    <f:ajax event="change" execute="DestinationRegion" listener="#{indexController.getCountyOfDestinationRegion}" render="DestinationCountry"/>
+                    <f:selectItem itemLabel="Select Destination Region" itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{indexController.regions}" var="region" itemValue="#{region}" itemLabel="#{region.label}"/>
+                </p:selectOneMenu>
+                <p:outputLabel for="DestinationCountry" value="Destination Country:" />
+                <p:selectOneMenu id="DestinationCountry" value="#{indexController.departureCountry}" required="true">
+                    <f:selectItem itemLabel="Select Destination Country" itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{indexController.countryList}" var="country" itemValue="#{country}" itemLabel="#{country.name}"/>
+                </p:selectOneMenu>
+                <p:outputLabel for="departureDate" value="Departure Date:" />
+                <p:calendar id="departureDate" value="#{indexController.departureDate}" pattern="dd/MM/yyyy" mindate="#{indexController.minDate}" required="true" >
+                    <p:ajax event="change" execute="departureDate" render="returnDate"/>
+                </p:calendar>
+                <p:outputLabel for="returnDate" value="Return Date:" />
+                <p:calendar id="returnDate" value="#{indexController.returnDate}" pattern="dd/MM/yyyy" mindate="#{indexController.minDate}" required="true" />
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
 </ui:composition>

@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
  * Created by BPTAT47 on 1/10/2014.
  */
 @Entity
+@NamedQuery(name = "Country.getAllCountriesOfARegionApprovedOrDisapproved", query = "SELECT c FROM Country c WHERE c.region =:region and c.approved=:approved")
 public class Country {
 
     @GeneratedValue
