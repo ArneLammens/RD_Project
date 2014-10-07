@@ -13,15 +13,15 @@
 
         <resource-bundle>
             <base-name>resourceBundle.ValidationMessages</base-name>
-            <var>validation</var>
+            <var>vld</var>
         </resource-bundle>
         <resource-bundle>
             <base-name>resourceBundle.Label</base-name>
-            <var>label</var>
+            <var>lbl</var>
         </resource-bundle>
         <resource-bundle>
             <base-name>resourceBundle.Enums</base-name>
-            <var>enum</var>
+            <var>enm</var>
         </resource-bundle>
     </application>
 </faces-config>
