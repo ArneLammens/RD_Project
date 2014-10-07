@@ -3,12 +3,11 @@ package com.realdolmen.domain.person;
 import com.realdolmen.domain.*;
 import com.realdolmen.domain.company.Company;
 import com.realdolmen.domain.country.Country;
-import com.realdolmen.domain.validator.Email;
+import com.realdolmen.domain.validator.ValidEmail;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 /**
@@ -20,7 +19,7 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private Integer id;
-    @Email
+    @ValidEmail
     private String email;
     @NotNull
     @Length(min=5)
@@ -64,6 +63,19 @@ public class Person {
         this.zipCode = zipCode;
         this.municipality = municipality;
         this.country = country;
+        this.region = region;
+        this.name = name;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.role = role;
+    }
+
+    public Person(String email, String password, String homeNumber, String zipCode, String municipality, Enums.Region region, String name, String lastName, Date dateOfBirth, Enums.Roles role) {
+        this.email = email;
+        this.password = password;
+        this.homeNumber = homeNumber;
+        this.zipCode = zipCode;
+        this.municipality = municipality;
         this.region = region;
         this.name = name;
         this.lastName = lastName;

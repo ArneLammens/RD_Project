@@ -14,7 +14,7 @@
 
     <ui:define name="divMain">
         <h:form>
-            <h:panelGrid columns="2" cellpadding="5">
+            <h:panelGrid columns="2" cellpadding="6">
                 <p:outputLabel for="DepartureRegion" value="#{lbl['index.departureRegion']}" />
                 <p:selectOneMenu id="DepartureRegion" value="#{indexController.departureRegion}" required="true">
                     <f:ajax event="change" execute="DepartureRegion" listener="#{indexController.getCountyOfDepartureRegion}" render="DepartureCountry"/>
@@ -39,7 +39,7 @@
                 </p:selectOneMenu>
                 <p:outputLabel for="departureDate" value="#{lbl['index.departureDate']}" />
                 <p:calendar id="departureDate" value="#{indexController.departureDate}" pattern="dd/MM/yyyy" mindate="#{indexController.minDate}" required="true" >
-                    <p:ajax event="change" execute="departureDate" render="returnDate"/>
+                    <p:ajax event="dateSelect" update="returnDate" />
                 </p:calendar>
                 <p:outputLabel for="returnDate" value="#{lbl['index.returnDate']}" />
                 <p:calendar id="returnDate" value="#{indexController.returnDate}" pattern="dd/MM/yyyy" mindate="#{indexController.departureDate}" required="true" />

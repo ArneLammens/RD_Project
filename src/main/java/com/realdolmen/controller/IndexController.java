@@ -6,6 +6,7 @@ import com.realdolmen.domain.country.CountryRepository;
 import com.realdolmen.session.CountrySession;
 import org.slf4j.Logger;
 
+import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -13,6 +14,7 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.ResourceBundle;
 
 @Named
 @ViewScoped
@@ -22,6 +24,9 @@ public class IndexController implements Serializable {
     private Logger logger;
     @Inject
     private CountrySession countrySession;
+
+    @Inject
+    private CountryRepository countryRepositor;
 
     /*attributes and/or ejbs form server*/
     private Enums.Region destinationRegion;
@@ -38,8 +43,9 @@ public class IndexController implements Serializable {
 
     /*Functions for the index page*/
     public void init() {
+        ResourceBundle bundle = ResourceBundle.getBundle("resourceBundle/Label", FacesContext.getCurrentInstance().getViewRoot().getLocale());
 
-        logger.info("IndexController init function");
+        logger.info("IndexController init function"+bundle.getString("index.search"));
 
     }
 

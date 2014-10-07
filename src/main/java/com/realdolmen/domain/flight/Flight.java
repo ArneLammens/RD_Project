@@ -74,6 +74,24 @@ public class Flight {
     public Flight() {
     }
 
+    public Flight(String flightNumber, Location departure, Location destination, int seats, int availableSeats, Company company, double discountPercentage, int seatThreshold, BigDecimal price, double margin, Person flightAdmin, Date departureTime, Date dateOfArrival, Period period, Enums.DayOfTheWeek dayOfTheWeek) {
+        this.flightNumber = flightNumber;
+        this.departure = departure;
+        this.destination = destination;
+        this.seats = seats;
+        this.availableSeats = availableSeats;
+        this.company = company;
+        this.discountPercentage = discountPercentage;
+        this.seatThreshold = seatThreshold;
+        this.price = price;
+        this.margin = margin;
+        this.flightAdmin = flightAdmin;
+        this.departureTime = departureTime;
+        this.dateOfArrival = dateOfArrival;
+        this.period = period;
+        this.dayOfTheWeek = dayOfTheWeek;
+    }
+
     public Integer getId() {
         return id;
     }
