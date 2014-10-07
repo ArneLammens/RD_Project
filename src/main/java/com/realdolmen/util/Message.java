@@ -1,6 +1,9 @@
 package com.realdolmen.util;
 
+import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import java.text.MessageFormat;
 import java.util.Locale;
@@ -9,10 +12,11 @@ import java.util.ResourceBundle;
 /**
  * Created by BPTAT47 on 2/10/2014.
  */
+
+
 public class Message {
 
-/*    @Inject
-    private Locale locale;
+    Locale locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
 
 
     public FacesMessage info(String message)
@@ -69,6 +73,6 @@ public class Message {
         FacesMessage facesMessage = new FacesMessage(MessageFormat.format(bundle.getString(key).replaceAll("'", "''"), parameters));
         facesMessage.setSeverity(severity);
         return facesMessage;
-    }*/
+    }
 
 }

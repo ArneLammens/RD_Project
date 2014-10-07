@@ -12,12 +12,16 @@
         </locale-config>
 
         <resource-bundle>
+            <base-name>resourceBundle.ValidationMessages</base-name>
+            <var>validation</var>
+        </resource-bundle>
+        <resource-bundle>
             <base-name>resourceBundle.Label</base-name>
-            <var>lbl</var>
+            <var>label</var>
         </resource-bundle>
         <resource-bundle>
             <base-name>resourceBundle.Enums</base-name>
-            <var>enm</var>
+            <var>enum</var>
         </resource-bundle>
     </application>
 </faces-config>

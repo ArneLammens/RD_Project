@@ -29,7 +29,7 @@ public class Login implements Serializable {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email == null?"":email;
     }
 
     public String getPassword() {
@@ -37,7 +37,8 @@ public class Login implements Serializable {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+
+        this.password = password == null?"":password;
     }
 
     public Enums.Roles getRole() {

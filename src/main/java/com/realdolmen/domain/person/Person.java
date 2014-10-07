@@ -20,7 +20,6 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private Integer id;
-    @Email
     private String email;
     @NotNull
     @Length(min=5)
@@ -55,6 +54,19 @@ public class Person {
     private Company company;
 
     public Person() {
+    }
+
+    public Person(String email, String password, String homeNumber, String zipCode, String municipality, Enums.Region region, String name, String lastName, Date dateOfBirth, Enums.Roles role) {
+        this.email = email;
+        this.password = password;
+        this.homeNumber = homeNumber;
+        this.zipCode = zipCode;
+        this.municipality = municipality;
+        this.region = region;
+        this.name = name;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.role = role;
     }
 
     public Person(String email, String password, String homeNumber, String zipCode, String municipality, Country country, Enums.Region region, String name, String lastName, Date dateOfBirth, Enums.Roles role) {

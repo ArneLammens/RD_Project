@@ -27,6 +27,12 @@ public class Country {
     public Country() {
     }
 
+    public Country(String name, boolean approved, Enums.Region region) {
+        this.name = name;
+        this.approved = approved;
+        this.region = region;
+    }
+
     public boolean isApproved() {
         return approved;
     }
