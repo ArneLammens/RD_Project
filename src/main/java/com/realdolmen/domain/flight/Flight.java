@@ -38,9 +38,6 @@ public class Flight {
     private int seats;
     @NotNull
     private int availableSeats;
-    @ManyToOne
-    @NotNull
-    private Company company;
     @Min(0)
     @Max(100)
     private double discountPercentage;
@@ -74,13 +71,12 @@ public class Flight {
     public Flight() {
     }
 
-    public Flight(String flightNumber, Location departure, Location destination, int seats, int availableSeats, Company company, double discountPercentage, int seatThreshold, BigDecimal price, double margin, Person flightAdmin, Date departureTime, Date dateOfArrival, Period period, Enums.DayOfTheWeek dayOfTheWeek) {
+    public Flight(String flightNumber, Location departure, Location destination, int seats, int availableSeats, double discountPercentage, int seatThreshold, BigDecimal price, double margin, Person flightAdmin, Date departureTime, Date dateOfArrival, Period period, Enums.DayOfTheWeek dayOfTheWeek) {
         this.flightNumber = flightNumber;
         this.departure = departure;
         this.destination = destination;
         this.seats = seats;
         this.availableSeats = availableSeats;
-        this.company = company;
         this.discountPercentage = discountPercentage;
         this.seatThreshold = seatThreshold;
         this.price = price;
@@ -134,14 +130,6 @@ public class Flight {
 
     public void setAvailableSeats(int availableSeats) {
         this.availableSeats = availableSeats;
-    }
-
-    public Company getCompany() {
-        return company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
     }
 
     public double getDiscountPercentage() {

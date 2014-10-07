@@ -63,6 +63,11 @@ public class Enums {
         }
 
     }
+    public enum RolesForACompany{
+        FLIGHT_ADMIN,
+        TRAVEL_ADMIN;
+
+    }
 
 
 }

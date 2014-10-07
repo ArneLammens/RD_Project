@@ -1,10 +1,9 @@
 package com.realdolmen.domain.company;
 
+import com.realdolmen.domain.Enums;
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -19,6 +18,17 @@ public class Company {
     @NotNull
     @Length(min = 2)
     private String name;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private Enums.RolesForACompany rolesForACompany;
+
+    public Company() {
+    }
+
+    public Company(String name, Enums.RolesForACompany rolesForACompany) {
+        this.name = name;
+        this.rolesForACompany = rolesForACompany;
+    }
 
     public Integer getId() {
         return id;

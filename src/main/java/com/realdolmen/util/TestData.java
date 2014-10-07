@@ -1,6 +1,7 @@
 package com.realdolmen.util;
 
 import com.realdolmen.domain.Enums;
+import com.realdolmen.domain.company.Company;
 import com.realdolmen.domain.country.Country;
 import com.realdolmen.domain.country.CountryRepository;
 
@@ -41,21 +42,35 @@ public class TestData {
 
     @PostConstruct
     public void init(){
+        addCompanies();
         addUsersWithDifferentRoles();
         addApprovedAndDisapprovedCountriesWithDifferentRegions();
         addLocation();
     }
 
+    public void addCompanies()
+    {
+        logger.info("/////************************************INJECTING COMPANIES*************************************/////");
+        entityManager.persist(new Company("RyanAir",Enums.RolesForACompany.FLIGHT_ADMIN));
+        entityManager.persist(new Company("JetAir",Enums.RolesForACompany.FLIGHT_ADMIN));
+        entityManager.persist(new Company("Neckermann",Enums.RolesForACompany.TRAVEL_ADMIN));
+        entityManager.persist(new Company("Mare Tours",Enums.RolesForACompany.TRAVEL_ADMIN));
+    }
+
 
     public void addUsersWithDifferentRoles() {
-        logger.info("/////************************************INJECTING users*************************************/////");
+       logger.info("/////************************************INJECTING USERS*************************************/////");
+
+        Company flightCompany=(Company) entityManager.createQuery("SELECT c FROM Company c where c.name =JetAir ").getSingleResult();
+        Company travelCompany=(Company) entityManager.createQuery("SELECT c FROM Company c where c.name =Neckermann ").getSingleResult();
        entityManager.persist(new Person("admin@hotmail.com","adminProfile","126B","9500","Geraardsbergen", Enums.Region.EUROPE,"administrator","administrator",new Date(),Enums.Roles.ADMIN));
-       entityManager.persist(new Person("flightadmin@hotmail.com","flightadmin","126B","9500","Arnhem", Enums.Region.EUROPE,"flightadmin","flightadmin",new Date(),Enums.Roles.FLIGHT_ADMIN));
-       entityManager.persist(new Person("travelagent@hotmail.com","travelagent","126B","9500","Lille",Enums.Region.EUROPE,"travelagent","travelagent",new Date(),Enums.Roles.TRAVEL_AGENT));
+       entityManager.persist(new Person("flightadmin@hotmail.com","flightadmin","126B","9500","Arnhem", Enums.Region.EUROPE,"flightadmin","flightadmin",new Date(),Enums.Roles.FLIGHT_ADMIN,flightCompany));
+       entityManager.persist(new Person("travelagent@hotmail.com","travelagent","126B","9500","Lille",Enums.Region.EUROPE,"travelagent","travelagent",new Date(),Enums.Roles.TRAVEL_AGENT,travelCompany));
        entityManager.persist(new Person("user@hotmail.com","userProfile","126B","9500","Haaltert", Enums.Region.EUROPE,"administrator","administrator",new Date(),Enums.Roles.USER));
     }
     public void addApprovedAndDisapprovedCountriesWithDifferentRegions()
     {
+        logger.info("/////************************************INJECTING COUNRTIES*************************************/////");
         entityManager.persist(new Country("Belgium",true,Enums.Region.EUROPE));
         entityManager.persist(new Country("Germany",true,Enums.Region.EUROPE));
         entityManager.persist(new Country("Spain",true,Enums.Region.EUROPE));
@@ -107,6 +122,12 @@ public class TestData {
         }
 
     }
+
+    public void addFlights()
+    {
+
+    }
+
 
 
 
