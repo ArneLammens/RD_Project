@@ -14,6 +14,7 @@ public class LoginService {
     private LoginRepository loginRepository;
 
     public LoginAttempt attempt(Login login) throws Exception {
+
         Login foundLogin = loginRepository.retrievePersonWithGivenNameAndPassword(login);
         return new LoginAttempt(isValidLogin(foundLogin, login));
 

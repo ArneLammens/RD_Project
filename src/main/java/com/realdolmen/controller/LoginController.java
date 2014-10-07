@@ -53,9 +53,6 @@ public class LoginController implements Serializable {
             if (attempt.wasSuccessful()) {
                 loginSession.setLogin(login);
                 return RedirectEnum.REDIRECT.INDEX.getUrl();
-            } else if (login.getEmail().isEmpty() && login.getPassword().isEmpty()) {
-                new FacesMessage("fjekfljelfjlejflkjef");
-                return "";
             }
         }
         catch (Exception e) {
