@@ -15,6 +15,13 @@ public class LoginSession implements Serializable {
 
     private Login login;
 
+    public boolean loggedIn(){
+        if(getLogin() != null){
+            return  true;
+        }else {
+            return false;
+        }
+    }
 
     public Login getLogin() {
         return login;

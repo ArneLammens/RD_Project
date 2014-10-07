@@ -19,6 +19,7 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private Integer id;
+
     @ValidEmail
     private String email;
     @NotNull
@@ -55,6 +56,7 @@ public class Person {
 
     public Person() {
     }
+
 
     public Person(String email, String password, String homeNumber, String zipCode, String municipality, Country country, Enums.Region region, String name, String lastName, Date dateOfBirth, Enums.Roles role) {
         this.email = email;

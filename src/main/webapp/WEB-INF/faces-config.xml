@@ -12,6 +12,10 @@
         </locale-config>
 
         <resource-bundle>
+            <base-name>resourceBundle.ValidationMessages</base-name>
+            <var>vld</var>
+        </resource-bundle>
+        <resource-bundle>
             <base-name>resourceBundle.Label</base-name>
             <var>lbl</var>
         </resource-bundle>
