@@ -14,6 +14,7 @@
 
     <ui:define name="divMain">
         <h:form>
+            <p:messages autoUpdate="true"/>
             <h:panelGrid columns="2" cellpadding="6">
                 <p:outputLabel for="DepartureRegion" value="#{lbl['index.departureRegion']}" />
                 <p:selectOneMenu id="DepartureRegion" value="#{indexController.departureRegion}" required="true">
@@ -43,8 +44,8 @@
                 </p:calendar>
                 <p:outputLabel for="returnDate" value="#{lbl['index.returnDate']}" />
                 <p:calendar id="returnDate" value="#{indexController.returnDate}" pattern="dd/MM/yyyy" mindate="#{indexController.departureDate}" required="true" />
+                <p:commandButton action="#{indexController.redirectToTripPage()}" value="#{lbl['index.search']}"/>
             </h:panelGrid>
         </h:form>
-        <p:commandButton action="#{indexController.redirectToTripPage()}" value="#{lbl['index.search']}"/>
     </ui:define>
 </ui:composition>

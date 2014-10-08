@@ -68,6 +68,8 @@ public class IndexController implements Serializable {
 
         return "trips?faces-redirect=true";
     }
+
+
     /*Getters and Setters*/
 
     public Enums.Region getDestinationRegion() {

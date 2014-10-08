@@ -73,25 +73,13 @@ public class Person {
         this.role = role;
     }
 
-    public Person(String email, String password, String homeNumber, String zipCode, String municipality, Enums.Region region, String name, String lastName, Date dateOfBirth, Enums.Roles role) {
+    public Person(String email, String password, String homeNumber, String zipCode, String municipality, Country country, Enums.Region region, String name, String lastName, Date dateOfBirth, Enums.Roles role, Company company) {
         this.email = email;
         this.password = password;
         this.homeNumber = homeNumber;
         this.zipCode = zipCode;
         this.municipality = municipality;
-        this.region = region;
-        this.name = name;
-        this.lastName = lastName;
-        this.dateOfBirth = dateOfBirth;
-        this.role = role;
-    }
-
-    public Person(String email, String password, String homeNumber, String zipCode, String municipality, Enums.Region region, String name, String lastName, Date dateOfBirth, Enums.Roles role, Company company) {
-        this.email = email;
-        this.password = password;
-        this.homeNumber = homeNumber;
-        this.zipCode = zipCode;
-        this.municipality = municipality;
+        this.country = country;
         this.region = region;
         this.name = name;
         this.lastName = lastName;
