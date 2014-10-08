@@ -1,5 +1,7 @@
 package com.realdolmen.domain.login;
 
+import com.realdolmen.util.EncryptUtil;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
@@ -13,9 +15,21 @@ public class LoginService {
     @Inject
     private LoginRepository loginRepository;
 
-    public LoginAttempt attempt(Login login) throws Exception {
+    private EncryptUtil encryptUtil = new EncryptUtil();
+
+
+    public Login attempt(Login login){
+
         Login foundLogin = loginRepository.retrievePersonWithGivenNameAndPassword(login);
-        return new LoginAttempt(isValidLogin(foundLogin, login));
+        login.setPassword(encryptUtil.encryptPassword(login.getPassword()));
+        LoginAttempt loginAttempt = new LoginAttempt(isValidLogin(foundLogin, login));
+
+        if(loginAttempt.wasSuccessful()){
+            return foundLogin;
+
+        }else{
+            return null;
+        }
 
     }
 

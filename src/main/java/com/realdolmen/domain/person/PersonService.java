@@ -12,4 +12,9 @@ public class PersonService {
     @Inject
     private PersonRepository personRepository;
 
+    public void createAPerson(Person person){
+        personRepository.persist(person);
+    }
+
+
 }

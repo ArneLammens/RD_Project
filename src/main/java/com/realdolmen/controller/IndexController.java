@@ -4,6 +4,7 @@ import com.realdolmen.domain.Enums;
 import com.realdolmen.domain.country.Country;
 import com.realdolmen.domain.country.CountryRepository;
 import com.realdolmen.session.CountrySession;
+import com.realdolmen.util.RedirectEnum;
 import org.slf4j.Logger;
 
 import javax.faces.context.FacesContext;
@@ -43,9 +44,7 @@ public class IndexController implements Serializable {
 
     /*Functions for the index page*/
     public void init() {
-        ResourceBundle bundle = ResourceBundle.getBundle("resourceBundle/Label", FacesContext.getCurrentInstance().getViewRoot().getLocale());
-
-        logger.info("IndexController init function"+bundle.getString("index.search"));
+        logger.info("IndexController init function");
 
     }
 
@@ -66,7 +65,7 @@ public class IndexController implements Serializable {
     public String redirectToTripPage()
     {
 
-        return "trips?faces-redirect=true";
+        return RedirectEnum.REDIRECT.TRIPS.getUrl();
     }
 
 

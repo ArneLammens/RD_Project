@@ -1,0 +1,65 @@
+<ui:composition template="/template/master.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+
+    <f:metadata>
+        <f:viewAction action="#{personController.init()}" onPostback="false"/>
+    </f:metadata>
+
+    <ui:define name="divTop">
+    </ui:define>
+    <ui:define name="divMain">
+        <h:form>
+            <p:messages autoUpdate="true"/>
+            <h:panelGrid columns="2" cellpadding="6">
+                <p:outputLabel for="email" value="#{lbl['person.email']}"/>
+                <p:inputText required="true" id="email" value="#{personController.person.email}"/>
+                <p:outputLabel for="password" value="#{lbl['person.password']}"/>
+                <p:password required="true" id="password" value="#{personController.person.password}"/>
+                <p:outputLabel for="name" value="#{lbl['person.name']}"/>
+                <p:inputText required="true" id="name" value="#{personController.person.name}"/>
+                <p:outputLabel for="lastName" value="#{lbl['person.lastname']}"/>
+                <p:inputText required="true" id="lastName" value="#{personController.person.lastName}"/>
+                <p:outputLabel for="dateOfBirth" value="#{lbl['person.dateOfBirth']}"/>
+                <p:calendar required="true" id="dateOfBirth" yearRange="c-100:c" navigator="true"
+                            value="#{personController.person.dateOfBirth}"/>
+                <p:outputLabel for="PersonRegion" value="#{lbl['person.region']}"/>
+                <p:selectOneMenu id="PersonRegion" value="#{personController.personRegion}" required="true">
+                    <f:ajax event="change" execute="PersonRegion" listener="#{personController.getCountryOfPerson}"
+                            render="CountryList"/>
+                    <f:selectItem itemLabel="#{lbl['index.selectDepartureRegion']}" itemValue=""
+                                  noSelectionOption="true"/>
+                    <f:selectItems value="#{personController.regions}" var="region" itemValue="#{region}"
+                                   itemLabel="#{enm[region.label]}"/>
+                </p:selectOneMenu>
+                <p:outputLabel for="CountryList" value="#{lbl['person.country']}"/>
+                <p:selectOneMenu converter="#{countryConverter}" id="CountryList" value="#{personController.person.country}"
+                                required="true">
+                    <f:selectItem itemLabel="#{lbl['index.selectDepartureCountry']}" itemValue=""
+                                  noSelectionOption="true"/>
+                    <f:selectItems value="#{personController.countries}" var="country"
+                                   itemValue="#{personController.person.country.id}"
+                                   itemLabel="#{country.name}"/>
+                </p:selectOneMenu>
+                <p:outputLabel for="homeNumber" value="#{lbl['person.homenumber']}"/>
+                <p:inputText required="true" id="homeNumber" value="#{personController.person.homeNumber}"/>
+                <p:outputLabel for="municipality" value="#{lbl['person.municipality']}"/>
+                <p:inputText required="true" id="municipality" value="#{personController.person.municipality}"/>
+                <p:outputLabel for="zipcode" value="#{lbl['person.zipcode']}"/>
+                <p:inputText required="true" id="zipcode" value="#{personController.person.zipCode}"/>
+                <h:outputLink value="index.xhtml">
+                    <h:graphicImage url="resource/image/goback-icon.png" height="50px" width="50px"/>
+                </h:outputLink>
+                <p:commandButton action="#{personController.createAPerson()}"
+                                 style="margin-right: 15px" value="#{lbl['person.createAccount']}"/>
+            </h:panelGrid>
+        </h:form>
+
+    </ui:define>
+
+
+</ui:composition>

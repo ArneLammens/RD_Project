@@ -25,7 +25,7 @@ public class LoginSessionTest extends AbstractArquillianTestCase {
 
     @Test
     public void sessionLoginTester() throws Exception {
-        Login insertedLogin = new Login(null,"admin", "admin", Enums.Roles.ADMIN);
+        Login insertedLogin = new Login(null,"admin","admin", "admin", Enums.Roles.ADMIN);
         loginSession.setLogin(insertedLogin);
         Login retrievedLoginFromSession = loginSession.getLogin();
         Assert.assertEquals(insertedLogin, retrievedLoginFromSession);

@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -15,7 +16,7 @@ import java.util.Date;
  */
 @NamedQuery(name = "Person.retrievePersonWithGivenEmailAndPassword",query = "SELECT p FROM Person p WHERE p.email =:email and p.password  =:password")
 @Entity
-public class Person {
+public class Person implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private Integer id;
@@ -87,6 +88,31 @@ public class Person {
         this.role = role;
         this.company = company;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Person person = (Person) o;
+
+        if (company != null ? !company.equals(person.company) : person.company != null) return false;
+        if (!country.equals(person.country)) return false;
+        if (!dateOfBirth.equals(person.dateOfBirth)) return false;
+        if (!email.equals(person.email)) return false;
+        if (!homeNumber.equals(person.homeNumber)) return false;
+        if (!id.equals(person.id)) return false;
+        if (!lastName.equals(person.lastName)) return false;
+        if (!municipality.equals(person.municipality)) return false;
+        if (!name.equals(person.name)) return false;
+        if (!password.equals(person.password)) return false;
+        if (region != person.region) return false;
+        if (role != person.role) return false;
+        if (!zipCode.equals(person.zipCode)) return false;
+
+        return true;
+    }
+
 
     public Integer getId() {
         return id;

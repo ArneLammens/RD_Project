@@ -31,8 +31,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-import static com.realdolmen.domain.person.PersonBuilder.aPerson;
-
 
 @Startup
 @Singleton
@@ -42,6 +40,8 @@ public class TestData {
     private EntityManager entityManager;
     @Inject
     private Logger logger;
+
+    private EncryptUtil encryptUtil = new EncryptUtil();
 
     @PostConstruct
     public void init(){
@@ -61,6 +61,7 @@ public class TestData {
         entityManager.persist(new Company("Neckermann",Enums.RolesForACompany.TRAVEL_ADMIN));
         entityManager.persist(new Company("Mare Tours",Enums.RolesForACompany.TRAVEL_ADMIN));
     }
+
     public void addApprovedAndDisapprovedCountriesWithDifferentRegions()
     {
         logger.info("/////************************************INJECTING COUNRTIES*************************************/////");
@@ -119,7 +120,9 @@ public class TestData {
         Random randomGenerator = new Random();
 
         List<Country> allCountries;
+
         Query query = entityManager.createQuery("SELECT c FROM Country c");
+
         if (query.getResultList().isEmpty()) {
             allCountries = null;
         }
