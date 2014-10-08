@@ -21,8 +21,9 @@ public class Person {
     private Integer id;
 
     @ValidEmail
+    @Column(unique=true)
     private String email;
-    @NotNull
+    @NotNull(message ="{resourceBundle/ValidationMessages/creditCard.message}" )
     @Length(min=5)
     private String password;
     @NotNull

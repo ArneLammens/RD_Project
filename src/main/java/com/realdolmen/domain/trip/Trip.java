@@ -32,6 +32,13 @@ public class Trip {
     public Trip() {
     }
 
+    public Trip(Flight departureFlight, Flight returnFlight, Person travelAgent, int numberOfSeats) {
+        this.departureFlight = departureFlight;
+        this.returnFlight = returnFlight;
+        this.travelAgent = travelAgent;
+        this.numberOfSeats = numberOfSeats;
+    }
+
     public Integer getId() {
         return id;
     }

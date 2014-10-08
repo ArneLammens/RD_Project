@@ -17,7 +17,7 @@
             <h:panelGrid columns="2" cellpadding="6">
                 <p:outputLabel for="DepartureRegion" value="#{lbl['index.departureRegion']}" />
                 <p:selectOneMenu id="DepartureRegion" value="#{indexController.departureRegion}" required="true">
-                    <f:ajax event="change" execute="DepartureRegion" listener="#{indexController.getCountyOfDepartureRegion}" render="DepartureCountry"/>
+                    <f:ajax event="change" execute="DepartureRegion" listener="#{indexController.getCountryOfDepartureRegion}" render="DepartureCountry"/>
                     <f:selectItem itemLabel="#{lbl['index.selectDepartureRegion']}" itemValue="" noSelectionOption="true" />
                     <f:selectItems value="#{indexController.regions}" var="region" itemValue="#{region}" itemLabel="#{enm[region.label]}"/>
                 </p:selectOneMenu>
@@ -28,7 +28,7 @@
                 </p:selectOneMenu>
                 <p:outputLabel for="DestinationRegion" value="#{lbl['index.destinationRegion']}" />
                 <p:selectOneMenu id="DestinationRegion" value="#{indexController.destinationRegion}" required="true">
-                    <f:ajax event="change" execute="DestinationRegion" listener="#{indexController.getCountyOfDestinationRegion}" render="DestinationCountry"/>
+                    <f:ajax event="change" execute="DestinationRegion" listener="#{indexController.getCountryOfDestinationRegion}" render="DestinationCountry"/>
                     <f:selectItem itemLabel="#{lbl['index.selectDestinationRegion']}" itemValue="" noSelectionOption="true" />
                     <f:selectItems value="#{indexController.regions}" var="region" itemValue="#{region}" itemLabel="#{enm[region.label]}"/>
                 </p:selectOneMenu>

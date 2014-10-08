@@ -53,12 +53,12 @@ public class IndexController implements Serializable {
         return Enums.Region.values();
     }
 
-    public void getCountyOfDepartureRegion(AjaxBehaviorEvent event) {
+    public void getCountryOfDepartureRegion(AjaxBehaviorEvent event) {
         logger.info("get approved countries for departure region: "+departureRegion.getLabel());
         departureCountryList = countrySession.getCorrectCountryListForAGivenRegion(departureRegion);
     }
 
-    public void getCountyOfDestinationRegion(AjaxBehaviorEvent event) {
+    public void getCountryOfDestinationRegion(AjaxBehaviorEvent event) {
         logger.info("get approved countries for destination region: "+destinationRegion.getLabel());
         destinationCountryList = countrySession.getCorrectCountryListForAGivenRegion(destinationRegion);
     }

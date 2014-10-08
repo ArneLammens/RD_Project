@@ -41,4 +41,13 @@ public class Company {
     public void setName(String name) {
         this.name = name;
     }
+
+    public Enums.RolesForACompany getRolesForACompany() {
+        return rolesForACompany;
+    }
+
+    public void setRolesForACompany(Enums.RolesForACompany rolesForACompany) {
+        this.rolesForACompany = rolesForACompany;
+    }
+
 }

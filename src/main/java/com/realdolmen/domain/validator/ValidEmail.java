@@ -19,7 +19,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ValidEmail {
 
-    String message() default "{invalid.email}";
+    String message() default "{resourceBundle/ValidationMessages/person.email}";
 
     Class<?>[] groups() default {};
 

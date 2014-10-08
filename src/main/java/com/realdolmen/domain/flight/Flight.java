@@ -62,8 +62,9 @@ public class Flight {
     @NotNull
     private Date dateOfArrival;
 
+    @Embedded
     @NotNull
-    private Period period;
+    private FlightPeriod period;
 
     @Enumerated(EnumType.STRING)
     private Enums.DayOfTheWeek dayOfTheWeek;
@@ -71,7 +72,7 @@ public class Flight {
     public Flight() {
     }
 
-    public Flight(String flightNumber, Location departure, Location destination, int seats, int availableSeats, double discountPercentage, int seatThreshold, BigDecimal price, double margin, Person flightAdmin, Date departureTime, Date dateOfArrival, Period period, Enums.DayOfTheWeek dayOfTheWeek) {
+    public Flight(String flightNumber, Location departure, Location destination, int seats, int availableSeats, double discountPercentage, int seatThreshold, BigDecimal price, double margin, Person flightAdmin, Date departureTime, Date dateOfArrival, FlightPeriod period, Enums.DayOfTheWeek dayOfTheWeek) {
         this.flightNumber = flightNumber;
         this.departure = departure;
         this.destination = destination;
@@ -186,5 +187,21 @@ public class Flight {
 
     public void setFlightAdmin(Person flightAdmin) {
         this.flightAdmin = flightAdmin;
+    }
+
+    public FlightPeriod getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(FlightPeriod period) {
+        this.period = period;
+    }
+
+    public Enums.DayOfTheWeek getDayOfTheWeek() {
+        return dayOfTheWeek;
+    }
+
+    public void setDayOfTheWeek(Enums.DayOfTheWeek dayOfTheWeek) {
+        this.dayOfTheWeek = dayOfTheWeek;
     }
 }
