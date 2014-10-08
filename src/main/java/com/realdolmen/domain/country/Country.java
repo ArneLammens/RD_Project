@@ -34,6 +34,30 @@ public class Country  {
         this.region = region;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Country country = (Country) o;
+
+        if (approved != country.approved) return false;
+        if (!id.equals(country.id)) return false;
+        if (!name.equals(country.name)) return false;
+        if (region != country.region) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + (approved ? 1 : 0);
+        result = 31 * result + region.hashCode();
+        return result;
+    }
+
     public boolean isApproved() {
         return approved;
     }

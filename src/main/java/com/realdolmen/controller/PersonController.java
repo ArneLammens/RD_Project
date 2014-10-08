@@ -59,6 +59,8 @@ public class PersonController implements Serializable{
 
    public String createAPerson(){
        logger.info(person.getCountry().getName());
+       person.setRole(Enums.Roles.USER);
+       person.setRegion(getPersonRegion());
        personService.createAPerson(person);
        return RedirectEnum.REDIRECT.INDEX.getUrl();
    }
@@ -94,4 +96,6 @@ public class PersonController implements Serializable{
     public void setCountry(Country country) {
         this.country = country;
     }
+
+
 }
