@@ -3,15 +3,21 @@ package com.realdolmen.domain.login;
 import com.realdolmen.domain.AbstractRepositoy;
 import com.realdolmen.domain.Enums;
 import com.realdolmen.domain.person.Person;
+import com.realdolmen.util.EncryptUtil;
 import com.realdolmen.util.Message;
+import org.slf4j.Logger;
 
 import javax.ejb.EJBTransactionRolledbackException;
 import javax.ejb.Stateless;
+import javax.enterprise.event.Event;
+import javax.faces.application.FacesMessage;
+import javax.inject.Inject;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 /**
  * Created by BPTAT47 on 3/10/2014.
@@ -19,42 +25,31 @@ import java.security.NoSuchAlgorithmException;
 @Stateless
 public class LoginRepository extends AbstractRepositoy<Login> {
 
+    public static final String RESOURCE_BUNDLE_VALIDATION = "resourceBundle/ValidationMessages";
 
-    public String encryptPassword(String password) throws NoSuchAlgorithmException {
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
-        md.update(password.getBytes());
+    @Inject
+    private Logger logger;
+    @Inject
+    private Event<FacesMessage> event;
 
-        byte byteData[] = md.digest();
+    private EncryptUtil encryptUtil = new EncryptUtil();
 
-        //convert the byte to hex format method 1
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < byteData.length; i++) {
-            sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+    public Login retrievePersonWithGivenNameAndPassword(Login login) {
+        List<Person> persons = entityManager.createNamedQuery("Person.retrievePersonWithGivenEmailAndPassword", Person.class)
+                .setParameter("email", login.getEmail())
+                .setParameter("password", encryptUtil.encryptPassword(login.getPassword())).getResultList();
+
+        if (persons.size() == 0) {
+            logger.error("Person wasn't found");
+            event.fire(new Message().warning(RESOURCE_BUNDLE_VALIDATION, "login.emptyEmailAndPassword"));
+        } else {
+            Person person = persons.get(0);
+            return new Login(person.getId(), person.getName(),person.getEmail(), person.getPassword(), person.getRole(),person.getCountry(),person.getRegion());
         }
 
-        System.out.println("Hex format : " + sb.toString());
-
-        //convert the byte to hex format method 2
-        StringBuffer hexString = new StringBuffer();
-        for (int i=0;i<byteData.length;i++) {
-            String hex=Integer.toHexString(0xff & byteData[i]);
-            if(hex.length()==1) hexString.append('0');
-            hexString.append(hex);
-        }
-        System.out.println("Hex format : " + hexString.toString());
-
-        return hexString.toString();
+        return null;
     }
-    public Login retrievePersonWithGivenNameAndPassword(Login login)throws Exception {
-        try {
-            Person person = entityManager.createNamedQuery("Person.retrievePersonWithGivenEmailAndPassword", Person.class)
-                    .setParameter("email", login.getEmail())
-                    .setParameter("password", encryptPassword(login.getPassword())).getSingleResult();
-            return new Login(person.getId(), person.getEmail(), person.getPassword(), person.getRole());
-        } catch (Exception e) {
-            throw new NoResultException();
-        }
 
-    }
 }
+
 

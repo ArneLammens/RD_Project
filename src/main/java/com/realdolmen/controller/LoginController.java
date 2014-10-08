@@ -1,6 +1,7 @@
 package com.realdolmen.controller;
 
 import com.realdolmen.domain.Enums;
+import com.realdolmen.domain.country.Country;
 import com.realdolmen.domain.login.Login;
 import com.realdolmen.domain.login.LoginAttempt;
 import com.realdolmen.domain.login.LoginService;
@@ -48,20 +49,27 @@ public class LoginController implements Serializable {
     }
 
     public String loginTo() {
-        try {
-            LoginAttempt attempt = loginService.attempt(login);
-            if (attempt.wasSuccessful()) {
-                loginSession.setLogin(login);
-                return RedirectEnum.REDIRECT.INDEX.getUrl();
+
+            if(stringIsEmpty(login.getEmail()) && stringIsEmpty(login.getPassword())){
+                event.fire(new Message().warning("Your email and password is empty"));
             }
-        }
-        catch (Exception e) {
-            logger.info("NoResultException");
-            event.fire(new Message().warning(RESOURCE_BUNDLE_VALIDATION, "login.emptyEmailAndPassword"));
-        }
+            Login foundLogin =  loginService.attempt(login);
+            if (foundLogin != null) {
+                loginSession.setLogin(foundLogin);
+                return RedirectEnum.REDIRECT.INDEX.getUrl();
+            }else{
+                return "";
+            }
 
-        return "";
 
+    }
+
+    public boolean stringIsEmpty(String  toBeChecked){
+       if(toBeChecked.trim().length() == 0){
+           return true;
+       }else {
+          return false;
+       }
     }
 
 
@@ -80,4 +88,5 @@ public class LoginController implements Serializable {
     public void setLogin(Login login) {
         this.login = login;
     }
+
 }

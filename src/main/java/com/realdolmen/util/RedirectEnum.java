@@ -9,7 +9,9 @@ public class RedirectEnum {
     public enum REDIRECT {
      INDEX("index?faces-redirect=true"),
      LOGIN("index?faces-redirect=true"),
-     TRIPS("index?faces-redirect=true");
+     TRIPS("index?faces-redirect=true"),
+     CREATE_ACCOUNT("createAccount?faces-redirect=true");
+
 
 
         private final String url;

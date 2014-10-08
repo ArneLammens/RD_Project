@@ -28,8 +28,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-import static com.realdolmen.domain.person.PersonBuilder.aPerson;
-
 
 @Startup
 @Singleton
@@ -39,6 +37,8 @@ public class TestData {
     private EntityManager entityManager;
     @Inject
     private Logger logger;
+
+    private EncryptUtil encryptUtil = new EncryptUtil();
 
     @PostConstruct
     public void init(){
@@ -61,10 +61,10 @@ public class TestData {
     public void addUsersWithDifferentRoles() {
        logger.info("/////************************************INJECTING USERS*************************************/////");
 
-        Company flightCompany=(Company) entityManager.createQuery("SELECT c FROM Company c where c.name =JetAir ").getSingleResult();
-        Company travelCompany=(Company) entityManager.createQuery("SELECT c FROM Company c where c.name =Neckermann ").getSingleResult();
-       entityManager.persist(new Person("admin@hotmail.com","adminProfile","126B","9500","Geraardsbergen", Enums.Region.EUROPE,"administrator","administrator",new Date(),Enums.Roles.ADMIN));
-       entityManager.persist(new Person("flightadmin@hotmail.com","flightadmin","126B","9500","Arnhem", Enums.Region.EUROPE,"flightadmin","flightadmin",new Date(),Enums.Roles.FLIGHT_ADMIN,flightCompany));
+        Company flightCompany=(Company) entityManager.createQuery("SELECT c FROM Company c where c.name ='JetAir' ").getSingleResult();
+        Company travelCompany=(Company) entityManager.createQuery("SELECT c FROM Company c where c.name ='Neckermann' ").getSingleResult();
+       entityManager.persist(new Person("admin@hotmail.com",encryptUtil.encryptPassword("adminProfile"),"126B","9500","Geraardsbergen", Enums.Region.EUROPE,"administrator","administrator",new Date(),Enums.Roles.ADMIN));
+       entityManager.persist(new Person("flightadmin@hotmail.com",encryptUtil.encryptPassword("flightadmin"),"126B","9500","Arnhem", Enums.Region.EUROPE,"flightadmin","flightadmin",new Date(),Enums.Roles.FLIGHT_ADMIN,flightCompany));
        entityManager.persist(new Person("travelagent@hotmail.com","travelagent","126B","9500","Lille",Enums.Region.EUROPE,"travelagent","travelagent",new Date(),Enums.Roles.TRAVEL_AGENT,travelCompany));
        entityManager.persist(new Person("user@hotmail.com","userProfile","126B","9500","Haaltert", Enums.Region.EUROPE,"administrator","administrator",new Date(),Enums.Roles.USER));
     }
@@ -110,7 +110,7 @@ public class TestData {
     {
         List<Country> allCountries;
         Query query = entityManager.createQuery("SELECT c FROM Country c ");
-        if (query.getResultList() == null) {
+        if (query.getResultList().isEmpty()) {
             allCountries = null;
         }
         else

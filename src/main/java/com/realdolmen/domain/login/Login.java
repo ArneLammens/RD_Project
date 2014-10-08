@@ -9,6 +9,7 @@ import java.io.Serializable;
 
 public class Login implements Serializable {
     private Integer id;
+    private String name;
     private String email;
     private String password;
     private Enums.Roles role;
@@ -18,10 +19,30 @@ public class Login implements Serializable {
     public Login() {
     }
 
-    public Login(Integer id, String email, String password, Enums.Roles role) {
+    public Login(Integer id, String name, String email, String password, Enums.Roles role) {
+        this.id = id;
+        this.name = name;
         this.email = email;
         this.password = password;
         this.role = role;
+    }
+
+    public Login(Integer id, String name, String email, String password, Enums.Roles role, Country country, Enums.Region region) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.country = country;
+        this.region = region;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {

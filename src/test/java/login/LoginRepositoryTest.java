@@ -14,7 +14,7 @@ public class LoginRepositoryTest {
 
     @Test
          public void getUserWithGivenNameAndPassword() throws Exception{
-        Login logInToBeRetrieved = new Login(null,"admin","admin", Enums.Roles.ADMIN);
-        loginRepository.retrievePersonWithGivenNameAndPassword(logInToBeRetrieved);
+       // Login logInToBeRetrieved = new Login(null,"admin","admin", Enums.Roles.ADMIN);
+        //loginRepository.retrievePersonWithGivenNameAndPassword(logInToBeRetrieved);
     }
 }
