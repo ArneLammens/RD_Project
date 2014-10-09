@@ -44,5 +44,9 @@ public class TripService {
         trip.getDepartureFlight().getDestination().getPricePerDay();
         return null;
     }
+    public boolean checkTripsExistForGivenCountry(Country country){
+        return tripRepository.checkTripsExistForGivenCountry(country);
+    }
+
 
 }

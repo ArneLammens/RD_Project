@@ -17,11 +17,11 @@
         </ui:insert>
     </div>
 
-    <ui:fragment rendered="isAdmin?">
+
     <div id='divLeft'>
-        <ui:include src='left.xhtml'/>
+        <ui:insert name="divLeft">
+        </ui:insert>
     </div>
-    </ui:fragment>
 
     <div id='divMain'>
         <ui:insert name='divMain'/>

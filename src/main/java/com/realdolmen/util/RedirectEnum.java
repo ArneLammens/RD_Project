@@ -11,7 +11,9 @@ public class RedirectEnum {
      LOGIN("login?faces-redirect=true"),
      TRIPS("trips?faces-redirect=true"),
      BOOKING("booking?faces-redirect=true"),
-     CREATE_ACCOUNT("createAccount?faces-redirect=true");
+     CREATE_ACCOUNT("createAccount?faces-redirect=true"),
+     ADMIN_COUNTRY("countryManagement?faces-redirect=true");
+
 
 
 
@@ -25,4 +27,6 @@ public class RedirectEnum {
             return url;
         }
     }
+
+
 }

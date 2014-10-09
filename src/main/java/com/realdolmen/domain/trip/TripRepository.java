@@ -4,6 +4,7 @@ import com.realdolmen.domain.AbstractRepositoy;
 import com.realdolmen.domain.country.Country;
 
 import javax.ejb.Stateless;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -21,5 +22,9 @@ public class TripRepository extends AbstractRepositoy<Trip>  {
 
     }
 
+    public boolean checkTripsExistForGivenCountry(Country country){
+        return (boolean)entityManager.createQuery("select case when (count(t) > 0)  then true else false end from Trip t where t.departureFlight.departure.country = :country or t.departureFlight.departure.country =:country ")
+         .setParameter("country",country).getSingleResult();
+    }
 
 }

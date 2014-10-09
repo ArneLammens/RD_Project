@@ -28,8 +28,17 @@ public class CountryRepository extends AbstractRepositoy<Country>
         return  entityManager.createNamedQuery("Country.getAllCountriesOfARegionApprovedOrDisapproved",Country.class)
                 .setParameter("region",region)
                 .setParameter("approved",false).getResultList();
-
     }
 
+    public void update(List<Country> allowedCountries,List<Country> disallowedCountries){
+        for (Country country : allowedCountries) {
+            entityManager.merge(country);
+
+        }
+        for (Country country : disallowedCountries) {
+            entityManager.merge(country);
+
+        }
+    }
 
 }

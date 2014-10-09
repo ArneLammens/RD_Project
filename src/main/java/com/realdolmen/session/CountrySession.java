@@ -9,6 +9,8 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Startup;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Startup
@@ -35,91 +37,137 @@ public class CountrySession {
     private List<Country> AUSTRALIA_Approved;
     private List<Country> AUSTRALIA_Disapproved;
 
-   @PostConstruct
+    @PostConstruct
     private void getAllCountries() {
         for (Enums.Region region : Enums.Region.values()) {
-            if(region.equals(Enums.Region.AFRICA))
-            {
-                logger.info("get all approved and disapproved countries of the region "+ region );
-                AFRICA_Approved=countryRepository.getAllApprovedCountriesOfARegion(region);
-                AFRICA_Disapproved=countryRepository.getAllDisapprovedCountriesOfARegion(region);
-            }
-            else if(region.equals(Enums.Region.EUROPE))
-            {
-                logger.info("get all approved and disapproved countries of the region "+ region );
-                EUROPE_Approved=countryRepository.getAllApprovedCountriesOfARegion(region);
-                EUROPE_Disapproved=countryRepository.getAllDisapprovedCountriesOfARegion(region);
-            }
-            else if(region.equals(Enums.Region.ASIA))
-            {
-                logger.info("get all approved and disapproved countries of the region "+ region );
-                ASIA_Approved=countryRepository.getAllApprovedCountriesOfARegion(region);
-                ASIA_Disapproved=countryRepository.getAllDisapprovedCountriesOfARegion(region);
-            }
-            else if(region.equals(Enums.Region.NORTH_AMERICA))
-            {
-                logger.info("get all approved and disapproved countries of the region "+ region );
-                NORTH_AMERICA_Approved=countryRepository.getAllApprovedCountriesOfARegion(region);
-                NORTH_AMERICA_Disapproved=countryRepository.getAllDisapprovedCountriesOfARegion(region);
-            }
-            else if(region.equals(Enums.Region.SOUTH_AMERICA))
-            {
-                logger.info("get all approved and disapproved countries of the region "+ region );
-                SOUTH_AMERICA_Approved=countryRepository.getAllApprovedCountriesOfARegion(region);
-                SOUTH_AMERICA_Disapproved=countryRepository.getAllDisapprovedCountriesOfARegion(region);
-            }
-            else if(region.equals(Enums.Region.ANTARCTICA))
-            {
-                logger.info("get all approved and disapproved countries of the region "+ region );
-                ANTARCTICA_Approved=countryRepository.getAllApprovedCountriesOfARegion(region);
-                ANTARCTICA_Disapproved=countryRepository.getAllDisapprovedCountriesOfARegion(region);
-            }
-            else if(region.equals(Enums.Region.AUSTRALIA))
-            {
-                logger.info("get all approved and disapproved countries of the region "+ region );
-                AUSTRALIA_Approved=countryRepository.getAllApprovedCountriesOfARegion(region);
-                AUSTRALIA_Disapproved=countryRepository.getAllDisapprovedCountriesOfARegion(region);
+            if (region.equals(Enums.Region.AFRICA)) {
+                logger.info("get all approved and disapproved countries of the region " + region);
+                AFRICA_Approved = countryRepository.getAllApprovedCountriesOfARegion(region);
+                AFRICA_Disapproved = countryRepository.getAllDisapprovedCountriesOfARegion(region);
+            } else if (region.equals(Enums.Region.EUROPE)) {
+                logger.info("get all approved and disapproved countries of the region " + region);
+                EUROPE_Approved = countryRepository.getAllApprovedCountriesOfARegion(region);
+                EUROPE_Disapproved = countryRepository.getAllDisapprovedCountriesOfARegion(region);
+            } else if (region.equals(Enums.Region.ASIA)) {
+                logger.info("get all approved and disapproved countries of the region " + region);
+                ASIA_Approved = countryRepository.getAllApprovedCountriesOfARegion(region);
+                ASIA_Disapproved = countryRepository.getAllDisapprovedCountriesOfARegion(region);
+            } else if (region.equals(Enums.Region.NORTH_AMERICA)) {
+                logger.info("get all approved and disapproved countries of the region " + region);
+                NORTH_AMERICA_Approved = countryRepository.getAllApprovedCountriesOfARegion(region);
+                NORTH_AMERICA_Disapproved = countryRepository.getAllDisapprovedCountriesOfARegion(region);
+            } else if (region.equals(Enums.Region.SOUTH_AMERICA)) {
+                logger.info("get all approved and disapproved countries of the region " + region);
+                SOUTH_AMERICA_Approved = countryRepository.getAllApprovedCountriesOfARegion(region);
+                SOUTH_AMERICA_Disapproved = countryRepository.getAllDisapprovedCountriesOfARegion(region);
+            } else if (region.equals(Enums.Region.ANTARCTICA)) {
+                logger.info("get all approved and disapproved countries of the region " + region);
+                ANTARCTICA_Approved = countryRepository.getAllApprovedCountriesOfARegion(region);
+                ANTARCTICA_Disapproved = countryRepository.getAllDisapprovedCountriesOfARegion(region);
+            } else if (region.equals(Enums.Region.AUSTRALIA)) {
+                logger.info("get all approved and disapproved countries of the region " + region);
+                AUSTRALIA_Approved = countryRepository.getAllApprovedCountriesOfARegion(region);
+                AUSTRALIA_Disapproved = countryRepository.getAllDisapprovedCountriesOfARegion(region);
             }
         }
     }
 
-    public List<Country> getCorrectCountryListForAGivenRegion(Enums.Region region)
-    {
-        if(region.equals(Enums.Region.AFRICA))
-        {
+    public List<Country> getCorrectCountryListForAGivenRegion(Enums.Region region) {
+
+        if (region.equals(Enums.Region.AFRICA)) {
             return AFRICA_Approved;
-        }
-        else if(region.equals(Enums.Region.EUROPE))
-        {
+        } else if (region.equals(Enums.Region.EUROPE)) {
             return EUROPE_Approved;
-        }
-        else if(region.equals(Enums.Region.ASIA))
-        {
+        } else if (region.equals(Enums.Region.ASIA)) {
             return ASIA_Approved;
-        }
-        else if(region.equals(Enums.Region.NORTH_AMERICA))
-        {
+        } else if (region.equals(Enums.Region.NORTH_AMERICA)) {
             return NORTH_AMERICA_Approved;
-        }
-        else if(region.equals(Enums.Region.SOUTH_AMERICA))
-        {
+        } else if (region.equals(Enums.Region.SOUTH_AMERICA)) {
             return SOUTH_AMERICA_Approved;
-        }
-        else if(region.equals(Enums.Region.ANTARCTICA))
-        {
-            return ANTARCTICA_Approved ;
-        }
-        else if(region.equals(Enums.Region.AUSTRALIA))
-        {
+        } else if (region.equals(Enums.Region.ANTARCTICA)) {
+            return ANTARCTICA_Approved;
+        } else if (region.equals(Enums.Region.AUSTRALIA)) {
             return AUSTRALIA_Approved;
-        }
-        else
-        {
+        } else {
             return null;
         }
-
-
     }
+
+    public List<List> getCorrectCountryListForAdmin(Enums.Region region) {
+        logger.info("getCorrectCounty");
+        List<List> countriesApprovedAndDisapproved = new ArrayList<>();
+        if ((region.equals(Enums.Region.AFRICA))) {
+            countriesApprovedAndDisapproved.add(AFRICA_Approved);
+            countriesApprovedAndDisapproved.add(AFRICA_Disapproved);
+            logger.info("checkList"+countriesApprovedAndDisapproved.get(0).toString());
+            return countriesApprovedAndDisapproved;
+        } else if (region.equals(Enums.Region.EUROPE)) {
+            countriesApprovedAndDisapproved.add(EUROPE_Approved);
+            countriesApprovedAndDisapproved.add(EUROPE_Disapproved);
+            return countriesApprovedAndDisapproved;
+        } else if (region.equals(Enums.Region.ASIA)) {
+            countriesApprovedAndDisapproved.add(ASIA_Approved);
+            countriesApprovedAndDisapproved.add(ASIA_Disapproved);
+            return countriesApprovedAndDisapproved;
+        } else if (region.equals(Enums.Region.NORTH_AMERICA)) {
+            countriesApprovedAndDisapproved.add(NORTH_AMERICA_Approved);
+            countriesApprovedAndDisapproved.add(NORTH_AMERICA_Disapproved);
+            return countriesApprovedAndDisapproved;
+        } else if (region.equals(Enums.Region.SOUTH_AMERICA)) {
+            countriesApprovedAndDisapproved.add(SOUTH_AMERICA_Approved);
+            countriesApprovedAndDisapproved.add(SOUTH_AMERICA_Disapproved);
+            return countriesApprovedAndDisapproved;
+        } else if (region.equals(Enums.Region.ANTARCTICA)) {
+            countriesApprovedAndDisapproved.add(ANTARCTICA_Approved);
+            countriesApprovedAndDisapproved.add(ANTARCTICA_Disapproved);
+            return countriesApprovedAndDisapproved;
+        } else if (region.equals(Enums.Region.AUSTRALIA)) {
+            countriesApprovedAndDisapproved.add(AUSTRALIA_Approved);
+            countriesApprovedAndDisapproved.add(AUSTRALIA_Disapproved);
+            return countriesApprovedAndDisapproved;
+        }
+        return null;
+    }
+
+    public void updateSessionForGivenRegion(Enums.Region region, List<Country> approvedCountries,List<Country> disapprovedCountries){
+        if ((region.equals(Enums.Region.AFRICA))) {
+            AFRICA_Approved.clear();
+            AFRICA_Approved.addAll(approvedCountries);
+            AFRICA_Disapproved.clear();
+            AFRICA_Disapproved.addAll(disapprovedCountries);
+        } else if (region.equals(Enums.Region.EUROPE)) {
+            EUROPE_Approved.clear();
+            EUROPE_Approved.addAll(approvedCountries);
+            EUROPE_Disapproved.clear();
+            EUROPE_Disapproved.addAll(disapprovedCountries);
+        } else if (region.equals(Enums.Region.ASIA)) {
+            ASIA_Approved.clear();
+            ASIA_Approved.addAll(approvedCountries);
+            ASIA_Disapproved.clear();
+            ASIA_Disapproved.addAll(disapprovedCountries);
+        } else if (region.equals(Enums.Region.NORTH_AMERICA)) {
+            NORTH_AMERICA_Approved.clear();
+            NORTH_AMERICA_Approved.addAll(approvedCountries);
+            NORTH_AMERICA_Disapproved.clear();
+            NORTH_AMERICA_Disapproved.addAll(disapprovedCountries);
+        } else if (region.equals(Enums.Region.SOUTH_AMERICA)) {
+            SOUTH_AMERICA_Approved.clear();
+            SOUTH_AMERICA_Approved.addAll(approvedCountries);
+            SOUTH_AMERICA_Disapproved.clear();
+            SOUTH_AMERICA_Disapproved.addAll(disapprovedCountries);
+        } else if (region.equals(Enums.Region.ANTARCTICA)) {
+            ANTARCTICA_Approved.clear();
+            ANTARCTICA_Approved.addAll(approvedCountries);
+            ANTARCTICA_Disapproved.clear();
+            ANTARCTICA_Disapproved.addAll(disapprovedCountries);
+        } else if (region.equals(Enums.Region.AUSTRALIA)) {
+            AUSTRALIA_Approved.clear();
+            AUSTRALIA_Approved.addAll(approvedCountries);
+            AUSTRALIA_Disapproved.clear();
+            AUSTRALIA_Disapproved.addAll(disapprovedCountries);
+        }
+    }
+
 
 
     public List<Country> getAFRICA_Approved() {
