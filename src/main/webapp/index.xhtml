@@ -7,7 +7,9 @@
     <f:metadata>
         <f:viewAction action="#{indexController.init()}" onPostback="false"/>
     </f:metadata>
-
+       <ui:define name="divLeft">
+           <ui:include src='template/left.xhtml'/>
+       </ui:define>
     <ui:define name="divTop">
         <ui:include src='template/top.xhtml'/>
     </ui:define>

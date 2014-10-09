@@ -1,0 +1,35 @@
+<ui:composition template="/template/master.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    <f:metadata>
+        <f:viewAction action="#{adminController.init()}" onPostback="false"/>
+    </f:metadata>
+    <ui:define name="divLeft">
+    </ui:define>
+    <ui:define name="divTop">
+    </ui:define>
+    <ui:define name="divMain">
+        <h:form>
+            <p:messages id="msg" autoUpdate="true"/>
+            <p:selectOneMenu id="PersonRegion" value="#{adminController.region}" required="true">
+                <f:ajax event="change" execute="PersonRegion" listener="#{adminController.getCountryOfDepartureRegion}"
+                        render="pickList"/>
+                <f:selectItem itemLabel="#{lbl['index.selectDepartureRegion']}" itemValue=""
+                              noSelectionOption="true"/>
+                <f:selectItems value="#{adminController.regions}" var="region" itemValue="#{region}"
+                               itemLabel="#{enm[region.label]}"/>
+            </p:selectOneMenu>
+           <p:pickList converter="#{countryConverter}" id="pickList" value="#{adminController.dualListModel}"  var="country" itemLabel="#{country.name}" itemValue="#{country}" >
+               <f:facet name="sourceCaption">Allowed</f:facet>
+               <f:facet name="targetCaption">Disallowed</f:facet>
+               <p:ajax event="transfer" listener="#{adminController.onTransfer}" update="msg" />
+                   </p:pickList>
+
+            <p:commandButton action="#{adminController.saveCountryList()}" value="Save changes"/>
+           </h:form>
+    </ui:define>
+
+</ui:composition>

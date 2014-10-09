@@ -41,7 +41,6 @@ public class Country  {
 
         Country country = (Country) o;
 
-        if (approved != country.approved) return false;
         if (!id.equals(country.id)) return false;
         if (!name.equals(country.name)) return false;
         if (region != country.region) return false;

@@ -11,6 +11,7 @@ import com.realdolmen.util.RedirectEnum;
 import org.slf4j.Logger;
 
 import javax.enterprise.event.Event;
+import javax.faces.application.FacesMessage;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -24,7 +25,7 @@ import java.util.List;
 public class PersonController implements Serializable{
 
     @Inject
-    Event<Message> event;
+    Event<FacesMessage> event;
 
     @Inject
     private Logger logger;
