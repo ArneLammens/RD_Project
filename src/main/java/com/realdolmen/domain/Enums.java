@@ -1,5 +1,7 @@
 package com.realdolmen.domain;
 
+import java.util.Calendar;
+
 /**
  * Created by BPTAT47 on 1/10/2014.
  */
@@ -44,22 +46,31 @@ public class Enums {
     }
 
     public enum DayOfTheWeek{
-        MONDAY("Monday"),
-        TUESDAY("Tuesday"),
-        WEDNESDAY("Wednesday"),
-        THURSDAY("Thursday"),
-        FRIDAY("Friday"),
-        SATURDAY("Saturday"),
-        SUNDAY("Sunday");
+        MONDAY(Calendar.MONDAY),
+        TUESDAY(Calendar.TUESDAY),
+        WEDNESDAY(Calendar.WEDNESDAY),
+        THURSDAY(Calendar.THURSDAY),
+        FRIDAY(Calendar.FRIDAY),
+        SATURDAY(Calendar.SATURDAY),
+        SUNDAY(Calendar.SUNDAY);
 
-        private final String label;
+        private final int label;
 
-        DayOfTheWeek(String label) {
+        DayOfTheWeek(int label) {
             this.label = label;
         }
 
-        public String getLabel() {
+        public int getLabel() {
             return label;
+        }
+
+        public static DayOfTheWeek valueOf(int value) {
+            for (DayOfTheWeek day : values()) {
+                if (day.getLabel() == value) {
+                    return day;
+                }
+            }
+            throw new IllegalArgumentException(""+value);
         }
 
     }

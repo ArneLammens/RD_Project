@@ -3,10 +3,14 @@ package com.realdolmen.controller;
 import com.realdolmen.domain.Enums;
 import com.realdolmen.domain.country.Country;
 import com.realdolmen.domain.country.CountryRepository;
+import com.realdolmen.domain.trip.TripService;
 import com.realdolmen.session.CountrySession;
+import com.realdolmen.util.Message;
 import com.realdolmen.util.RedirectEnum;
 import org.slf4j.Logger;
 
+import javax.enterprise.event.Event;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.view.ViewScoped;
@@ -17,6 +21,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static javax.faces.context.FacesContext.getCurrentInstance;
+
 @Named
 @ViewScoped
 public class IndexController implements Serializable {
@@ -25,9 +31,10 @@ public class IndexController implements Serializable {
     private Logger logger;
     @Inject
     private CountrySession countrySession;
-
     @Inject
-    private CountryRepository countryRepositor;
+    private Event<FacesMessage> event;
+
+
 
     /*attributes and/or ejbs form server*/
     private Enums.Region destinationRegion;
@@ -41,10 +48,13 @@ public class IndexController implements Serializable {
     private Date departureDate;
     private Date returnDate;
     private Date minDate =new Date() ;
+    private int numberOfSeats;
+
 
     /*Functions for the index page*/
     public void init() {
         logger.info("IndexController init function");
+
 
     }
 
@@ -64,9 +74,21 @@ public class IndexController implements Serializable {
 
     public String redirectToTripPage()
     {
-
-        return RedirectEnum.REDIRECT.TRIPS.getUrl();
+        if(numberOfSeats == 0) {
+            event.fire(new Message().warning("There are no trips"));
+            return null;
+        }
+        else {
+            getCurrentInstance().getExternalContext().getFlash().put("destinationCountry", destinationCountry);
+            getCurrentInstance().getExternalContext().getFlash().put("departureCountry", departureCountry);
+            getCurrentInstance().getExternalContext().getFlash().put("departureDate", departureDate);
+            getCurrentInstance().getExternalContext().getFlash().put("returnDate", returnDate);
+            getCurrentInstance().getExternalContext().getFlash().put("numberOfSeats", numberOfSeats);
+            return RedirectEnum.REDIRECT.TRIPS.getUrl();
+        }
     }
+
+
 
 
     /*Getters and Setters*/
@@ -142,4 +164,13 @@ public class IndexController implements Serializable {
     public void setMinDate(Date minDate) {
         this.minDate = minDate;
     }
+
+    public int getNumberOfSeats() {
+        return numberOfSeats;
+    }
+
+    public void setNumberOfSeats(int numberOfSeats) {
+        this.numberOfSeats = numberOfSeats;
+    }
+
 }

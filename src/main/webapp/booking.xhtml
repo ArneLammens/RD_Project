@@ -1,0 +1,18 @@
+<ui:composition template="template/master.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    <f:metadata>
+        <f:viewAction action="#{bookingController.init()}" onPostback="false"/>
+    </f:metadata>
+
+    <ui:define name="divTop">
+        <ui:include src='template/top.xhtml'/>
+    </ui:define>
+
+    <ui:define name="divMain">
+
+    </ui:define>
+</ui:composition>

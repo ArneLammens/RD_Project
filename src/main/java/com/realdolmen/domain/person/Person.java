@@ -37,6 +37,7 @@ public class Person implements Serializable {
     @Length(min=1)
     private String municipality;
     @ManyToOne
+    @NotNull
     private Country country;
     @NotNull
     @Enumerated(EnumType.STRING)

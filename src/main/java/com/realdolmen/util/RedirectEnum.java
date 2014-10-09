@@ -8,8 +8,9 @@ public class RedirectEnum {
 
     public enum REDIRECT {
      INDEX("index?faces-redirect=true"),
-     LOGIN("index?faces-redirect=true"),
-     TRIPS("index?faces-redirect=true"),
+     LOGIN("login?faces-redirect=true"),
+     TRIPS("trips?faces-redirect=true"),
+     BOOKING("booking?faces-redirect=true"),
      CREATE_ACCOUNT("createAccount?faces-redirect=true");
 
 

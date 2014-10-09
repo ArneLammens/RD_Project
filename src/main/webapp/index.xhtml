@@ -22,11 +22,13 @@
                     <f:selectItem itemLabel="#{lbl['index.selectDepartureRegion']}" itemValue="" noSelectionOption="true" />
                     <f:selectItems value="#{indexController.regions}" var="region" itemValue="#{region}" itemLabel="#{enm[region.label]}"/>
                 </p:selectOneMenu>
+
                 <p:outputLabel for="DepartureCountry" value="#{lbl['index.departureCountry']}" />
-                <p:selectOneMenu id="DepartureCountry" value="#{indexController.departureCountry}" required="true">
+                <p:selectOneMenu converter="#{countryConverter}" id="DepartureCountry" value="#{indexController.departureCountry}" required="true">
                     <f:selectItem itemLabel="#{lbl['index.selectDepartureCountry']}" itemValue="" noSelectionOption="true" />
-                    <f:selectItems value="#{indexController.departureCountryList}" var="country" itemValue="#{country}" itemLabel="#{country.name}"/>
+                    <f:selectItems value="#{indexController.departureCountryList}" var="country" itemValue="#{indexController.departureCountry.id}" itemLabel="#{country.name}"/>
                 </p:selectOneMenu>
+
                 <p:outputLabel for="DestinationRegion" value="#{lbl['index.destinationRegion']}" />
                 <p:selectOneMenu id="DestinationRegion" value="#{indexController.destinationRegion}" required="true">
                     <f:ajax event="change" execute="DestinationRegion" listener="#{indexController.getCountryOfDestinationRegion}" render="DestinationCountry"/>
@@ -34,9 +36,9 @@
                     <f:selectItems value="#{indexController.regions}" var="region" itemValue="#{region}" itemLabel="#{enm[region.label]}"/>
                 </p:selectOneMenu>
                 <p:outputLabel for="DestinationCountry" value="#{lbl['index.destinationCountry']}" />
-                <p:selectOneMenu id="DestinationCountry" value="#{indexController.destinationCountry}" required="true">
+                <p:selectOneMenu converter="#{countryConverter}" id="DestinationCountry" value="#{indexController.destinationCountry}" required="true">
                     <f:selectItem itemLabel="#{lbl['index.selectDestinationCountry']}" itemValue="" noSelectionOption="true" />
-                    <f:selectItems value="#{indexController.destinationCountryList}" var="country" itemValue="#{country}" itemLabel="#{country.name}"/>
+                    <f:selectItems value="#{indexController.destinationCountryList}" var="country" itemValue="#{indexController.destinationCountry.id}" itemLabel="#{country.name}"/>
                 </p:selectOneMenu>
                 <p:outputLabel for="departureDate" value="#{lbl['index.departureDate']}" />
                 <p:calendar id="departureDate" value="#{indexController.departureDate}" pattern="dd/MM/yyyy" mindate="#{indexController.minDate}" required="true" >
@@ -44,6 +46,14 @@
                 </p:calendar>
                 <p:outputLabel for="returnDate" value="#{lbl['index.returnDate']}" />
                 <p:calendar id="returnDate" value="#{indexController.returnDate}" pattern="dd/MM/yyyy" mindate="#{indexController.departureDate}" required="true" />
+
+                <p:outputLabel for="amoutSeats" value="#{lbl['index.amountOfSeats']}" />
+                <p:inputMask id="amoutSeats" value="#{indexController.numberOfSeats}"
+                        mask="9?99"
+                        maxlength="3"
+                        placeHolder=" "/>
+
+
                 <p:commandButton action="#{indexController.redirectToTripPage()}" value="#{lbl['index.search']}"/>
             </h:panelGrid>
         </h:form>

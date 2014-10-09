@@ -4,13 +4,40 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui">
-
+    <f:metadata>
+        <f:viewAction action="#{tripController.init()}" onPostback="false"/>
+    </f:metadata>
 
     <ui:define name="divTop">
         <ui:include src='template/top.xhtml'/>
     </ui:define>
 
     <ui:define name="divMain">
-            dit is een testpagina
+        <h:form>
+            <p:messages autoUpdate="true"/>
+        <p:dataTable id="mydata"  value="#{tripController.trips}" var="trip">
+            <p:column headerText="Name">
+                <h:outputText value="#{trip.name}" />
+            </p:column>
+            <p:column headerText="departure country">
+                <h:outputText value="#{trip.departureFlight.departure.country.name}" />
+            </p:column>
+            <p:column headerText="destination country">
+                <h:outputText value="#{trip.departureFlight.destination.country.name}" />
+            </p:column>
+            <p:column headerText="departure date">
+                <h:outputText value="#{trip.departureFlight.departureTime}" />
+            </p:column>
+            <p:column headerText="return date">
+                <h:outputText value="#{trip.returnFlight.departureTime}" />
+            </p:column>
+            <p:column rendered="#{!loginSession.loggedIn()}" headerText="Login">
+                <p:commandButton rendered="#{!loginSession.loggedIn()}" action="#{tripController.toLogin()}" value="Login"/>
+            </p:column>
+            <p:column rendered="#{loginSession.loggedIn()}" headerText="book">
+                <p:commandButton rendered="#{loginSession.loggedIn()}" action="#{tripController.toBooking(trip)}" value="Book"/>
+            </p:column>
+        </p:dataTable>
+        </h:form>
     </ui:define>
 </ui:composition>
