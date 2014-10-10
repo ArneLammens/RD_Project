@@ -13,6 +13,7 @@
     <ui:define name="divTop">
         <ui:include src='template/top.xhtml'/>
     </ui:define>
+    <div class="container-fluid">
     <ui:define name="divMain">
         <h:form>
             <p:messages id="msg" autoUpdate="true"/>
@@ -40,5 +41,5 @@
             <p:commandButton value="Cancel" onclick="confirmation.hide()" type="button" />
         </p:confirmDialog>
     </ui:define>
-
+    </div>
 </ui:composition>
