@@ -17,39 +17,73 @@
     </ui:define>
     <ui:define name="divMain">
         <h:form>
-        <p:panelGrid columns="3">
+            <p:messages autoUpdate="true"/>
+        <p:panelGrid columns="2">
             <p:outputLabel for="flightNumber" value="flight number"/>
             <p:inputText required="true" id="flightNumber" value="#{flightAdminController.flight.flightNumber}"/>
-            <p:outputLabel for="departure" value="departure"/>
 
-            <p:inputText required="true" id="departure" value="#{flightAdminController.flight.departure}"/>
-            <p:outputLabel for="destination" value="destination"/>
-            <p:inputText required="true" id="destination" value="#{flightAdminController.flight.destination}"/>
+
+            <p:outputLabel for="departure" value="departure" />
+            <p:selectOneMenu converter="#{locationConverter}"  id="departure" value="#{flightAdminController.flight.departure}" required="true">
+                <f:selectItem itemLabel="Select departure" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{flightAdminController.locations}" var="location" itemValue="#{flightAdminController.departureLocation.id}" itemLabel="#{location.name}"/>
+            </p:selectOneMenu>
+            <p:outputLabel for="destination" value="destination" />
+            <p:selectOneMenu converter="#{locationConverter}"  id="destination" value="#{flightAdminController.flight.destination}" required="true">
+                <f:selectItem itemLabel="Select departure" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{flightAdminController.locations}" var="location" itemValue="#{flightAdminController.destinationLocation.id}" itemLabel="#{location.name}"/>
+            </p:selectOneMenu>
+
             <p:outputLabel for="seats" value="seats"/>
-            <p:inputText required="true" id="seats" value="#{flightAdminController.flight.seats}"/>
+                        <p:inputMask id="seats" value="#{flightAdminController.flight.seats}"
+                         mask="9?99"
+                         maxlength="3"
+                         placeHolder=" " required="true"/>
+
             <p:outputLabel for="discountPercentage" value="discount percentage"/>
-            <p:inputText required="true" id="discountPercentage" value="#{flightAdminController.flight.discountPercentage}"/>
-            <p:outputLabel for="seatThreshold" value="seat threshold"/>
-            <p:inputText required="true" id="seatThreshold" value="#{flightAdminController.flight.seatThreshold}"/>
+            <p:inputText required="true" id="discountPercentage" value="#{flightAdminController.flight.discountPercentage}">
+                <f:convertNumber type="percent" />
+            </p:inputText>
+
+            <p:outputLabel for="seatThreshold" value="seatThreshold" />
+            <p:inputMask id="seatThreshold" value="#{flightAdminController.flight.seatThreshold}"
+                         mask="9?99"
+                         maxlength="3"
+                         placeHolder=" " required="true"/>
+
+
+
             <p:outputLabel for="price" value="price"/>
-            <p:inputText required="true" id="price" value="#{flightAdminController.flight.price}"/>
-            <p:outputLabel for="departuretime" value="departuretime"/>
-            <p:inputText required="true" id="departuretime" value="#{flightAdminController.flight.departureTime}"/>
-            <p:outputLabel for="duration" value="duration"/>
-            <p:inputText required="true" id="duration" value="#{flightAdminController.flight.departureTime}"/>
-            <p:outputLabel for="startDate" value="Start Date"/>
-            <p:inputText required="true" id="startDate" value="#{flightAdminController.flight.period.startDate}"/>
-            <p:outputLabel for="endDate" value="End  Date"/>
-            <p:inputText required="true" id="endDate" value="#{flightAdminController.flight.period.endDate}"/>
+
+            <p:inputText required="true" id="price" value="#{flightAdminController.flight.price}">
+              <f:convertNumber maxFractionDigits="2"/>
+            </p:inputText>
+
+            <p:outputLabel for="departuretime" value="departuretime:" />
+            <p:calendar required="true" id="departuretime" value="#{flightAdminController.flight.departureTime}" pattern="HH:mm a" timeOnly="true"  />
+
+            <p:outputLabel for="duration" value="duration:" />
+            <p:calendar required="true" id="duration" value="#{flightAdminController.duration}" pattern="HH:mm a" timeOnly="true"/>
+
+            <p:outputLabel for="startDate" value="start date" />
+            <p:calendar id="startDate" value="#{flightAdminController.startDate}" pattern="dd/MM/yyyy" mindate="#{flightAdminController.mindate}" required="true">
+                <p:ajax event="dateSelect" update="endDate"  />
+            </p:calendar>
+
+            <p:outputLabel for="endDate" value="end date" />
+            <p:calendar id="endDate" value="#{flightAdminController.endDate}" pattern="dd/MM/yyyy" mindate="#{flightAdminController.startDate}" required="true" />
+
+
+
             <p:outputLabel for="dayOfTheWeek" value="Day of the week"/>
-            <p:inputText required="true" id="dayOfTheWeek" value="#{flightAdminController.flight.dayOfTheWeek}"/>
+            <p:selectOneMenu id="dayOfTheWeek" value="#{flightAdminController.dayOfTheWeek}" required="true">
+                <f:selectItem itemLabel="select day of the week of the flight departs" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{flightAdminController.getweekDays()}" var="weekday" itemValue="#{weekday}" itemLabel="#{weekday}"/>
+            </p:selectOneMenu>
 
-
-
-
-
-
-
+            <p:commandButton action="#{flightAdminController.createFlight()}" value="save" >
+                <f:ajax render="@form" listener="#{flightAdminController.erazer}"/>
+            </p:commandButton>
         </p:panelGrid>
         </h:form>
     </ui:define>

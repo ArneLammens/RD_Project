@@ -15,4 +15,16 @@
         </p:menu>
         </h:panelGrid>
     </h:form>
+
+    <h:form rendered="#{loginSession.login.role.label == 'Flight Admin'}">
+        <h:panelGrid columns="6" >
+            <p:menu >
+                <p:submenu label="Actions">
+                    <p:menuitem value="Create flights" outcome="#{commonController.redirectToFLightAdminCreateFlight()}" />
+
+
+                </p:submenu>
+            </p:menu>
+        </h:panelGrid>
+    </h:form>
 </ui:composition>

@@ -18,8 +18,7 @@ public class LocationRepository extends AbstractRepositoy<Location>
 
     public List<Location> getLocationsOfAprovedCountries()
     {
-       /* return entityManager.createNamedQuery("Flight.getFlightsForGivenCountry", Flight.class)
-                .setParameter("country", country).getResultList();*/
-        return null;
+        return entityManager.createNamedQuery("Location.getLocationsOfAprovedCountries", Location.class).getResultList();
+
     }
 }

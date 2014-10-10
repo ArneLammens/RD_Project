@@ -20,6 +20,9 @@ public class CommonController implements Serializable{
     public String redirectToAdminPageForMargins(){
         return RedirectEnum.REDIRECT.ADMIN_MARGIN.getUrl();
     }
+    public String redirectToFLightAdminCreateFlight(){
+        return RedirectEnum.REDIRECT.CREATE_FLIGHT.getUrl();
+    }
 
 
 

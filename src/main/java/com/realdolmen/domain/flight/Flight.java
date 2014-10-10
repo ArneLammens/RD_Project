@@ -39,7 +39,7 @@ public class Flight{
     @NotNull
     private Location destination;
     @NotNull
-    @Min(2)
+    @Min(value = 2,message = "{person.email}")
     private int seats;
     @NotNull
     private int availableSeats;

@@ -26,5 +26,10 @@ public class FlightService
        return flightRepository.getAllFlightsForGivenCompanyName(company);
     }
 
+    public void createFlight(Flight flight)
+    {
+        flightRepository.persist(flight);
+    }
+
 
 }
