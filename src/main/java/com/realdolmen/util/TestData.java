@@ -57,10 +57,10 @@ public class TestData {
     public void addCompanies()
     {
         logger.info("/////************************************INJECTING COMPANIES*************************************/////");
-        entityManager.persist(new Company("RyanAir",Enums.RolesForACompany.FLIGHT_ADMIN));
+
         entityManager.persist(new Company("JetAir",Enums.RolesForACompany.FLIGHT_ADMIN));
         entityManager.persist(new Company("Neckermann",Enums.RolesForACompany.TRAVEL_ADMIN));
-        entityManager.persist(new Company("Mare Tours",Enums.RolesForACompany.TRAVEL_ADMIN));
+
     }
 
     public void addApprovedAndDisapprovedCountriesWithDifferentRegions()
