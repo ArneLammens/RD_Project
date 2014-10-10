@@ -15,26 +15,35 @@
     <ui:define name="divMain">
         <h:form>
             <p:messages autoUpdate="true"/>
-        <p:dataTable id="mydata"  value="#{tripController.trips}" var="trip">
-            <p:column headerText="Name">
+        <p:dataTable id="mydata"  value="#{tripController.tripsWithPrice}" var="trip">
+            <p:column headerText="#{lbl['trips.name']}">
                 <h:outputText value="#{trip.name}" />
             </p:column>
-            <p:column headerText="departure country">
+            <p:column headerText="#{lbl['trips.departureCountry']}">
                 <h:outputText value="#{trip.departureFlight.departure.country.name}" />
             </p:column>
-            <p:column headerText="destination country">
+            <p:column headerText="#{lbl['trips.destinationCountry']}">
                 <h:outputText value="#{trip.departureFlight.destination.country.name}" />
             </p:column>
-            <p:column headerText="departure date">
+            <p:column headerText="#{lbl['trips.departureDate']}">
+                <h:outputText value="#{trip.startDate}" />
+            </p:column>
+            <p:column headerText="#{lbl['trips.departureTime']}">
                 <h:outputText value="#{trip.departureFlight.departureTime}" />
             </p:column>
-            <p:column headerText="return date">
+            <p:column headerText="#{lbl['trips.returnDate']}">
+                <h:outputText value="#{trip.endDate}" />
+            </p:column>
+            <p:column headerText="#{lbl['trips.departureDate']}">
                 <h:outputText value="#{trip.returnFlight.departureTime}" />
             </p:column>
-            <p:column rendered="#{!loginSession.loggedIn()}" headerText="Login">
+            <p:column headerText="#{lbl['trips.price']}">
+                <h:outputText value="#{trip.price}" />
+            </p:column>
+            <p:column rendered="#{!loginSession.loggedIn()}" headerText="#{lbl['trips.login']}">
                 <p:commandButton rendered="#{!loginSession.loggedIn()}" action="#{tripController.toLogin()}" value="Login"/>
             </p:column>
-            <p:column rendered="#{loginSession.loggedIn()}" headerText="book">
+            <p:column rendered="#{loginSession.loggedIn()}" headerText="#{lbl['trips.book']}">
                 <p:commandButton rendered="#{loginSession.loggedIn()}" action="#{tripController.toBooking(trip)}" value="Book"/>
             </p:column>
         </p:dataTable>

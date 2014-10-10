@@ -35,6 +35,13 @@ public class Booking {
     public Booking() {
     }
 
+    public Booking(Trip trip, BigDecimal totalPrice, Person travellingPerson, int numberOfTickets) {
+        this.trip = trip;
+        this.totalPrice = totalPrice;
+        this.travellingPerson = travellingPerson;
+        this.numberOfTickets = numberOfTickets;
+    }
+
     public Integer getId() {
         return id;
     }

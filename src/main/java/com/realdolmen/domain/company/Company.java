@@ -50,4 +50,25 @@ public class Company {
         this.rolesForACompany = rolesForACompany;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Company)) return false;
+
+        Company company = (Company) o;
+
+        if (!id.equals(company.id)) return false;
+        if (!name.equals(company.name)) return false;
+        if (rolesForACompany != company.rolesForACompany) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + rolesForACompany.hashCode();
+        return result;
+    }
 }

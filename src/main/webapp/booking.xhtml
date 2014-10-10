@@ -13,6 +13,91 @@
     </ui:define>
 
     <ui:define name="divMain">
+        <h:form>
+            <p:messages autoUpdate="true"/>
+            <h:panelGrid columns="3">
+                <h:panelGrid columns="1" cellpadding="6" >
+                    <h2 style="display:inline">#{lbl['booking.info']}</h2><br/>
+                    <h:panelGrid columns="2" cellpadding="6">
+                        <p:outputLabel for="personName" value="#{lbl['booking.personName']}"/>
+                        <h:outputText id="personName" value="#{bookingController.person.name}"/>
+                        <p:outputLabel for="personLastname" value="#{lbl['booking.personLastname']}"/>
+                        <h:outputText id="personLastname" value="#{bookingController.person.lastName}"/>
+                        <p:outputLabel for="personEmail" value="#{lbl['booking.personEmail']}"/>
+                        <h:outputText id="personEmail" value="#{bookingController.person.email}"/>
+                        <p:outputLabel for="personHomeNumber" value="#{lbl['booking.personHomeNumber']}"/>
+                        <h:outputText id="personHomeNumber" value="#{bookingController.person.homeNumber}"/>
+                        <p:outputLabel for="personZipcode" value="#{lbl['booking.personZipcode']}"/>
+                        <h:outputText id="personZipcode" value="#{bookingController.person.zipCode}"/>
+                        <p:outputLabel for="personMunicipality" value="#{lbl['booking.personMunicipality']}"/>
+                        <h:outputText id="personMunicipality" value="#{bookingController.person.municipality}"/>
+                        <p:outputLabel for="personCountry" value="#{lbl['booking.personCountry']}"/>
+                        <h:outputText id="personCountry" value="#{bookingController.person.country.name}"/>
+                    </h:panelGrid>
+                </h:panelGrid>
+                <h:panelGrid columns="1">
+                    <h2>#{lbl['booking.departureFlight']}</h2>
+                    <h:panelGrid columns="2" cellpadding="6">
+                        <p:outputLabel for="tripName" value="#{lbl['booking.personName']}"/>
+                        <h:outputText id="tripName" value="#{bookingController.trip.name}"/>
+                        <p:outputLabel for="tripDepartureFlightid" value="#{lbl['booking.tripDepartureFlightid']}"/>
+                        <h:outputText id="tripDepartureFlightid"
+                                      value="#{bookingController.trip.departureFlight.flightNumber}"/>
+                        <p:outputLabel for="tripDepartureFlightDate" value="#{lbl['booking.tripDepartureFlightDate']}"/>
+                        <h:outputText id="tripDepartureFlightDate" value="#{bookingController.trip.startDate}"/>
+                        <p:outputLabel for="tripDepartureFlightTime" value="#{lbl['booking.tripDepartureFlightTime']}"/>
+                        <h:outputText id="tripDepartureFlightTime"
+                                      value="#{bookingController.trip.departureFlight.departureTime}"/>
+                        <p:outputLabel for="tripDepartureFlightCountry"
+                                       value="#{lbl['booking.tripDepartureFlightCountry']}"/>
+                        <h:outputText id="tripDepartureFlightCountry"
+                                      value="#{bookingController.trip.departureFlight.departure.country.name}"/>
+                        <p:outputLabel for="tripDepartureFlightDestination"
+                                       value="#{lbl['booking.tripDepartureFlightDestination']}"/>
+                        <h:outputText id="tripDepartureFlightDestination"
+                                      value="#{bookingController.trip.departureFlight.destination.country.name}"/>
+                    </h:panelGrid>
+                </h:panelGrid>
+                <h:panelGrid columns="1">
+                    <h2>#{lbl['booking.returnFlight']}</h2>
+                    <h:panelGrid columns="2">
+                        <p:outputLabel for="tripDestinationFlightid" value="#{lbl['booking.tripDepartureFlightid']}"/>
+                        <h:outputText id="tripDestinationFlightid"
+                                      value="#{bookingController.trip.returnFlight.flightNumber}"/>
+                        <p:outputLabel for="tripDestinationFlightDate"
+                                       value="#{lbl['booking.tripDestinationFlightDate']}"/>
+                        <h:outputText id="tripDestinationFlightDate" value="#{bookingController.trip.endDate}"/>
+                        <p:outputLabel for="tripDestinationFlightTime"
+                                       value="#{lbl['booking.tripDestinationFlightTime']}"/>
+                        <h:outputText id="tripDestinationFlightTime"
+                                      value="#{bookingController.trip.returnFlight.departureTime}"/>
+                        <p:outputLabel for="tripDestinationFlightCountry"
+                                       value="#{lbl['booking.tripDestinationFlightCountry']}"/>
+                        <h:outputText id="tripDestinationFlightCountry"
+                                      value="#{bookingController.trip.returnFlight.departure.country.name}"/>
+                        <p:outputLabel for="tripDestinationFlightDestination"
+                                       value="#{lbl['booking.tripDepartureFlightDestination']}"/>
+                        <h:outputText id="tripDestinationFlightDestination"
+                                      value="#{bookingController.trip.returnFlight.destination.country.name}"/>
+                    </h:panelGrid>
+                </h:panelGrid>
+            </h:panelGrid>
 
+            <h3>#{lbl['booking.choosePayment']}</h3>
+            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                <p:outputLabel for="payment" value="#{lbl['booking.choosePayment']}"/>
+                <p:selectOneRadio id="payment" value="#{bookingController.paymentMethode}" rendered="true" layout="grid"
+                                  columns="2">
+                    <f:selectItem itemValue="Creditcard" itemLabel="Creditcard"/>
+                    <f:selectItem itemValue="Online banking" itemLabel="Online banking"/>
+                    <p:ajax update="price" event="valueChange" listener="#{bookingController.alterPrice}"/>
+                </p:selectOneRadio>
+            </h:panelGrid>
+            <h:panelGrid columns="2">
+                <p:outputLabel for="price" value="#{lbl['booking.tripDepartureFlightDestination']}"/>
+                <h:outputText id="price" value="#{bookingController.trip.price}"/>
+            </h:panelGrid>
+            <p:commandButton action="#{bookingController.redirectToThankYouPage()}" value="#{lbl['booking.book']}"/>
+        </h:form>
     </ui:define>
 </ui:composition>

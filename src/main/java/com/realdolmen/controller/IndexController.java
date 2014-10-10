@@ -72,10 +72,20 @@ public class IndexController implements Serializable {
         destinationCountryList = countrySession.getCorrectCountryListForAGivenRegion(destinationRegion);
     }
 
+    public void erazer()
+    {
+        destinationCountry=null;
+        departureCountry=null;
+        destinationRegion=null;
+        departureRegion=null;
+
+    }
+
     public String redirectToTripPage()
     {
         if(numberOfSeats == 0) {
             event.fire(new Message().warning("There are no trips"));
+            //erazer();
             return null;
         }
         else {
@@ -84,6 +94,7 @@ public class IndexController implements Serializable {
             getCurrentInstance().getExternalContext().getFlash().put("departureDate", departureDate);
             getCurrentInstance().getExternalContext().getFlash().put("returnDate", returnDate);
             getCurrentInstance().getExternalContext().getFlash().put("numberOfSeats", numberOfSeats);
+            //erazer();
             return RedirectEnum.REDIRECT.TRIPS.getUrl();
         }
     }

@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.function.BiFunction;
 
 @Stateless
 public class TripService {
@@ -23,27 +24,79 @@ public class TripService {
     {
         return tripRepository.getTripsForSearchData(departureCountry,destinationCountry,departuredate,returnDate,numberOfSeats);
     }
-    public List<BigDecimal>getPriceForGivenTrips(List<Trip>trips, int numberOfSeats,Date departureDate,Date returnDate)
+    public List<TripDTO>getPriceForGivenTrips(List<Trip>trips, int numberOfSeats)
     {
-        List<BigDecimal>prices=new ArrayList<>();
-        calculatePriceForTrip(trips.get(0),numberOfSeats,departureDate,returnDate);
-   /*     for (Trip trip : trips) {
+        List<TripDTO>DTOTrips=new ArrayList<>();
 
-            prices.add();
-        }*/
+       for (Trip trip : trips) {
+           TripDTO tempTrip = new TripDTO(trip.getId(),trip.getName(),trip.getDepartureFlight(),trip.getReturnFlight(),trip.getTravelAgent(),trip.getNumberOfSeats(),trip.getAvailableSeats(),trip.getStartDate(),trip.getEndDate(),calculatePriceForTrip(trip, numberOfSeats));
+           DTOTrips.add(tempTrip);
 
-        return null;
+
+        }
+        return DTOTrips;
     }
-    public BigDecimal calculatePriceForTrip(Trip trip,int numberOfSeats,Date departureDate,Date returnDate)
+    public BigDecimal calculatePriceForTrip(Trip trip,int numberOfSeats)
     {
+        logger.info("Calculate price for trip: "+trip.getName());
+        BigDecimal departureFlightBasePriceWithMargin;
+        BigDecimal returnFlightBasePriceWithMargin;
+        int days=((int)( trip.getEndDate().getTime() - trip.getStartDate().getTime()) / (1000 * 60 * 60 * 24));
+        BigDecimal amountOfDays = new BigDecimal(days);
+        BigDecimal amountOfTickets=new BigDecimal(numberOfSeats);
+        BigDecimal pricePerDay= trip.getDepartureFlight().getDestination().getPricePerDay();
+
+        if(trip.getDepartureFlight().getSeatThreshold()<=trip.getNumberOfSeats())
+        {
+            BigDecimal discountPercentage = new BigDecimal(trip.getDepartureFlight().getDiscountPercentage());
+            discountPercentage= discountPercentage.divide(new BigDecimal(100));
+            discountPercentage=discountPercentage.add(new BigDecimal(1));
+
+            BigDecimal subtotal= trip.getDepartureFlight().getPrice().multiply(discountPercentage);
+
+            BigDecimal marginPercentage = new BigDecimal(trip.getDepartureFlight().getMargin());
+            marginPercentage=marginPercentage.divide(new BigDecimal(100));
+            marginPercentage=marginPercentage.add(new BigDecimal(1));
+
+            departureFlightBasePriceWithMargin= subtotal.multiply(marginPercentage);
+        }else
+        {
+            BigDecimal marginPercentage = new BigDecimal(trip.getDepartureFlight().getMargin());
+            marginPercentage= marginPercentage.divide(new BigDecimal(100));
+            marginPercentage=marginPercentage.add(new BigDecimal(1));
+
+            departureFlightBasePriceWithMargin=trip.getDepartureFlight().getPrice().multiply(marginPercentage);
+        }
+        if(trip.getReturnFlight().getSeatThreshold()<=trip.getNumberOfSeats())
+        {
+            BigDecimal discountPercentage = new BigDecimal(trip.getReturnFlight().getDiscountPercentage());
+            discountPercentage=discountPercentage.divide(new BigDecimal(100));
+            discountPercentage=discountPercentage.add(new BigDecimal(1));
+
+            BigDecimal subtotal= trip.getReturnFlight().getPrice().multiply(discountPercentage);
+
+            BigDecimal marginPercentage = new BigDecimal(trip.getDepartureFlight().getMargin());
+            marginPercentage= marginPercentage.divide(new BigDecimal(100));
+            marginPercentage=marginPercentage.add(new BigDecimal(1));
+
+            returnFlightBasePriceWithMargin= subtotal.multiply(marginPercentage);
+        }
+        else
+        {
+            BigDecimal marginPercentage = new BigDecimal(trip.getDepartureFlight().getMargin());
+            marginPercentage=marginPercentage.divide(new BigDecimal(100));
+            marginPercentage=marginPercentage.add(new BigDecimal(1));
+
+            returnFlightBasePriceWithMargin=trip.getReturnFlight().getPrice().multiply(marginPercentage);
+        }
+
+        BigDecimal flightsTotalPrice = (departureFlightBasePriceWithMargin.add(returnFlightBasePriceWithMargin)).multiply(amountOfTickets);
+        BigDecimal locationPricePerDay= (pricePerDay.multiply(amountOfDays)).multiply(amountOfTickets);
 
 
-        logger.info("aantal dagen berekening "+  ((int)( (returnDate.getTime() - departureDate.getTime()) / (1000 * 60 * 60 * 24))));
-        trip.getDepartureFlight().getPrice();
-        trip.getReturnFlight().getPrice();
-        trip.getDepartureFlight().getDestination().getPricePerDay();
-        return null;
+        return (flightsTotalPrice.add(locationPricePerDay)).setScale(2,BigDecimal.ROUND_HALF_UP);
     }
+
     public boolean checkTripsExistForGivenCountry(Country country){
         return tripRepository.checkTripsExistForGivenCountry(country);
     }

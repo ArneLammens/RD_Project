@@ -4,21 +4,18 @@ import com.realdolmen.domain.flight.Flight;
 import com.realdolmen.domain.person.Person;
 import org.hibernate.validator.constraints.Length;
 
-import javax.inject.Inject;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
+/**
+ * Created by ALMAU78 on 9/10/2014.
+ */
+public class TripDTO
+{
 
-@Entity
-@NamedQuery(name = "Trip.getTripsForSearchData",query = "SELECT t FROM Trip t WHERE t.departureFlight.departure.country =:departureCountry AND t.returnFlight.departure.country  =:returnCountry AND :departureDate = t.startDate  AND :returnDate = t.endDate  AND t.availableSeats>= :numberOfSeats")
-public class Trip implements Serializable {
-
-    @Id @GeneratedValue
     private Integer id;
     @NotNull
     @Length(min = 1)
@@ -44,11 +41,10 @@ public class Trip implements Serializable {
     @NotNull
     private Date endDate;
 
+    private BigDecimal price;
 
-    public Trip() {
-    }
-
-    public Trip(String name, Flight departureFlight, Flight returnFlight, Person travelAgent, int numberOfSeats, int availableSeats, Date startDate, Date endDate) {
+    public TripDTO(Integer id, String name, Flight departureFlight, Flight returnFlight, Person travelAgent, int numberOfSeats, int availableSeats, Date startDate, Date endDate, BigDecimal price) {
+        this.id = id;
         this.name = name;
         this.departureFlight = departureFlight;
         this.returnFlight = returnFlight;
@@ -57,10 +53,22 @@ public class Trip implements Serializable {
         this.availableSeats = availableSeats;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.price = price;
+    }
+
+    public TripDTO() {
     }
 
     public Integer getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Flight getDepartureFlight() {
@@ -95,14 +103,6 @@ public class Trip implements Serializable {
         this.numberOfSeats = numberOfSeats;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getAvailableSeats() {
         return availableSeats;
     }
@@ -125,5 +125,13 @@ public class Trip implements Serializable {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 }

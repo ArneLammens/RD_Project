@@ -3,6 +3,7 @@ package com.realdolmen.controller;
 
 import com.realdolmen.domain.country.Country;
 import com.realdolmen.domain.trip.Trip;
+import com.realdolmen.domain.trip.TripDTO;
 import com.realdolmen.domain.trip.TripRepository;
 import com.realdolmen.domain.trip.TripService;
 import com.realdolmen.session.CountrySession;
@@ -34,24 +35,26 @@ public class TripController implements Serializable {
     @Inject
     Event<FacesMessage> event;
 
-    private List<Trip>trips;
+    private List<TripDTO>tripsWithPrice;
     private List<BigDecimal> price;
+    private Integer numberOfSeats;
 
 
     public String init()
     {
         logger.info("init function tripcontroller");
-        Country country=(Country)getCurrentInstance().getExternalContext().getFlash().get("departureCountry");
-        Integer numberOfSeats=(Integer)getCurrentInstance().getExternalContext().getFlash().get("numberOfSeats");
-        Date departureDate=(Date)getCurrentInstance().getExternalContext().getFlash().get("departureDate");
-        Date returnDate=(Date)getCurrentInstance().getExternalContext().getFlash().get("returnDate");
-        if(country==null || departureDate==null || returnDate==null || numberOfSeats==null)
+
+        if(getCurrentInstance().getExternalContext().getFlash().get("departureCountry")==null || getCurrentInstance().getExternalContext().getFlash().get("numberOfSeats")==null || getCurrentInstance().getExternalContext().getFlash().get("departureDate")==null || getCurrentInstance().getExternalContext().getFlash().get("returnDate")==null)
         {
             return RedirectEnum.REDIRECT.INDEX.getUrl();
         }
         else
         {
-            trips = tripService.getTripsForSearchData(country,
+            Country country=(Country)getCurrentInstance().getExternalContext().getFlash().get("departureCountry");
+            numberOfSeats=(Integer)getCurrentInstance().getExternalContext().getFlash().get("numberOfSeats");
+            Date departureDate=(Date)getCurrentInstance().getExternalContext().getFlash().get("departureDate");
+            Date returnDate=(Date)getCurrentInstance().getExternalContext().getFlash().get("returnDate");
+           List<Trip> trips = tripService.getTripsForSearchData(country,
                     (Country) getCurrentInstance().getExternalContext().getFlash().get("destinationCountry"),
                     departureDate,
                     returnDate,
@@ -62,7 +65,7 @@ public class TripController implements Serializable {
                 return null;
             }else
             {
-                price =tripService.getPriceForGivenTrips(trips, numberOfSeats, departureDate, returnDate);
+                tripsWithPrice =tripService.getPriceForGivenTrips(trips, numberOfSeats);
                 return null;
             }
 
@@ -74,17 +77,28 @@ public class TripController implements Serializable {
     {
         return RedirectEnum.REDIRECT.LOGIN.getUrl();
     }
-    public String toBooking(Trip trip)
+
+    public String toBooking(TripDTO trip)
     {
-        getCurrentInstance().getExternalContext().getFlash().put("Trip",trip);
+        getCurrentInstance().getExternalContext().getFlash().put("trip",trip);
+        getCurrentInstance().getExternalContext().getFlash().put("numberOfSeats",numberOfSeats);
+
         return RedirectEnum.REDIRECT.BOOKING.getUrl();
     }
 
-    public List<Trip> getTrips() {
-        return trips;
+    public List<TripDTO> getTripsWithPrice() {
+        return tripsWithPrice;
     }
 
-    public void setTrips(List<Trip> trips) {
-        this.trips = trips;
+    public void setTripsWithPrice(List<TripDTO> tripsWithPrice) {
+        this.tripsWithPrice = tripsWithPrice;
+    }
+
+    public List<BigDecimal> getPrice() {
+        return price;
+    }
+
+    public void setPrice(List<BigDecimal> price) {
+        this.price = price;
     }
 }

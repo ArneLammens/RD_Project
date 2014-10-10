@@ -16,5 +16,7 @@ public class PersonService {
         personRepository.persist(person);
     }
 
+    public Person findAPerson(int id){return personRepository.find(id);}
+
 
 }

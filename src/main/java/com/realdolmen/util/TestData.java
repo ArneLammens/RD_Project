@@ -152,8 +152,8 @@ public class TestData {
         int radomInt2=randomGenerator2.nextInt(allLocations.size());
             int randomInt3=randomGenerator2.nextInt(7);
         logger.info("/////************************************INJECTING FLIGHT*************************************/////");
-        entityManager.persist(new Flight("abc"+i,allLocations.get(randomInt),allLocations.get(radomInt2),45,45,13.58,5,new BigDecimal((randomInt*10)),0,person.get(0),new Date(),new Date(),new FlightPeriod(new Date(1412632800000l), new Date(1444168800000l)),Enums.DayOfTheWeek.valueOf(randomInt3+1)));
-            entityManager.persist(new Flight("abcr"+i,allLocations.get(radomInt2),allLocations.get(randomInt),45,45,13.58,5,new BigDecimal((randomInt*10)),0,person.get(0),new Date(),new Date(),new FlightPeriod(new Date(1412632800000l), new Date(1444168800000l)),Enums.DayOfTheWeek.valueOf(randomInt3+1)));
+        entityManager.persist(new Flight("abc"+i,allLocations.get(randomInt),allLocations.get(radomInt2),45,45,13.58,5,new BigDecimal((randomInt*10)),randomInt3+1,person.get(0),new Date(),new Date(),new FlightPeriod(new Date(1412632800000l), new Date(1444168800000l)),Enums.DayOfTheWeek.valueOf(randomInt3+1)));
+            entityManager.persist(new Flight("abcr"+i,allLocations.get(radomInt2),allLocations.get(randomInt),45,45,13.58,5,new BigDecimal((randomInt*10)),randomInt3+1,person.get(0),new Date(),new Date(),new FlightPeriod(new Date(1412632800000l), new Date(1444168800000l)),Enums.DayOfTheWeek.valueOf(randomInt3+1)));
         }
 
     }
@@ -161,16 +161,17 @@ public class TestData {
     {
         Calendar c = Calendar.getInstance();
         c.setTime(new Date());
-        int dayOfWeek= c.get(Calendar.DAY_OF_WEEK);
-        Enums.DayOfTheWeek.valueOf(dayOfWeek);
+        int dayOfWeekDeparture= c.get(Calendar.DAY_OF_WEEK);
+
+        Calendar c2 = Calendar.getInstance();
+        c2.setTime(new Date(new Date().getTime()+604800000l));
+        int dayOfWeekDestination= c.get(Calendar.DAY_OF_WEEK);
 
         List<Country> country=entityManager.createQuery("SELECT c FROM Country c where c.name ='Belgium'").getResultList();
-        List<Flight>departureFlight=entityManager.createQuery("SELECT f FROM Flight f WHERE f.departure.country=:country AND f.availableSeats >=30 AND :departuredate between f.period.startDate AND f.period.endDate AND f.dayOfTheWeek = :dayOfTheWeek").setParameter("country", country.get(0)).setParameter("departuredate",new Date()).setParameter("dayOfTheWeek",Enums.DayOfTheWeek.valueOf(dayOfWeek)).getResultList();
-        List<Flight>returnFlight=entityManager.createQuery("SELECT f FROM Flight f WHERE f.destination.country=:country AND f.availableSeats >=30").setParameter("country",country.get(0)).getResultList();
+        List<Flight>departureFlight=entityManager.createQuery("SELECT f FROM Flight f WHERE f.departure.country=:country AND f.availableSeats >=30 AND :departuredate between f.period.startDate AND f.period.endDate AND f.dayOfTheWeek = :dayOfTheWeek").setParameter("country", country.get(0)).setParameter("departuredate",new Date()).setParameter("dayOfTheWeek",Enums.DayOfTheWeek.valueOf(dayOfWeekDeparture)).getResultList();
+        List<Flight>returnFlight=entityManager.createQuery("SELECT f FROM Flight f WHERE f.destination.country=:country AND f.availableSeats >=30 AND :returnDate between f.period.startDate AND f.period.endDate AND f.dayOfTheWeek = :dayOfTheWeek").setParameter("country", country.get(0)).setParameter("returnDate",new Date()).setParameter("dayOfTheWeek",Enums.DayOfTheWeek.valueOf(dayOfWeekDestination)).getResultList();
         List<Person>travelAgent= entityManager.createQuery("SELECT p FROM Person p WHERE p.role =:role").setParameter("role", Enums.Roles.TRAVEL_AGENT).getResultList();
 
-
-        Enums.DayOfTheWeek.valueOf(dayOfWeek);
 
 
         Trip trip = new Trip("testTrip",departureFlight.get(0),returnFlight.get(0),travelAgent.get(0),30,30,new Date(),new Date(new Date().getTime()+604800000l));
