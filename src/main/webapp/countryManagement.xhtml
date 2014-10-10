@@ -8,8 +8,10 @@
         <f:viewAction action="#{adminController.init()}" onPostback="false"/>
     </f:metadata>
     <ui:define name="divLeft">
+        <ui:include src='template/left.xhtml'/>
     </ui:define>
     <ui:define name="divTop">
+        <ui:include src='template/top.xhtml'/>
     </ui:define>
     <ui:define name="divMain">
         <h:form>
@@ -22,14 +24,21 @@
                 <f:selectItems value="#{adminController.regions}" var="region" itemValue="#{region}"
                                itemLabel="#{enm[region.label]}"/>
             </p:selectOneMenu>
-           <p:pickList converter="#{countryConverter}" id="pickList" value="#{adminController.dualListModel}"  var="country" itemLabel="#{country.name}" itemValue="#{country}" >
+           <p:pickList converter="#{countryConverter}"  id="pickList" value="#{adminController.dualListModel}"  var="country" itemLabel="#{country.name}" itemValue="#{country}" >
                <f:facet name="sourceCaption">Allowed</f:facet>
                <f:facet name="targetCaption">Disallowed</f:facet>
-               <p:ajax event="transfer" listener="#{adminController.onTransfer}" update="msg" />
-                   </p:pickList>
+               <p:ajax event="transfer"   listener="#{adminController.onTransfer}" update="msg pickList"/>
+           </p:pickList>
 
-            <p:commandButton action="#{adminController.saveCountryList()}" value="Save changes"/>
+            <p:commandButton  value="Save changes">
+                <p:confirm  message="Countries you dissalow that have flights will be removed"/>
+            </p:commandButton>
            </h:form>
+        <p:confirmDialog global="true" showEffect="fade" hideEffect="explode" widgetVar="confirmation">
+            <p:commandButton value="OK"  oncomplete="confirmation.hide()"
+                             action="#{adminController.saveCountryList}" />
+            <p:commandButton value="Cancel" onclick="confirmation.hide()" type="button" />
+        </p:confirmDialog>
     </ui:define>
 
 </ui:composition>

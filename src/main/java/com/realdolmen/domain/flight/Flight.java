@@ -20,7 +20,12 @@ import java.util.Date;
  * Created by BPTAT47 on 1/10/2014.
  */
 @Entity
-public class Flight {
+@NamedQueries({
+        @NamedQuery(name ="Flight.getFlightsForGivenCountry",query = "SELECT f FROM Flight f WHERE f.destination.country =:country or f.departure.country =:country"),
+        @NamedQuery(name ="Flight.removeFlightsForGiveCountry",query = "DELETE FROM Flight f where f.id = 200"),
+        @NamedQuery(name ="Flight.getAllFlightsForGivenCompanyName",query = "SELECT f FROM Flight  f WHERE f.flightAdmin.company =:company")
+})
+public class Flight{
     @Id
     @GeneratedValue
     private Integer id;

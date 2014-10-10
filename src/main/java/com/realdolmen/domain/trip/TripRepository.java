@@ -23,8 +23,14 @@ public class TripRepository extends AbstractRepositoy<Trip>  {
     }
 
     public boolean checkTripsExistForGivenCountry(Country country){
-        return (boolean)entityManager.createQuery("select case when (count(t) > 0)  then true else false end from Trip t where t.departureFlight.departure.country = :country or t.departureFlight.departure.country =:country ")
-         .setParameter("country",country).getSingleResult();
+        List<Trip> trips =  entityManager.createQuery("select t from  Trip  t where t.departureFlight.destination.country = :country or t.departureFlight.departure.country =:country ")
+         .setParameter("country",country).getResultList();
+        if(trips.size() > 0){
+            return true;
+        }else{
+            return false;
+        }
+
     }
 
 }

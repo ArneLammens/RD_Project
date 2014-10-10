@@ -9,8 +9,9 @@ public class CompanyService {
     @Inject
     private CompanyRepository companyRepository;
 
-    public List<Company> getAllCompanies()
-    {
-        return companyRepository.findAll();
+
+    public List<Company> getAllCompanies(){
+        return companyRepository.getAllCompanies();
     }
+
 }

@@ -12,10 +12,13 @@ public class RedirectEnum {
      TRIPS("trips?faces-redirect=true"),
      BOOKING("booking?faces-redirect=true"),
      CREATE_ACCOUNT("createAccount?faces-redirect=true"),
+
      THANK_YOU("thankyou?faces-redirect=true"),
      CREATE_FLIGHT("createFlight?faces-redirect=true"),
-     ADMIN_COUNTRY("countryManagement?faces-redirect=true");
 
+     ADMIN_COUNTRY("countryManagement?faces-redirect=true"),
+     ADMIN_MARGIN("marginManagement?faces-redirect=true"),
+        ;
 
 
 

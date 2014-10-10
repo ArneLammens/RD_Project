@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
  * Created by BPTAT47 on 1/10/2014.
  */
 @Entity
+@NamedQuery(name = "Company.getAllCompanies",query = "SELECT c FROM Company  c where  c.rolesForACompany =:rolesForACompany")
 public class Company {
 
     @GeneratedValue
@@ -53,7 +54,7 @@ public class Company {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Company)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
 
         Company company = (Company) o;
 

@@ -10,12 +10,18 @@
     <ui:define name="divTop">
         <ui:include src='template/top.xhtml'/>
     </ui:define>
+<<<<<<< HEAD
 
        <ui:define name="divLeft">
            <ui:include src='template/left.xhtml'/>
        </ui:define>
 
 
+=======
+    <ui:define name="divLeft">
+        <ui:include src='template/left.xhtml'/>
+    </ui:define>
+>>>>>>> 0bd4ca21a0886e36fa715e5d284fadfb59b5b4d8
     <ui:define name="divMain">
         <h:form>
             <p:messages autoUpdate="true"/>
@@ -53,9 +59,9 @@
 
                 <p:outputLabel for="amoutSeats" value="#{lbl['index.amountOfSeats']}" />
                 <p:inputMask id="amoutSeats" value="#{indexController.numberOfSeats}"
-                        mask="9?99"
-                        maxlength="3"
-                        placeHolder=" "/>
+                             mask="9?99"
+                             maxlength="3"
+                             placeHolder=" "/>
 
 
                 <p:commandButton action="#{indexController.redirectToTripPage()}" value="#{lbl['index.search']}">
@@ -64,5 +70,7 @@
                 </p:commandButton>
             </h:panelGrid>
         </h:form>
-    </ui:define>
+</ui:define>
+
+
 </ui:composition>
