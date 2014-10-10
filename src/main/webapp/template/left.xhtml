@@ -5,12 +5,11 @@
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:p="http://primefaces.org/ui">
     <h:form rendered="#{loginSession.login.role.label == 'Admin'}">
-        <p:messages id="messages" autoUpdate="true" />
         <h:panelGrid columns="6" >
         <p:menu >
             <p:submenu label="Actions">
                 <p:menuitem value="Manage countries" outcome="#{commonController.redirectToAdminPage()}" />
-                <p:menuitem value="Manage margins" outcome="#{commonController.redirectToAdminPage()}" />
+                <p:menuitem value="Manage margins" outcome="#{commonController.redirectToAdminPageForMargins()}" />
 
             </p:submenu>
         </p:menu>

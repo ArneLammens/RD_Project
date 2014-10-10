@@ -10,6 +10,7 @@
     <ui:define name="divTop">
     </ui:define>
     <ui:define name="divMain">
+        <div class="panelGridCenter">
         <h:form>
             <p:messages autoUpdate="true"/>
             <h:panelGrid columns="2" cellpadding="6" styleClass="panelGridCenter">
@@ -19,13 +20,14 @@
                 <p:password id="password" value="#{loginController.login.password}"/>
                 <p:commandLink action="#{loginController.loginTo()}"
                                style="margin-right: 15px">
-                    <h:graphicImage url="resource/image/login.png" height="50px" width="50px"/>
+                    <h:graphicImage url="resources/image/login.png" height="50px" width="50px"/>
                 </p:commandLink>
                 <h:outputLink value="createAccount.xhtml" style="margin-right: 15px" >
-                    <h:graphicImage url="resource/image/userAdd.png" height="50px" width="50px"/>
+                    <h:graphicImage url="resources/image/userAdd.png" height="50px" width="50px"/>
                 </h:outputLink>
             </h:panelGrid>
         </h:form>
+        </div>
     </ui:define>
 
 </ui:composition>
