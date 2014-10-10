@@ -7,13 +7,12 @@
     <f:metadata>
         <f:viewAction action="#{indexController.init()}" onPostback="false"/>
     </f:metadata>
-       <ui:define name="divLeft">
-           <ui:include src='template/left.xhtml'/>
-       </ui:define>
     <ui:define name="divTop">
         <ui:include src='template/top.xhtml'/>
     </ui:define>
-
+    <ui:define name="divLeft">
+        <ui:include src='template/left.xhtml'/>
+    </ui:define>
     <ui:define name="divMain">
         <h:form>
             <p:messages autoUpdate="true"/>
@@ -51,13 +50,15 @@
 
                 <p:outputLabel for="amoutSeats" value="#{lbl['index.amountOfSeats']}" />
                 <p:inputMask id="amoutSeats" value="#{indexController.numberOfSeats}"
-                        mask="9?99"
-                        maxlength="3"
-                        placeHolder=" "/>
+                             mask="9?99"
+                             maxlength="3"
+                             placeHolder=" "/>
 
 
                 <p:commandButton action="#{indexController.redirectToTripPage()}" value="#{lbl['index.search']}"/>
             </h:panelGrid>
         </h:form>
-    </ui:define>
+</ui:define>
+
+
 </ui:composition>

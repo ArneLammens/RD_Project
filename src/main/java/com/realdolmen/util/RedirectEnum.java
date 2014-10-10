@@ -12,9 +12,9 @@ public class RedirectEnum {
      TRIPS("trips?faces-redirect=true"),
      BOOKING("booking?faces-redirect=true"),
      CREATE_ACCOUNT("createAccount?faces-redirect=true"),
-     ADMIN_COUNTRY("countryManagement?faces-redirect=true");
-
-
+     ADMIN_COUNTRY("countryManagement?faces-redirect=true"),
+     ADMIN_MARGIN("marginManagement?faces-redirect=true"),
+        ;
 
 
         private final String url;

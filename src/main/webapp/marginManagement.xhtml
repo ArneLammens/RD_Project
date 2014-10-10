@@ -1,0 +1,38 @@
+<ui:composition template="/template/master.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    <f:metadata>
+        <f:viewAction action="#{adminFlightController.init()}" onPostback="false"/>
+    </f:metadata>
+    <ui:define name="divLeft">
+        <ui:include src='template/left.xhtml'/>
+    </ui:define>
+    <ui:define name="divTop">
+        <ui:include src='template/top.xhtml'/>
+    </ui:define>
+    <ui:define name="divMain">
+        <h:form>
+            <p:messages id="msg" autoUpdate="true"/>
+            <p:selectOneMenu  id="CompanySelection" converter="#{companyConverter}" required="true" value="#{adminFlightController.company}" >
+                <f:ajax event="change" execute="CompanySelection" listener="#{adminFlightController.getFlightsForGivenCompanyName}"
+                        render="flights"/>
+                <f:selectItem itemLabel="Select a company" itemValue=""
+                              noSelectionOption="true" />
+                <f:selectItems  value="#{adminFlightController.companies}" var="company"
+                               itemValue="#{adminFlightController.company.id}"
+                               itemLabel="#{company.name}"/>
+            </p:selectOneMenu>
+
+            <p:dataTable scrollable="true" id="flights"  value="#{adminFlightController.flights}" var="flight">
+                <p:column headerText="Flightnumber">
+                    <h:outputText value="#{flight.flightNumber}" />
+                </p:column>
+
+            </p:dataTable>
+         </h:form>
+    </ui:define>
+
+</ui:composition>

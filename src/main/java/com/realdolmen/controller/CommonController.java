@@ -17,5 +17,8 @@ public class CommonController implements Serializable{
     public String redirectToAdminPage(){
         return RedirectEnum.REDIRECT.ADMIN_COUNTRY.getUrl();
     }
+    public String redirectToAdminPageForMargins(){
+        return RedirectEnum.REDIRECT.ADMIN_MARGIN.getUrl();
+    }
 
 }
