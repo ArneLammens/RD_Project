@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 
 
 @Entity
+@NamedQuery(name ="Location.getLocationsOfAprovedCountries",query = "SELECT l FROM Location  l WHERE l.country.approved =:true")
 public class Location {
     @Id @GeneratedValue
     private Integer id;

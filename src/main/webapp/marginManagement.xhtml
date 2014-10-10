@@ -26,11 +26,39 @@
                                itemLabel="#{company.name}"/>
             </p:selectOneMenu>
 
-            <p:dataTable scrollable="true" id="flights"  value="#{adminFlightController.flights}" var="flight">
+            <p:dataTable scrollable="true" id="flights"  editable="true" editMode="cell"  value="#{adminFlightController.flights}" var="flight">
+                <p:ajax event="cellEdit"  listener="#{adminFlightController.onCellEdit(flight)}" />
                 <p:column headerText="Flightnumber">
                     <h:outputText value="#{flight.flightNumber}" />
                 </p:column>
+                <p:column headerText="Flightnumber">
+                    <h:outputText value="#{flight.departureTime}" />
+                </p:column>
+                <p:column headerText="Flightnumber">
+                    <h:outputText value="#{flight.departure.country.name}" />
+                </p:column>
 
+                <p:column headerText="Flightnumber">
+                    <h:outputText value="#{flight.price}" />
+                </p:column>
+                <p:column headerText="Flightnumber">
+                    <h:outputText value="#{flight.seats}" />
+                </p:column>
+                <p:column headerText="Flightnumber">
+                    <h:outputText value="#{flight.period.startDate}" />
+                </p:column>
+                <p:column headerText="Flightnumber">
+                    <h:outputText value="#{flight.period.endDate}" />
+                </p:column>
+                <p:column headerText="Flightnumber">
+                    <h:outputText value="#{flight.period.endDate}" />
+                </p:column>
+                <p:column headerText="Flightnumber">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{flight.margin}" /></f:facet>
+                        <f:facet name="input"><p:inputText id="modelInput" value="#{flight.margin}"  style="width:96%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
             </p:dataTable>
          </h:form>
     </ui:define>

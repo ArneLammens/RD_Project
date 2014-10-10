@@ -27,4 +27,7 @@ public class FlightService
     }
 
 
+    public void updateAFlight(Flight flight) {
+        flightRepository.updateAFlight(flight);
+    }
 }

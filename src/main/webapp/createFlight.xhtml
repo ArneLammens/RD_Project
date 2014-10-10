@@ -3,58 +3,55 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:p="http://primefaces.org/ui">
-<f:metadata>
-    <f:viewAction action="#{personController.init()}" onPostback="false"/>
-</f:metadata>
+                xmlns:p="http://primefaces.org/ui"
+        >
+    <f:metadata>
+        <f:viewAction action="#{flightAdminController.init()}" onPostback="false"/>
+    </f:metadata>
 
-<ui:define name="divTop">
-</ui:define>
-<ui:define name="divMain">
-<h:form>
-    <p:messages autoUpdate="true"/>
-    <h:panelGrid columns="2" cellpadding="6">
-        <p:outputLabel for="email" value="#{lbl['person.email']}"/>
-        <p:inputText required="true" id="email" value="#{personController.person.email}"/>
-        <p:outputLabel for="password" value="#{lbl['person.password']}"/>
-        <p:password required="true" id="password" value="#{personController.person.password}"/>
-        <p:outputLabel for="name" value="#{lbl['person.name']}"/>
-        <p:inputText required="true" id="name" value="#{personController.person.name}"/>
-        <p:outputLabel for="lastName" value="#{lbl['person.lastname']}"/>
-        <p:inputText required="true" id="lastName" value="#{personController.person.lastName}"/>
-        <p:outputLabel for="dateOfBirth" value="#{lbl['person.dateOfBirth']}"/>
-        <p:calendar required="true" id="dateOfBirth" yearRange="c-100:c" navigator="true"
-                    value="#{personController.person.dateOfBirth}"/>
-        <p:outputLabel for="PersonRegion" value="#{lbl['person.region']}"/>
-        <p:selectOneMenu id="PersonRegion" value="#{personController.personRegion}" required="true">
-            <f:ajax event="change" execute="PersonRegion" listener="#{personController.getCountryOfPerson}"
-                    render="CountryList"/>
-            <f:selectItem itemLabel="#{lbl['index.selectDepartureRegion']}" itemValue=""
-                          noSelectionOption="true"/>
-            <f:selectItems value="#{personController.regions}" var="region" itemValue="#{region}"
-                           itemLabel="#{enm[region.label]}"/>
-        </p:selectOneMenu>
-        <p:outputLabel for="CountryList" value="#{lbl['person.country']}"/>
-        <p:selectOneMenu converter="#{countryConverter}" id="CountryList" value="#{personController.person.country}"
-                         required="true">
-            <f:selectItem itemLabel="#{lbl['index.selectDepartureCountry']}" itemValue=""
-                          noSelectionOption="true"/>
-            <f:selectItems value="#{personController.countries}" var="country"
-                           itemValue="#{personController.person.country.id}"
-                           itemLabel="#{country.name}"/>
-        </p:selectOneMenu>
-        <p:outputLabel for="homeNumber" value="#{lbl['person.homenumber']}"/>
-        <p:inputText required="true" id="homeNumber" value="#{personController.person.homeNumber}"/>
-        <p:outputLabel for="municipality" value="#{lbl['person.municipality']}"/>
-        <p:inputText required="true" id="municipality" value="#{personController.person.municipality}"/>
-        <p:outputLabel for="zipcode" value="#{lbl['person.zipcode']}"/>
-        <p:inputText required="true" id="zipcode" value="#{personController.person.zipCode}"/>
-        <h:outputLink value="index.xhtml">
-            <h:graphicImage url="resources/image/goback-icon.png" height="50px" width="50px"/>
-        </h:outputLink>
-        <p:commandButton action="#{personController.createAPerson()}"
-                         style="margin-right: 15px" value="#{lbl['person.createAccount']}"/>
-    </h:panelGrid>
-</h:form>
+    <ui:define name="divTop">
+        <ui:include src='template/top.xhtml'/>
+    </ui:define>
+    <ui:define name="divLeft">
+        <ui:include src='template/left.xhtml'/>
+    </ui:define>
+    <ui:define name="divMain">
+        <h:form>
+        <p:panelGrid columns="3">
+            <p:outputLabel for="flightNumber" value="flight number"/>
+            <p:inputText required="true" id="flightNumber" value="#{flightAdminController.flight.flightNumber}"/>
+            <p:outputLabel for="departure" value="departure"/>
 
-</ui:define>
+            <p:inputText required="true" id="departure" value="#{flightAdminController.flight.departure}"/>
+            <p:outputLabel for="destination" value="destination"/>
+            <p:inputText required="true" id="destination" value="#{flightAdminController.flight.destination}"/>
+            <p:outputLabel for="seats" value="seats"/>
+            <p:inputText required="true" id="seats" value="#{flightAdminController.flight.seats}"/>
+            <p:outputLabel for="discountPercentage" value="discount percentage"/>
+            <p:inputText required="true" id="discountPercentage" value="#{flightAdminController.flight.discountPercentage}"/>
+            <p:outputLabel for="seatThreshold" value="seat threshold"/>
+            <p:inputText required="true" id="seatThreshold" value="#{flightAdminController.flight.seatThreshold}"/>
+            <p:outputLabel for="price" value="price"/>
+            <p:inputText required="true" id="price" value="#{flightAdminController.flight.price}"/>
+            <p:outputLabel for="departuretime" value="departuretime"/>
+            <p:inputText required="true" id="departuretime" value="#{flightAdminController.flight.departureTime}"/>
+            <p:outputLabel for="duration" value="duration"/>
+            <p:inputText required="true" id="duration" value="#{flightAdminController.flight.departureTime}"/>
+            <p:outputLabel for="startDate" value="Start Date"/>
+            <p:inputText required="true" id="startDate" value="#{flightAdminController.flight.period.startDate}"/>
+            <p:outputLabel for="endDate" value="End  Date"/>
+            <p:inputText required="true" id="endDate" value="#{flightAdminController.flight.period.endDate}"/>
+            <p:outputLabel for="dayOfTheWeek" value="Day of the week"/>
+            <p:inputText required="true" id="dayOfTheWeek" value="#{flightAdminController.flight.dayOfTheWeek}"/>
+
+
+
+
+
+
+
+        </p:panelGrid>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

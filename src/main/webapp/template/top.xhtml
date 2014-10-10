@@ -6,8 +6,11 @@
 
     <h:form>
         <p:tabMenu  activeIndex="#{param.i}">
-            <p:menuitem >
-                <h:graphicImage value="resources/image/redo-air.png" style="resize: horizontal;" width="200" height="40px"/>
+            <p:menuitem>
+                <h:graphicImage url="/resources/image/redo-air.png"/>
+                <!--<div class="transparent">
+                    <h:outputText value=" " > </h:outputText>
+                </div>-->
             </p:menuitem>
             <p:menuitem value="Home" outcome="/index" icon="ui-icon-home">
                 <f:param name="i" value="0"/>

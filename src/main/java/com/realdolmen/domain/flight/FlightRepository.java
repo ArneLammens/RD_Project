@@ -35,4 +35,9 @@ public class FlightRepository extends AbstractRepositoy<Flight> {
               .getResultList()
               ;
     }
+
+    public void updateAFlight(Flight flight){
+        entityManager.merge(flight);
+        entityManager.flush();
+    }
 }
