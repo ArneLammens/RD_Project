@@ -21,6 +21,7 @@
             <p:outputLabel for="flightNumber" value="flight number"/>
             <p:inputText required="true" id="flightNumber" value="#{flightAdminController.flight.flightNumber}"/>
             <p:outputLabel for="departure" value="departure"/>
+
             <p:inputText required="true" id="departure" value="#{flightAdminController.flight.departure}"/>
             <p:outputLabel for="destination" value="destination"/>
             <p:inputText required="true" id="destination" value="#{flightAdminController.flight.destination}"/>
@@ -38,6 +39,13 @@
             <p:inputText required="true" id="duration" value="#{flightAdminController.flight.departureTime}"/>
             <p:outputLabel for="startDate" value="Start Date"/>
             <p:inputText required="true" id="startDate" value="#{flightAdminController.flight.period.startDate}"/>
+            <p:outputLabel for="endDate" value="End  Date"/>
+            <p:inputText required="true" id="endDate" value="#{flightAdminController.flight.period.endDate}"/>
+            <p:outputLabel for="dayOfTheWeek" value="Day of the week"/>
+            <p:inputText required="true" id="dayOfTheWeek" value="#{flightAdminController.flight.dayOfTheWeek}"/>
+
+
+
 
 
 
