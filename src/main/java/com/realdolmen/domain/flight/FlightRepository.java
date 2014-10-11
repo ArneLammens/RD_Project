@@ -40,4 +40,8 @@ public class FlightRepository extends AbstractRepositoy<Flight> {
         entityManager.merge(flight);
         entityManager.flush();
     }
+
+    public Flight findById(Integer id) {
+       return find(id);
+    }
 }

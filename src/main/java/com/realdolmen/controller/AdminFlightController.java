@@ -53,15 +53,10 @@ public class AdminFlightController implements Serializable{
     }
 
     public void onCellEdit(Flight flight) {
-        Object oldValue = event.getOldValue();
-        Object newValue = event.getNewValue();
-
-        if(newValue != null && !newValue.equals(oldValue)) {
-            FacesContext context = FacesContext.getCurrentInstance();
-            Flight flightToBeUpdated = context.getApplication().evaluateExpressionGet(context, "#{flight}", Flight.class);
-            flightToBeUpdated.setMargin((double)newValue);
+           Flight foundFlight = flightService.findById(flight.getId());
+        if(flight != null && !flight.equals(foundFlight)) {
             flightService.updateAFlight(flight);
-            eventMessage.fire(new Message().info("Cell Changed", "Old: " + oldValue + ", New:" + newValue));
+            eventMessage.fire(new Message().info( "The margin for " + foundFlight.getFlightNumber()  + "with margin" + foundFlight.getMargin() + "has been set to " + flight.getMargin()));
         }
     }
 
