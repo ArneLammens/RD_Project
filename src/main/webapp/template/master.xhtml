@@ -7,26 +7,30 @@
 
 
 <h:head>
-    <h:outputStylesheet library="css" name="basis.css"/>
+    <h:outputStylesheet library="css" name="bootstrap.min.css"/>
     <h:outputStylesheet library="css" name="bootstrap-theme.css"/>
-    <h:outputStylesheet library="css" name="bootstrap.css"/>
+    <h:outputStylesheet library="css" name="basis.css"/>
 </h:head>
 
 <h:body>
 
-    <div id='divTop' style='vertical-align: middle;' >
+    <div id='divTop' class="topSpacing" >
         <ui:insert name="divTop">
         </ui:insert>
     </div>
 
-
-    <div class="col-lg-3" id='divLeft'>
+    <div class="col-md-2 " id='divLeft'>
         <ui:insert name="divLeft">
         </ui:insert>
     </div>
 
-    <div class="col-lg-4" id='divMain'>
+     <div class="panel col-md-9  panel-primary removePadding">
+    <div class="panel-heading  " >
+        <h3 class="panel-title " >Information</h3>
+    </div>
+    <div class=" panel-body" id='divMain'>
         <ui:insert name='divMain'/>
     </div>
+     </div>
 </h:body>
 </html>

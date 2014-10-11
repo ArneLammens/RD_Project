@@ -1,6 +1,7 @@
 package com.realdolmen.controller;
 
 import com.realdolmen.domain.Enums;
+import com.realdolmen.domain.company.Company;
 import com.realdolmen.domain.flight.Flight;
 import com.realdolmen.domain.flight.FlightPeriod;
 import com.realdolmen.domain.flight.FlightService;
@@ -55,6 +56,8 @@ public class FlightAdminController implements Serializable
     private Date mindate=new Date();
     private Enums.DayOfTheWeek dayOfTheWeek;
 
+    private Enums.Region region;
+
     public String init() {
         if( loginSession.getLogin()==null||loginSession.getLogin().getRole()!= Enums.Roles.FLIGHT_ADMIN)
         {
@@ -69,6 +72,25 @@ public class FlightAdminController implements Serializable
         }
 
 
+    }
+    public String initManageFlight()
+    {
+        if( loginSession.getLogin()==null||loginSession.getLogin().getRole()!= Enums.Roles.FLIGHT_ADMIN)
+        {
+            return RedirectEnum.REDIRECT.INDEX.getUrl();
+        }
+        else
+        {
+
+            person=personService.findAPerson(loginSession.getLogin().getId());
+            return null;
+        }
+
+    }
+
+    public void getFlightForRegionAndCompany(AjaxBehaviorEvent event)
+    {
+        flights=flightService.getAllFLightsForGivenRegionAndCompany(region,person);
     }
 
     public String createFlight()
@@ -93,29 +115,34 @@ public class FlightAdminController implements Serializable
             flight.setDayOfTheWeek(dayOfTheWeek);
             flight.setDiscountPercentage(flight.getDiscountPercentage()*100);
             flightService.createFlight(flight);
-
+            locations=null;
             return RedirectEnum.REDIRECT.INDEX.getUrl();
         }
 
     }
-    public void erazer(AjaxBehaviorEvent event)
-    {
-        locations=null;
 
-    }
 
     public Enums.DayOfTheWeek[] getweekDays() {
         return Enums.DayOfTheWeek.values();
+    }
+    public Enums.Region[] regions() {
+        return Enums.Region.values();
     }
 
     public void getFlightsForGivenCompanyName(AjaxBehaviorEvent event){
         flights = flightService.getAllFlightsForGivenCompanyName(person.getCompany());
     }
-
-    public void setStartDateOfPeriod(AjaxBehaviorEvent event)
+    public void removeFlight(Flight flight)
     {
-        //listener="#{adminFlightController.setStartDateOfPeriod}"
+        flightService.removeFlight(flight);
+        event.fire(new Message().info("The flight has been removed"));
+
     }
+    public void refreshList(Flight flight)
+    {
+        flights.remove(flight);
+    }
+
 
     public List<Flight> getFlights() {
         return flights;
@@ -156,6 +183,7 @@ public class FlightAdminController implements Serializable
     public void setDepartureLocation(Location departureLocation) {
         this.departureLocation = departureLocation;
     }
+
 
     public Flight getFlight() {
         return flight;
@@ -203,5 +231,13 @@ public class FlightAdminController implements Serializable
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public Enums.Region getRegion() {
+        return region;
+    }
+
+    public void setRegion(Enums.Region region) {
+        this.region = region;
     }
 }

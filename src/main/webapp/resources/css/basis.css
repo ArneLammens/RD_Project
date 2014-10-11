@@ -1,3 +1,28 @@
 .panelGridCenter {
     margin: 0 auto;
 }
+.topSpacing {
+    margin:20px;
+}
+.removePadding{
+    padding: 0;
+}
+
+.panel-primary > .panel-heading {
+    background: #5c9ccc  url("/RedoAir//javax.faces.resource/images/ui-bg_gloss-wave_55_5c9ccc_500x100.png.xhtml?ln=primefaces-redmond") 50% 50% repeat-x;
+    color: #31708f;
+    border-color: #5c9ccc!important;
+
+}
+.transparent {
+    background-image: url('../image/redo-air.png');
+    background-repeat: no-repeat;
+    width: 637px;
+    height: 306px;
+    z-index:1000;
+}
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active{
+    background-color:transparent;
+    background-image: none;
+}

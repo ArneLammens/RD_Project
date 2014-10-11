@@ -1,6 +1,8 @@
 package com.realdolmen.domain.trip;
 
+import com.realdolmen.domain.company.Company;
 import com.realdolmen.domain.country.Country;
+import com.realdolmen.domain.flight.Flight;
 import org.slf4j.Logger;
 
 import javax.ejb.Stateless;
@@ -35,6 +37,10 @@ public class TripService {
 
         }
         return DTOTrips;
+    }
+    public boolean checkForExsistingTripsForGivenFLight(Flight flight)
+    {
+        return tripRepository.checkTripsExistForGivenFlight(flight);
     }
     public BigDecimal calculatePriceForTrip(Trip trip,int numberOfSeats)
     {
@@ -99,6 +105,10 @@ public class TripService {
 
     public boolean checkTripsExistForGivenCountry(Country country){
         return tripRepository.checkTripsExistForGivenCountry(country);
+    }
+    public boolean checkTripsExistThatUseFlightOfGivenCompany(Company company)
+    {
+        return tripRepository.checkTripsExistThatUseFlightOfGivenCompany(company);
     }
 
 

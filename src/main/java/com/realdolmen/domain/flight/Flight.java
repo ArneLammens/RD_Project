@@ -23,6 +23,7 @@ import java.util.Date;
 @NamedQueries({
         @NamedQuery(name ="Flight.getFlightsForGivenCountry",query = "SELECT f FROM Flight f WHERE f.destination.country =:country or f.departure.country =:country"),
         @NamedQuery(name ="Flight.removeFlightsForGiveCountry",query = "DELETE FROM Flight f where f.id = 200"),
+        @NamedQuery(name ="Flight.getAllFLightsForGivenRegionAndCompany",query = "SELECT f FROM Flight  f WHERE f.flightAdmin.company =:company and f.departure.country.region=:region"),
         @NamedQuery(name ="Flight.getAllFlightsForGivenCompanyName",query = "SELECT f FROM Flight  f WHERE f.flightAdmin.company =:company")
 })
 public class Flight{

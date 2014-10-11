@@ -11,13 +11,12 @@
         <ui:include src='template/top.xhtml'/>
     </ui:define>
 
-       <ui:define name="divLeft">
-           <ui:include src='template/left.xhtml'/>
-       </ui:define>
+    <ui:define name="divLeft">
+        <ui:include src='template/left.xhtml'/>
+    </ui:define>
 
     <ui:define name="divMain">
         <h:form>
-            <p:messages autoUpdate="true"/>
             <h:panelGrid columns="2" cellpadding="6">
                 <p:outputLabel for="DepartureRegion" value="#{lbl['index.departureRegion']}" />
                 <p:selectOneMenu id="DepartureRegion" value="#{indexController.departureRegion}" required="true">
@@ -63,7 +62,7 @@
                 </p:commandButton>
             </h:panelGrid>
         </h:form>
-</ui:define>
+    </ui:define>
 
 
 </ui:composition>

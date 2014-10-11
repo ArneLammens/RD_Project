@@ -55,7 +55,6 @@ public class IndexController implements Serializable {
     public void init() {
         logger.info("IndexController init function");
 
-
     }
 
     public Enums.Region[] getRegions() {
