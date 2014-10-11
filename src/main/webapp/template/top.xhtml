@@ -13,14 +13,9 @@
                 </div>-->
             </p:menuitem>
             <p:menuitem value="Home" outcome="/index" icon="ui-icon-home">
-                <f:param name="i" value="0"/>
             </p:menuitem>
-            <p:menuitem value="Logout,#{loginSession.login.name}" action="#{loginController.logout()}" rendered="#{loginSession.loggedIn()}" icon="ui-icon-circle-arrow-w">
-                <f:param name="i" value="2"/>
-            </p:menuitem>
-            <p:menuitem value="Login" outcome="/login" rendered="#{!loginSession.loggedIn()}" icon="ui-icon-circle-arrow-e">
-                <f:param name="i" value="2"/>
-            </p:menuitem>
+            <p:menuitem value="Logout,#{loginSession.login.name}" action="#{loginController.logout()}" rendered="#{loginSession.loggedIn()}" icon="ui-icon-circle-arrow-w"/>
+            <p:menuitem value="Login" outcome="/login" rendered="#{!loginSession.loggedIn()}" icon="ui-icon-circle-arrow-e"/>
         </p:tabMenu>
     </h:form>
 </ui:composition>

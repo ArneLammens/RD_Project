@@ -58,11 +58,10 @@ public class AdminFlightController implements Serializable{
             return RedirectEnum.REDIRECT.INDEX.getUrl();
         }else
         {
-            companies = companyService.getAllCompanies();
+            companies = companyService.getAllCompanies(Enums.RolesForACompany.FLIGHT_ADMIN);
             flight = new Flight();
             return null;
         }
-
 
     }
 

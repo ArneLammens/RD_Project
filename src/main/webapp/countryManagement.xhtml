@@ -16,8 +16,7 @@
     <div class="container-fluid">
     <ui:define name="divMain">
         <h:form>
-            <p:messages id="msg" autoUpdate="true"/>
-            <p:selectOneMenu id="PersonRegion" value="#{adminController.region}" required="true">
+            <p:selectOneMenu id="PersonRegion" value="#{adminController.region}">
                 <f:ajax event="change" execute="PersonRegion" listener="#{adminController.getCountryOfDepartureRegion}"
                         render="pickList"/>
                 <f:selectItem itemLabel="#{lbl['index.selectDepartureRegion']}" itemValue=""
@@ -28,17 +27,17 @@
            <p:pickList converter="#{countryConverter}"  id="pickList" value="#{adminController.dualListModel}"  var="country" itemLabel="#{country.name}" itemValue="#{country}" >
                <f:facet name="sourceCaption">Allowed</f:facet>
                <f:facet name="targetCaption">Disallowed</f:facet>
-               <p:ajax event="transfer"   listener="#{adminController.onTransfer}" update="msg pickList"/>
+               <p:ajax event="transfer"   listener="#{adminController.onTransfer}" />
            </p:pickList>
 
             <p:commandButton  value="Save changes">
                 <p:confirm  message="Countries you dissalow that have flights will be removed"/>
             </p:commandButton>
            </h:form>
-        <p:confirmDialog global="true" showEffect="fade" hideEffect="explode" widgetVar="confirmation">
-            <p:commandButton value="OK"  oncomplete="confirmation.hide()"
+        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" widgetVar="confirmation">
+            <p:commandButton value="OK"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
                              action="#{adminController.saveCountryList}" />
-            <p:commandButton value="Cancel" onclick="confirmation.hide()" type="button" />
+            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
         </p:confirmDialog>
     </ui:define>
     </div>

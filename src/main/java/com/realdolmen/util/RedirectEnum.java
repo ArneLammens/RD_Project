@@ -20,7 +20,7 @@ public class RedirectEnum {
 
      ADMIN_COUNTRY("countryManagement?faces-redirect=true"),
      ADMIN_MARGIN("marginManagement?faces-redirect=true"),
-        ;
+     REPORT("report?faces-redirect=true");
 
 
 
