@@ -48,7 +48,7 @@ public class AdminFlightController implements Serializable{
 
     public void init() {
 
-        companies = companyService.getAllCompanies();
+        companies = companyService.getAllCompanies(Enums.RolesForACompany.FLIGHT_ADMIN);
         flight = new Flight();
     }
 

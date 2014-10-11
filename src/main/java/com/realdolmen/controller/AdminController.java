@@ -133,7 +133,7 @@ public class AdminController implements Serializable {
         }
         countryService.persistAllowedAndDisallowedCountries(approvedCountries, disapprovedCountries);
         countrySession.updateSessionForGivenRegion(region, approvedCountries, disapprovedCountries);
-        return RedirectEnum.REDIRECT.INDEX.getUrl();
+        return RedirectEnum.REDIRECT.ADMIN_COUNTRY.getUrl();
     }
 
 

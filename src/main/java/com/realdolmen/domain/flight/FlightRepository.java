@@ -5,15 +5,21 @@ import com.realdolmen.domain.Enums;
 import com.realdolmen.domain.company.Company;
 import com.realdolmen.domain.country.Country;
 import com.realdolmen.domain.person.Person;
+import com.realdolmen.util.Message;
 import org.slf4j.Logger;
 
 import javax.ejb.Stateless;
+import javax.enterprise.event.Event;
+import javax.faces.application.FacesMessage;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
 
 @Stateless
 public class FlightRepository extends AbstractRepositoy<Flight> {
+
+    @Inject
+    private Event<FacesMessage> event;
 
     @Inject
     private Logger logger;
@@ -27,8 +33,9 @@ public class FlightRepository extends AbstractRepositoy<Flight> {
           entityManager.createQuery("DELETE FROM Flight f WHERE f.departure IN(SELECT d FROM f.departure d  WHERE d.country.id =:id ) or " +
                   "f.destination IN(SELECT d FROM f.destination d  WHERE d.country.id =:id )")
                   .setParameter("id",country.getId()).executeUpdate();
-            logger.info("removed " + country.getName());
+
         }
+        event.fire(new Message().info("Flights have been removed"));
     }
 
     public List<Flight> getAllFlightsForGivenCompanyName(Company company) {

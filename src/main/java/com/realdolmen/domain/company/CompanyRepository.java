@@ -11,14 +11,13 @@ import java.util.List;
 @Stateless
 public class CompanyRepository extends AbstractRepositoy<Company> {
 
-    public List<Company> getAllCompanies(){
+    public List<Company> getAllCompanies(Enums.RolesForACompany role){
        return entityManager.createNamedQuery("Company.getAllCompanies",Company.class)
-               .setParameter("rolesForACompany", Enums.RolesForACompany.FLIGHT_ADMIN).getResultList();
+               .setParameter("rolesForACompany",role).getResultList();
     }
 
     public void removeCompany(Company company)
     {
-
         entityManager.remove(entityManager.merge(company));
     }
 }

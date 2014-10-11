@@ -18,7 +18,9 @@
         <ui:insert name="divTop">
         </ui:insert>
     </div>
-
+    <div style="overflow-y: scroll; height:50px;" class="col-md-10 col-md-offset-2 " >
+        <p:messages id="msg" autoUpdate="true"/>
+    </div>
     <div class="col-md-2 " id='divLeft'>
         <ui:insert name="divLeft">
         </ui:insert>
@@ -29,7 +31,7 @@
         <h3 class="panel-title " >Information</h3>
     </div>
     <div class=" panel-body" id='divMain'>
-        <ui:insert name='divMain'/>
+        <ui:insert name='divMain'></ui:insert>
     </div>
      </div>
 </h:body>

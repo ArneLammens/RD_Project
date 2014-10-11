@@ -1,0 +1,30 @@
+<ui:composition template="/template/master.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    <f:metadata>
+        <f:viewAction action="#{reportController.init()}" onPostback="false"/>
+    </f:metadata>
+    <ui:define name="divLeft">
+        <ui:include src='template/left.xhtml'/>
+    </ui:define>
+    <ui:define name="divTop">
+        <ui:include src='template/top.xhtml'/>
+    </ui:define>
+    <div class="container-fluid">
+        <ui:define name="divMain">
+            <h:form>
+
+            <p:dataTable scrollable="true" id="flights"  editable="true" editMode="cell"  value="#{reportController.bookings}" var="book">
+
+                <p:column headerText="Flightnumber">
+                    <h:outputText value="#{book.totalPrice}" />
+                </p:column>
+
+            </p:dataTable>
+            </h:form>
+        </ui:define>
+    </div>
+</ui:composition>

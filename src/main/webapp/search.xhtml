@@ -1,0 +1,59 @@
+<ui:composition template="/template/master.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    <f:metadata>
+        <f:viewAction action="#{searchController.init()}" onPostback="false"/>
+    </f:metadata>
+    <ui:define name="divLeft">
+        <ui:include src='template/left.xhtml'/>
+    </ui:define>
+    <ui:define name="divTop">
+        <ui:include src='template/top.xhtml'/>
+    </ui:define>
+        <ui:define name="divMain">
+            <h:form>
+                <p:outputLabel for="departureDate" value="#{lbl['index.departureDate']}" />
+                <p:calendar id="departureDate" value="#{searchController.flightPeriod.startDate}" pattern="dd/MM/yyyy" mindate="#{searchController.minDate}"  >
+                    <p:ajax event="dateSelect" update="returnDate" />
+                </p:calendar>
+                <p:outputLabel for="returnDate" value="#{lbl['index.returnDate']}" />
+                <p:calendar id="returnDate" value="#{searchController.flightPeriod.endDate}" pattern="dd/MM/yyyy" mindate="#{searchController.flightPeriod.startDate}" />
+
+                <p:outputLabel for="DepartureRegion" value="#{lbl['index.departureRegion']}" />
+                <p:selectOneMenu id="DepartureRegion" value="#{searchController.departureRegion}" >
+                    <f:ajax event="change" execute="DepartureRegion" listener="#{searchController.getCountryOfDepartureRegion}" render="DepartureCountry"/>
+                    <f:selectItem itemLabel="#{lbl['index.selectDepartureRegion']}" itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{searchController.regions}" var="region" itemValue="#{region}" itemLabel="#{enm[region.label]}"/>
+                </p:selectOneMenu>
+
+                <p:outputLabel for="DestinationRegion" value="#{lbl['index.destinationRegion']}" />
+                <p:selectOneMenu id="DestinationRegion" value="#{searchController.destinationRegion}" >
+                    <f:ajax event="change" execute="DestinationRegion" listener="#{searchController.getCountryOfDestinationRegion}" render="DestinationCountry"/>
+                    <f:selectItem itemLabel="#{lbl['index.selectDestinationRegion']}" itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{searchController.regions}" var="region" itemValue="#{region}" itemLabel="#{enm[region.label]}"/>
+                </p:selectOneMenu>
+
+                <p:selectOneMenu  converter="#{companyConverter}"  value="#{searchController.companyForFlightAdmin}" >
+                    <f:selectItem itemLabel="Select a company" itemValue=""
+                                  noSelectionOption="true" />
+                    <f:selectItems  value="#{searchController.companiesForFlightAdmin}" var="companyForFlightAdmin"
+                                    itemValue="#{searchController.companyForFlightAdmin.id}"
+                                    itemLabel="#{companyForFlightAdmin.name}"/>
+                </p:selectOneMenu>
+
+
+                <p:selectOneMenu   converter="#{companyConverter}"  value="#{searchController.companyForTravelAdmin}" >
+                    <f:selectItem itemLabel="Select a company" itemValue=""
+                                  noSelectionOption="true" />
+                    <f:selectItems  value="#{searchController.companiesForTravelAdmin}" var="companyForTravelAdmin"
+                                    itemValue="#{searchController.companyForTravelAdmin.id}"
+                                    itemLabel="#{companyForTravelAdmin.name}"/>
+                </p:selectOneMenu>
+
+                <p:commandButton action="#{searchController.getReportData()}" value="#{lbl['index.search']}"/>
+            </h:form>
+        </ui:define>
+</ui:composition>

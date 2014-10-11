@@ -10,6 +10,7 @@ import com.realdolmen.util.RedirectEnum;
 
 import javax.enterprise.event.Event;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -39,20 +40,24 @@ public class AdminAirlineController implements Serializable {
     }
     else
     {
-       companies =companyService.getAllCompanies();
+       companies =companyService.getAllCompanies(Enums.RolesForACompany.FLIGHT_ADMIN);
         return null;
     }
     }
-    public void removeCompany(Company company)
+    public String removeCompany(Company company)
     {
-        companyService.removeCompany(company);
-        event.fire(new Message().info("The company has been removed"));
+      if( companyService.removeCompany(company)){
+          companies.remove(company);
+          FacesContext context = FacesContext.getCurrentInstance();
+          context.getExternalContext().getFlash().setKeepMessages(true);
+          context.addMessage(null, new Message().info(company.getName() + " has been removed"));
+          return "removeAirline?faces-redirect=true";
+      } else {
+          event.fire(new Message().warning( "You can not remove this company because it is used in a trip"));
+          return " ";
+      }
     }
 
-    public void refreshList(Company company)
-    {
-        companies.remove(company);
-    }
 
     public List<Company> getCompanies() {
         return companies;
