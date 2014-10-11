@@ -38,6 +38,7 @@ public class CountryConverter  implements Converter {
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object country) {
+
         return (country == null || country.toString().isEmpty()) ? "" : String.valueOf(((Country) country).getId());
     }
 }

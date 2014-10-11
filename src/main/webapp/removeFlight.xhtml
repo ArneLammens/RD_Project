@@ -51,8 +51,8 @@
                     <h:outputText value="#{flight.period.endDate}" />
                 </p:column>
                 <p:column headerText="remove">
-                    <p:commandButton action="#{flightAdminController.removeFlight(flight)}" value="remove flight">
-                        <f:ajax listener="#{flightAdminController.refreshList(flight)}" render="flights"/>
+                    <p:commandButton  value="remove flight">
+                        <f:ajax listener="#{flightAdminController.removeFlight(flight)}" render="flights"/>
                     </p:commandButton>
                 </p:column>
             </p:dataTable>

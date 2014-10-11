@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 
 import javax.enterprise.event.Event;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -65,6 +66,70 @@ public class PersonController implements Serializable{
        personService.createAPerson(person);
        return RedirectEnum.REDIRECT.INDEX.getUrl();
    }
+
+
+ /*   public boolean validator()
+    {
+        if(country==null)
+        {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.getExternalContext().getFlash().setKeepMessages(true);
+            context.addMessage(null, new Message().warning("no country"));
+            return true;
+        }
+        else if(personRegion == null)
+        {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.getExternalContext().getFlash().setKeepMessages(true);
+            context.addMessage(null, new Message().warning("no region"));
+            return true;
+        }
+        else if(departureCountry== null)
+        {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.getExternalContext().getFlash().setKeepMessages(true);
+            context.addMessage(null, new Message().warning("no departure country"));
+            return true;
+        }
+        else if(destinationCountry== null)
+        {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.getExternalContext().getFlash().setKeepMessages(true);
+            context.addMessage(null, new Message().warning("no destination country"));
+            return true;
+        } else if(departureDate== null)
+        {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.getExternalContext().getFlash().setKeepMessages(true);
+            context.addMessage(null, new Message().warning("no departure date"));
+            return true;
+        } else if(returnDate== null)
+        {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.getExternalContext().getFlash().setKeepMessages(true);
+            context.addMessage(null, new Message().warning("no return date"));
+            return true;
+        } else if(numberOfSeats== 0)
+        {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.getExternalContext().getFlash().setKeepMessages(true);
+            context.addMessage(null, new Message().warning("no number of seats"));
+            return true;
+        }else if(returnDate.getTime()<= departureDate.getTime())
+        {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.getExternalContext().getFlash().setKeepMessages(true);
+            context.addMessage(null, new Message().warning("return date must be after departure date"));
+            return true;
+        }
+        else {
+            return false;
+        }
+    }*/
+
+
+
+
 
     public Person getPerson() {
         return person;

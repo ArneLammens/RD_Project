@@ -7,7 +7,9 @@ import com.realdolmen.domain.flight.Flight;
 import com.realdolmen.domain.flight.FlightPeriod;
 import com.realdolmen.domain.flight.FlightService;
 
+import com.realdolmen.session.LoginSession;
 import com.realdolmen.util.Message;
+import com.realdolmen.util.RedirectEnum;
 import org.primefaces.event.CellEditEvent;
 
 import javax.enterprise.event.Event;
@@ -39,6 +41,10 @@ public class AdminFlightController implements Serializable{
 
     @Inject
     Event<FacesMessage> eventMessage;
+
+    @Inject
+    private LoginSession loginSession;
+
     private Company company;
 
     private Flight flight;
@@ -46,10 +52,18 @@ public class AdminFlightController implements Serializable{
     List<Company> companies = new ArrayList<>();
     List<Flight> flights = new ArrayList<>();
 
-    public void init() {
+    public String init() {
+        if(loginSession.getLogin()==null||loginSession.getLogin().getRole()!= Enums.Roles.ADMIN)
+        {
+            return RedirectEnum.REDIRECT.INDEX.getUrl();
+        }else
+        {
+            companies = companyService.getAllCompanies();
+            flight = new Flight();
+            return null;
+        }
 
-        companies = companyService.getAllCompanies();
-        flight = new Flight();
+
     }
 
     public void getFlightsForGivenCompanyName(AjaxBehaviorEvent event){

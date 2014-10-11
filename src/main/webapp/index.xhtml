@@ -5,8 +5,9 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui">
     <f:metadata>
-        <f:viewAction action="#{indexController.init()}"/>
+        <f:viewAction action="#{indexController.init()}" onPostback="false"/>
     </f:metadata>
+
     <ui:define name="divTop">
         <ui:include src='template/top.xhtml'/>
     </ui:define>
@@ -16,51 +17,66 @@
     </ui:define>
 
     <ui:define name="divMain">
-        <h:form>
-            <h:panelGrid columns="2" cellpadding="6">
-                <p:outputLabel for="DepartureRegion" value="#{lbl['index.departureRegion']}" />
-                <p:selectOneMenu id="DepartureRegion" value="#{indexController.departureRegion}" required="true">
-                    <f:ajax event="change" execute="DepartureRegion" listener="#{indexController.getCountryOfDepartureRegion}" render="DepartureCountry"/>
-                    <f:selectItem itemLabel="#{lbl['index.selectDepartureRegion']}" itemValue="" noSelectionOption="true" />
-                    <f:selectItems value="#{indexController.regions}" var="region" itemValue="#{region}" itemLabel="#{enm[region.label]}"/>
+        <p:messages autoUpdate="true"/>
+        <h:form id="form">
+            <p:panelGrid columns="2">
+                <p:outputLabel for="DepartureRegion" value="#{lbl['index.departureRegion']}"/>
+                <p:selectOneMenu id="DepartureRegion" value="#{indexController.departureRegion}">
+                    <f:ajax event="change" execute="DepartureRegion"
+                            listener="#{indexController.getCountryOfDepartureRegion}" render="DepartureCountry"/>
+                    <f:selectItem itemLabel="#{lbl['index.selectDepartureRegion']}" itemValue=""/>
+                    <f:selectItems value="#{indexController.regions}" var="region" itemValue="#{region}"
+                                   itemLabel="#{enm[region.label]}"/>
                 </p:selectOneMenu>
 
-                <p:outputLabel for="DepartureCountry" value="#{lbl['index.departureCountry']}" />
-                <p:selectOneMenu converter="#{countryConverter}" id="DepartureCountry" value="#{indexController.departureCountry}" required="true">
-                    <f:selectItem itemLabel="#{lbl['index.selectDepartureCountry']}" itemValue="" noSelectionOption="true" />
-                    <f:selectItems value="#{indexController.departureCountryList}" var="country" itemValue="#{indexController.departureCountry.id}" itemLabel="#{country.name}"/>
+                <p:outputLabel for="DepartureCountry" value="#{lbl['index.departureCountry']}"/>
+                <p:selectOneMenu converter="#{countryConverter}" id="DepartureCountry"
+                                 value="#{indexController.departureCountry}">
+                    <f:selectItem itemLabel="#{lbl['index.selectDepartureCountry']}" itemValue=""/>
+                    <f:selectItems value="#{indexController.departureCountryList}" var="country"
+                                   itemValue="#{indexController.departureCountry.id}" itemLabel="#{country.name}"/>
                 </p:selectOneMenu>
 
-                <p:outputLabel for="DestinationRegion" value="#{lbl['index.destinationRegion']}" />
-                <p:selectOneMenu id="DestinationRegion" value="#{indexController.destinationRegion}" required="true">
-                    <f:ajax event="change" execute="DestinationRegion" listener="#{indexController.getCountryOfDestinationRegion}" render="DestinationCountry"/>
-                    <f:selectItem itemLabel="#{lbl['index.selectDestinationRegion']}" itemValue="" noSelectionOption="true" />
-                    <f:selectItems value="#{indexController.regions}" var="region" itemValue="#{region}" itemLabel="#{enm[region.label]}"/>
+                <p:outputLabel for="DestinationRegion" value="#{lbl['index.destinationRegion']}"/>
+                <p:selectOneMenu id="DestinationRegion" value="#{indexController.destinationRegion}">
+                    <f:ajax event="change" execute="DestinationRegion"
+                            listener="#{indexController.getCountryOfDestinationRegion}" render="DestinationCountry"/>
+                    <f:selectItem itemLabel="#{lbl['index.selectDestinationRegion']}" itemValue=""
+                                  noSelectionOption="true"/>
+                    <f:selectItems value="#{indexController.regions}" var="region" itemValue="#{region}"
+                                   itemLabel="#{enm[region.label]}"/>
                 </p:selectOneMenu>
-                <p:outputLabel for="DestinationCountry" value="#{lbl['index.destinationCountry']}" />
-                <p:selectOneMenu converter="#{countryConverter}" id="DestinationCountry" value="#{indexController.destinationCountry}" required="true">
-                    <f:selectItem itemLabel="#{lbl['index.selectDestinationCountry']}" itemValue="" noSelectionOption="true" />
-                    <f:selectItems value="#{indexController.destinationCountryList}" var="country" itemValue="#{indexController.destinationCountry.id}" itemLabel="#{country.name}"/>
+
+                <p:outputLabel for="DestinationCountry" value="#{lbl['index.destinationCountry']}"/>
+                <p:selectOneMenu converter="#{countryConverter}" id="DestinationCountry"
+                                 value="#{indexController.destinationCountry}">
+                    <f:selectItem itemLabel="#{lbl['index.selectDestinationCountry']}" itemValue=""
+                                  noSelectionOption="true"/>
+                    <f:selectItems value="#{indexController.destinationCountryList}" var="country"
+                                   itemValue="#{indexController.destinationCountry.id}" itemLabel="#{country.name}"/>
                 </p:selectOneMenu>
-                <p:outputLabel for="departureDate" value="#{lbl['index.departureDate']}" />
-                <p:calendar id="departureDate" value="#{indexController.departureDate}" pattern="dd/MM/yyyy" mindate="#{indexController.minDate}" required="true" >
-                    <p:ajax event="dateSelect" update="returnDate" />
+
+                <p:outputLabel for="departureDate" value="#{lbl['index.departureDate']}"/>
+                <p:calendar immediate="true" id="departureDate" value="#{indexController.departureDate}" pattern="dd/MM/yyyy"
+                            mindate="#{indexController.minDate}">
+                    <p:ajax event="dateSelect" update="returnDate"/>
                 </p:calendar>
-                <p:outputLabel for="returnDate" value="#{lbl['index.returnDate']}" />
-                <p:calendar id="returnDate" value="#{indexController.returnDate}" pattern="dd/MM/yyyy" mindate="#{indexController.departureDate}" required="true" />
 
-                <p:outputLabel for="amoutSeats" value="#{lbl['index.amountOfSeats']}" />
-                <p:inputMask id="amoutSeats" value="#{indexController.numberOfSeats}"
-                             mask="9?99"
-                             maxlength="3"
-                             placeHolder=" " required="true"/>
+                <p:outputLabel for="returnDate" value="#{lbl['index.returnDate']}"/>
+                <p:calendar immediate="true" id="returnDate" value="#{indexController.returnDate}" pattern="dd/MM/yyyy"
+                            mindate="#{indexController.departureDate}"/>
 
-
-                <p:commandButton action="#{indexController.redirectToTripPage()}" value="#{lbl['index.search']}">
+                <p:outputLabel for="amoutSeats" value="#{lbl['index.amountOfSeats']}"/>
+                <p:spinner immediate="true" id="amoutSeats"  value="#{indexController.numberOfSeats}" min="0" max="100" />
 
 
-                </p:commandButton>
-            </h:panelGrid>
+
+            </p:panelGrid>
+            <div class="col-md-offset-3">
+                <p:commandButton action="#{indexController.redirectToTripPage()}" value="#{lbl['index.search']}"/>
+            </div>
+
+
         </h:form>
     </ui:define>
 

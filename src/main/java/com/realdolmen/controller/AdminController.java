@@ -5,8 +5,11 @@ import com.realdolmen.domain.country.Country;
 import com.realdolmen.domain.country.CountryService;
 import com.realdolmen.domain.flight.Flight;
 import com.realdolmen.domain.flight.FlightService;
+import com.realdolmen.domain.login.Login;
+import com.realdolmen.domain.login.LoginService;
 import com.realdolmen.domain.trip.TripService;
 import com.realdolmen.session.CountrySession;
+import com.realdolmen.session.LoginSession;
 import com.realdolmen.util.Message;
 import com.realdolmen.util.RedirectEnum;
 import org.primefaces.event.TransferEvent;
@@ -49,6 +52,9 @@ public class AdminController implements Serializable {
     @Inject
     private FlightService flightService;
 
+    @Inject
+    private LoginSession loginSession;
+
     private List<List> retrievedList;
 
 
@@ -61,7 +67,14 @@ public class AdminController implements Serializable {
     private List<Country> countriesToBeRemoved = new ArrayList<>();
 
 
-    public void init() {
+    public String init() {
+        if(loginSession.getLogin()==null||loginSession.getLogin().getRole()!= Enums.Roles.ADMIN)
+        {
+            return RedirectEnum.REDIRECT.INDEX.getUrl();
+        }else
+        {
+            return null;
+        }
 
     }
 

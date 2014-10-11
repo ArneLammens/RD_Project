@@ -26,6 +26,7 @@ public class Message {
 
     public FacesMessage info(String resourceBundle, String key, Object... parameters)
     {
+
         return createMessage(resourceBundle, key, parameters, FacesMessage.SEVERITY_INFO);
     }
 

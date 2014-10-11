@@ -21,7 +21,6 @@ public class FlightService
     private FlightRepository flightRepository;
     @Inject
     private TripService tripService;
-
     @Inject
     private Event<FacesMessage> event;
 
@@ -58,15 +57,18 @@ public class FlightService
        return flightRepository.getAllFLightsForGivenRegionAndCompany(region,person);
     }
 
-    public void removeFlight(Flight flight)
+    public boolean removeFlight(Flight flight)
     {
         if(tripService.checkForExsistingTripsForGivenFLight(flight))
         {
-            event.fire(new Message().warning( "You can not remove this flight because it is used in a trip"));
+            return true;
         }
         else
         {
             flightRepository.remove(flight.getId());
+            return false;
         }
+
+
     }
 }

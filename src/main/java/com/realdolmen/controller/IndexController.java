@@ -7,20 +7,30 @@ import com.realdolmen.domain.trip.TripService;
 import com.realdolmen.session.CountrySession;
 import com.realdolmen.util.Message;
 import com.realdolmen.util.RedirectEnum;
+import com.realdolmen.util.ValidationUtil;
+import org.primefaces.context.RequestContext;
 import org.slf4j.Logger;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.event.Event;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.context.Flash;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.validation.constraints.NotNull;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
 
+import static com.realdolmen.util.ValidationUtil.validateDatesForBeforeAndAfter;
+import static com.realdolmen.util.ValidationUtil.validateForNotNullValues;
+import static com.realdolmen.util.ValidationUtil.validateNumber;
 import static javax.faces.context.FacesContext.getCurrentInstance;
 
 @Named
@@ -33,6 +43,8 @@ public class IndexController implements Serializable {
     private CountrySession countrySession;
     @Inject
     private Event<FacesMessage> event;
+
+    private Flash flash= FacesContext.getCurrentInstance().getExternalContext().getFlash();
 
 
 
@@ -53,12 +65,9 @@ public class IndexController implements Serializable {
 
     /*Functions for the index page*/
     public void init() {
-        logger.info("IndexController init function");
+        logger.info("IndexController init function"+departureDate);
 
-    }
 
-    public Enums.Region[] getRegions() {
-        return Enums.Region.values();
     }
 
     public void getCountryOfDepartureRegion(AjaxBehaviorEvent event) {
@@ -71,35 +80,59 @@ public class IndexController implements Serializable {
         destinationCountryList = countrySession.getCorrectCountryListForAGivenRegion(destinationRegion);
     }
 
-    public void erazer()
-    {
-        destinationCountry=null;
-        departureCountry=null;
-        destinationRegion=null;
-        departureRegion=null;
-
-    }
-
     public String redirectToTripPage()
     {
-        if(numberOfSeats == 0) {
-            event.fire(new Message().warning("There are no trips"));
-            //erazer();
-            return null;
+
+
+        if(validateForNotNullValues("index.noDestinationRegion", destinationRegion, "index.noDepartureRegion", departureRegion,
+                "index.noDestinationCountry", destinationCountry, "index.noDepartureCountry", departureCountry,
+                "index.noDepartureDate", departureDate, "index.noReturnDate", returnDate,"index.noTicketsDate",numberOfSeats )||validator()) {
+            return RedirectEnum.REDIRECT.INDEX.getUrl();
         }
         else {
-            getCurrentInstance().getExternalContext().getFlash().put("destinationCountry", destinationCountry);
-            getCurrentInstance().getExternalContext().getFlash().put("departureCountry", departureCountry);
-            getCurrentInstance().getExternalContext().getFlash().put("departureDate", departureDate);
-            getCurrentInstance().getExternalContext().getFlash().put("returnDate", returnDate);
-            getCurrentInstance().getExternalContext().getFlash().put("numberOfSeats", numberOfSeats);
-            //erazer();
+            flash.put("destinationCountry", destinationCountry);
+            flash.put("departureCountry", departureCountry);
+            flash.put("departureDate", departureDate);
+            flash.put("returnDate", returnDate);
+            flash.put("numberOfSeats", numberOfSeats);
+
             return RedirectEnum.REDIRECT.TRIPS.getUrl();
         }
     }
 
+    public boolean validator()
+    {
+        if(departureDate!=null||returnDate!=null) {
+            if (numberOfSeats==0) {
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.getExternalContext().getFlash().setKeepMessages(true);
+                context.addMessage(null, new Message().warning("resourceBundle/ValidationMessages", "index.noTicketsDate"));
+                return true;
+            } else if (departureDate.getTime()>returnDate.getTime()) {
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.getExternalContext().getFlash().setKeepMessages(true);
+                context.addMessage(null, new Message().warning("resourceBundle/ValidationMessages", "index.returnDateMustAfterDepartureDate"));
+                return true;
+            } else if (departureDate.getTime()+86399999l<new Date().getTime()) {
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.getExternalContext().getFlash().setKeepMessages(true);
+                context.addMessage(null, new Message().warning("resourceBundle/ValidationMessages", "index.DepartureDateMostAfterDateOfToday"));
+                return true;
+            } else {
+                return false;
+            }
+        }
+        else
+        {
+            return true;
+        }
+    }
 
 
+
+    public Enums.Region[] getRegions() {
+        return Enums.Region.values();
+    }
 
     /*Getters and Setters*/
 
@@ -156,6 +189,7 @@ public class IndexController implements Serializable {
     }
 
     public void setDepartureDate(Date departureDate) {
+
         this.departureDate = departureDate;
     }
 
@@ -175,12 +209,11 @@ public class IndexController implements Serializable {
         this.minDate = minDate;
     }
 
-    public int getNumberOfSeats() {
+    public Integer getNumberOfSeats() {
         return numberOfSeats;
     }
 
-    public void setNumberOfSeats(int numberOfSeats) {
+    public void setNumberOfSeats(Integer numberOfSeats) {
         this.numberOfSeats = numberOfSeats;
     }
-
 }

@@ -9,6 +9,7 @@ import com.realdolmen.domain.location.Location;
 import com.realdolmen.domain.location.LocationService;
 import com.realdolmen.domain.person.Person;
 import com.realdolmen.domain.person.PersonService;
+import com.realdolmen.domain.trip.TripService;
 import com.realdolmen.session.LoginSession;
 import com.realdolmen.util.Message;
 import com.realdolmen.util.RedirectEnum;
@@ -33,6 +34,9 @@ public class FlightAdminController implements Serializable
 
     @Inject
     private FlightService flightService;
+
+    @Inject
+    private TripService tripService;
 
     @Inject
     private LoginSession loginSession;
@@ -81,7 +85,7 @@ public class FlightAdminController implements Serializable
         }
         else
         {
-
+            regions();
             person=personService.findAPerson(loginSession.getLogin().getId());
             return null;
         }
@@ -93,34 +97,27 @@ public class FlightAdminController implements Serializable
         flights=flightService.getAllFLightsForGivenRegionAndCompany(region,person);
     }
 
-    public String createFlight()
-    {
-        if(flight.getDeparture()==flight.getDestination())
-        {
+    public String createFlight() {
+        if (flight.getDeparture() == flight.getDestination()) {
             event.fire(new Message().error("you can not destination must differ from departure"));
             return null;
-        }
-        else if(endDate.getTime()<startDate.getTime())
-        {
+        } else if (endDate.getTime() < startDate.getTime()) {
             event.fire(new Message().error("The end date cant be before the start date"));
             return null;
-        }
-        else
-        {
-            flight.setPeriod(new FlightPeriod(startDate,endDate));
+        } else {
+            flight.setPeriod(new FlightPeriod(startDate, endDate));
             flight.setAvailableSeats(flight.getSeats());
             flight.setFlightAdmin(person);
             flight.setMargin(5);
-            flight.setDateOfArrival(new Date(flight.getDepartureTime().getTime()+duration.getTime()));
+            flight.setDateOfArrival(new Date(flight.getDepartureTime().getTime() + duration.getTime()));
             flight.setDayOfTheWeek(dayOfTheWeek);
-            flight.setDiscountPercentage(flight.getDiscountPercentage()*100);
+            flight.setDiscountPercentage(flight.getDiscountPercentage() * 100);
             flightService.createFlight(flight);
-            locations=null;
+            locations = null;
             return RedirectEnum.REDIRECT.INDEX.getUrl();
         }
 
     }
-
 
     public Enums.DayOfTheWeek[] getweekDays() {
         return Enums.DayOfTheWeek.values();
@@ -134,13 +131,18 @@ public class FlightAdminController implements Serializable
     }
     public void removeFlight(Flight flight)
     {
-        flightService.removeFlight(flight);
-        event.fire(new Message().info("The flight has been removed"));
+        if(flightService.removeFlight(flight))
+        {
+            event.fire(new Message().error("This flight can't be removed because it is used in a trip"));
+        }
+        else
+        {
 
-    }
-    public void refreshList(Flight flight)
-    {
-        flights.remove(flight);
+            flights.remove(flight);
+            event.fire(new Message().info("The flight has been removed"));
+        }
+
+
     }
 
 
@@ -183,7 +185,6 @@ public class FlightAdminController implements Serializable
     public void setDepartureLocation(Location departureLocation) {
         this.departureLocation = departureLocation;
     }
-
 
     public Flight getFlight() {
         return flight;

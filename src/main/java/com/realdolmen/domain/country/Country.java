@@ -37,7 +37,7 @@ public class Country  {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Country)) return false;
 
         Country country = (Country) o;
 
@@ -52,7 +52,6 @@ public class Country  {
     public int hashCode() {
         int result = id.hashCode();
         result = 31 * result + name.hashCode();
-        result = 31 * result + (approved ? 1 : 0);
         result = 31 * result + region.hashCode();
         return result;
     }
