@@ -4,7 +4,9 @@ import com.realdolmen.domain.Enums;
 import com.realdolmen.domain.company.Company;
 import com.realdolmen.domain.company.CompanyService;
 import com.realdolmen.domain.flight.Flight;
+import com.realdolmen.domain.flight.FlightPeriod;
 import com.realdolmen.domain.flight.FlightService;
+
 import com.realdolmen.util.Message;
 import org.primefaces.event.CellEditEvent;
 
@@ -18,6 +20,7 @@ import javax.inject.Named;
 import javax.persistence.Entity;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,6 +29,7 @@ import java.util.List;
 @Named
 @ViewScoped
 public class AdminFlightController implements Serializable{
+
 
     @Inject
     private CompanyService companyService;
@@ -92,4 +96,5 @@ public class AdminFlightController implements Serializable{
     public void setFlight(Flight flight) {
         this.flight = flight;
     }
+
 }

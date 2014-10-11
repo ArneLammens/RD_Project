@@ -15,4 +15,10 @@ public class CompanyRepository extends AbstractRepositoy<Company> {
        return entityManager.createNamedQuery("Company.getAllCompanies",Company.class)
                .setParameter("rolesForACompany", Enums.RolesForACompany.FLIGHT_ADMIN).getResultList();
     }
+
+    public void removeCompany(Company company)
+    {
+
+        entityManager.remove(entityManager.merge(company));
+    }
 }

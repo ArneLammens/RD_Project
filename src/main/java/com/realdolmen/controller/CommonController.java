@@ -17,9 +17,15 @@ public class CommonController implements Serializable{
     public String redirectToAdminPage(){
         return RedirectEnum.REDIRECT.ADMIN_COUNTRY.getUrl();
     }
+    public String redirectToAdminPageForAirlines(){return RedirectEnum.REDIRECT.REMOVE_AIRLINE.getUrl();}
     public String redirectToAdminPageForMargins(){
         return RedirectEnum.REDIRECT.ADMIN_MARGIN.getUrl();
     }
+    public String redirectToFLightAdminCreateFlight(){
+        return RedirectEnum.REDIRECT.CREATE_FLIGHT.getUrl();
+    }
+    public String redirectToFlightAdminRemoveFlight(){return RedirectEnum.REDIRECT.REMOVE_FLIGHT.getUrl();}
+
 
 
 

@@ -1,0 +1,37 @@
+<ui:composition template="/template/master.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+        >
+    <f:metadata>
+        <f:viewAction action="#{adminAirlineController.init()}" onPostback="false"/>
+    </f:metadata>
+
+    <ui:define name="divTop">
+        <ui:include src='template/top.xhtml'/>
+    </ui:define>
+    <ui:define name="divLeft">
+        <ui:include src='template/left.xhtml'/>
+    </ui:define>
+    <ui:define name="divMain">
+        <p:messages autoUpdate="true"/>
+        <h:form>
+
+            <p:panelGrid columns="2">
+                <p:dataTable scrollable="true" id="airlines"  value="#{adminAirlineController.companies}" var="company">
+                    <p:column headerText="name">
+                        <h:outputText value="#{company.name}" />
+                    </p:column>
+                    <p:column headerText="remove">
+                        <p:commandButton action="#{adminAirlineController.removeCompany(company)}" value="remove company">
+                            <f:ajax listener="#{adminAirlineController.refreshList(company)}" render="airlines"/>
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </p:panelGrid>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

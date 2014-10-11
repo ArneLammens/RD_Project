@@ -10,9 +10,23 @@
             <p:submenu label="Actions">
                 <p:menuitem value="Manage countries" outcome="#{commonController.redirectToAdminPage()}" />
                 <p:menuitem value="Manage margins" outcome="#{commonController.redirectToAdminPageForMargins()}" />
-
+                <p:menuitem value="Manage airlines" outcome="#{commonController.redirectToAdminPageForAirlines()}" />
             </p:submenu>
         </p:menu>
+        </h:panelGrid>
+    </h:form>
+
+    <h:form rendered="#{loginSession.login.role.label == 'Flight Admin'}">
+        <h:panelGrid columns="6" >
+            <p:menu >
+                <p:submenu label="Create">
+                    <p:menuitem value="Create flights" outcome="#{commonController.redirectToFLightAdminCreateFlight()}" />
+                </p:submenu>
+                <p:submenu label="Actions">
+                    <p:menuitem value="Remove flight" outcome="#{commonController.redirectToFlightAdminRemoveFlight()}" />
+                </p:submenu>
+
+            </p:menu>
         </h:panelGrid>
     </h:form>
 </ui:composition>

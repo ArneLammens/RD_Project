@@ -1,8 +1,10 @@
 package com.realdolmen.domain.flight;
 
 import com.realdolmen.domain.AbstractRepositoy;
+import com.realdolmen.domain.Enums;
 import com.realdolmen.domain.company.Company;
 import com.realdolmen.domain.country.Country;
+import com.realdolmen.domain.person.Person;
 import org.slf4j.Logger;
 
 import javax.ejb.Stateless;
@@ -42,6 +44,14 @@ public class FlightRepository extends AbstractRepositoy<Flight> {
     }
 
     public Flight findById(Integer id) {
-       return find(id);
+        return find(id);
+    }
+    public List<Flight>getAllFLightsForGivenRegionAndCompany(Enums.Region region,Person person)
+    {
+        return entityManager.createNamedQuery("Flight.getAllFLightsForGivenRegionAndCompany",Flight.class)
+                .setParameter("company",person.getCompany())
+                .setParameter("region",region)
+                .getResultList();
+
     }
 }

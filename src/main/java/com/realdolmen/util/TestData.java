@@ -59,6 +59,7 @@ public class TestData {
         logger.info("/////************************************INJECTING COMPANIES*************************************/////");
 
         entityManager.persist(new Company("JetAir",Enums.RolesForACompany.FLIGHT_ADMIN));
+        entityManager.persist(new Company("RyanAIr",Enums.RolesForACompany.FLIGHT_ADMIN));
         entityManager.persist(new Company("Neckermann",Enums.RolesForACompany.TRAVEL_ADMIN));
 
     }

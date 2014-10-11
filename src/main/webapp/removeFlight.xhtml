@@ -1,0 +1,63 @@
+<ui:composition template="/template/master.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    <f:metadata>
+        <f:viewAction action="#{flightAdminController.initManageFlight()}" onPostback="false"/>
+    </f:metadata>
+    <ui:define name="divLeft">
+        <ui:include src='template/left.xhtml'/>
+    </ui:define>
+    <ui:define name="divTop">
+        <ui:include src='template/top.xhtml'/>
+    </ui:define>
+    <ui:define name="divMain">
+        <p:messages autoUpdate="true"/>
+        <h:form>
+         <p:panelGrid columns="1">
+            <p:selectOneMenu  id="regions" required="true" value="#{flightAdminController.region}" >
+                <f:ajax event="change" execute="regions" listener="#{flightAdminController.getFlightForRegionAndCompany}"
+                        render="flights"/>
+                <f:selectItem itemLabel="Select a region" itemValue=""
+                              noSelectionOption="true" />
+                <f:selectItems  value="#{flightAdminController.regions()}" var="region"
+                                itemValue="#{region}" itemLabel="#{enm[region.label]}"/>
+            </p:selectOneMenu>
+            <p:dataTable scrollable="true" id="flights"  value="#{flightAdminController.flights}" var="flight">
+                <p:column headerText="Flightnumber">
+                    <h:outputText value="#{flight.flightNumber}" />
+                </p:column>
+                <p:column headerText="departureTIme">
+                    <h:outputText value="#{flight.departureTime}" />
+                </p:column>
+                <p:column headerText="country">
+                    <h:outputText value="#{flight.departure.country.name}" />
+                </p:column>
+                <p:column headerText="destination">
+                    <h:outputText value="#{flight.destination.country.name}" />
+                </p:column>
+                 <p:column headerText="price">
+                    <h:outputText value="#{flight.price}" />
+                </p:column>
+                <p:column headerText="seats">
+                    <h:outputText value="#{flight.seats}" />
+                </p:column>
+                <p:column headerText="period start">
+                    <h:outputText value="#{flight.period.startDate}" />
+                </p:column>
+                <p:column headerText="period end">
+                    <h:outputText value="#{flight.period.endDate}" />
+                </p:column>
+                <p:column headerText="remove">
+                    <p:commandButton action="#{flightAdminController.removeFlight(flight)}" value="remove flight">
+                        <f:ajax listener="#{flightAdminController.refreshList(flight)}" render="flights"/>
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+          </p:panelGrid>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
