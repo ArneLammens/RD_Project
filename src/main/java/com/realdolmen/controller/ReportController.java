@@ -6,6 +6,7 @@ import com.realdolmen.domain.company.Company;
 import com.realdolmen.domain.flight.FlightPeriod;
 import com.realdolmen.domain.search.SearchService;
 import com.realdolmen.session.LoginSession;
+import com.realdolmen.util.RedirectEnum;
 
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
@@ -39,47 +40,76 @@ public class ReportController implements Serializable {
     private BigDecimal marginAverage;
     private BigDecimal averageDiscount;
 
-    public void init(){
-        getAllValuesFromFlash();
-        if( loginSession.getLogin().getRole() == Enums.Roles.ADMIN ){
-            setAllQueriedValuesForAdmin();
-        }else {
-            setAllQueriedValuesForFlightAdmin();
+
+    public String init()
+    {
+        if(loginSession.getLogin() != null )
+        {
+            if(loginSession.getLogin().getRole() != Enums.Roles.ADMIN && loginSession.getLogin().getRole() != Enums.Roles.FLIGHT_ADMIN )
+            {
+                return RedirectEnum.REDIRECT.INDEX.getUrl();
+            }
+            else if(flash.get("companyForTravelAdmin")==null)
+            {
+                return RedirectEnum.REDIRECT.SEARCH.getUrl();
+            }
+            else {
+                startUp();
+                return " ";
+            }
+        }else
+        {
+            return RedirectEnum.REDIRECT.INDEX.getUrl();
         }
+
     }
 
-    public void getAllValuesFromFlash(){
+    public void startUp() {
+            getAllValuesFromFlash();
+            if (loginSession.getLogin().getRole() == Enums.Roles.ADMIN) {
+                setAllQueriedValuesForAdmin();
+
+            } else {
+                setAllQueriedValuesForFlightAdmin();
+            }
+
+        }
+
+
+    public void getAllValuesFromFlash() {
         flightPeriod = (FlightPeriod) flash.get("flightPeriod");
         departureRegion = (Enums.Region) flash.get("departureRegion");
         destinationRegion = (Enums.Region) flash.get("destinationRegion");
-        companyForFlightAdmin = (Company)  flash.get("companyForFlightAdmin");
-        companyForTravelAdmin = (Company)  flash.get("companyForTravelAdmin");
+        companyForFlightAdmin = (Company) flash.get("companyForFlightAdmin");
+        companyForTravelAdmin = (Company) flash.get("companyForTravelAdmin");
     }
 
 
-    public void setAllQueriedValuesForAdmin(){
-        bookings = searchService.getAllReportData(flightPeriod,departureRegion,destinationRegion,companyForFlightAdmin,companyForTravelAdmin);
-        averagePrice = searchService.getAveragePriceFromBookings(flightPeriod,departureRegion,destinationRegion,companyForFlightAdmin,companyForTravelAdmin);
-        averagePrice=averagePrice.setScale(2,BigDecimal.ROUND_HALF_UP);
-        maxPrice = searchService.getMaxPriceFromBookings(flightPeriod,departureRegion,destinationRegion,companyForFlightAdmin,companyForTravelAdmin);
-        minPrice = searchService.getMinPriceFromBookings(flightPeriod,departureRegion,destinationRegion,companyForFlightAdmin,companyForTravelAdmin);
-        marginAverage = searchService.getAverageMarginFromBookings(flightPeriod,departureRegion,destinationRegion,companyForFlightAdmin,companyForTravelAdmin);
-        averageDiscount =  searchService.getAverageDiscountFromBookings(flightPeriod,departureRegion,destinationRegion,companyForFlightAdmin,companyForTravelAdmin);
+    public void setAllQueriedValuesForAdmin() {
+        bookings = searchService.getAllReportData(flightPeriod, departureRegion, destinationRegion, companyForFlightAdmin, companyForTravelAdmin);
+        averagePrice = searchService.getAveragePriceFromBookings(flightPeriod, departureRegion, destinationRegion, companyForFlightAdmin, companyForTravelAdmin);
+        averagePrice = averagePrice.setScale(2, BigDecimal.ROUND_HALF_UP);
+        maxPrice = searchService.getMaxPriceFromBookings(flightPeriod, departureRegion, destinationRegion, companyForFlightAdmin, companyForTravelAdmin);
+        minPrice = searchService.getMinPriceFromBookings(flightPeriod, departureRegion, destinationRegion, companyForFlightAdmin, companyForTravelAdmin);
+        marginAverage = searchService.getAverageMarginFromBookings(flightPeriod, departureRegion, destinationRegion, companyForFlightAdmin, companyForTravelAdmin);
+        averageDiscount = searchService.getAverageDiscountFromBookings(flightPeriod, departureRegion, destinationRegion, companyForFlightAdmin, companyForTravelAdmin);
     }
 
-    public void setAllQueriedValuesForFlightAdmin(){
-        bookings = searchService.getAllReportData(flightPeriod,departureRegion,destinationRegion, getCompanyFromLoginSession(),companyForTravelAdmin);
-        averagePrice = searchService.getAveragePriceFromBookings(flightPeriod,departureRegion,destinationRegion,getCompanyFromLoginSession(),companyForTravelAdmin);
-         averagePrice=averagePrice.setScale(2,BigDecimal.ROUND_HALF_UP);
-        maxPrice = searchService.getMaxPriceFromBookings(flightPeriod,departureRegion,destinationRegion,getCompanyFromLoginSession(),companyForTravelAdmin);
-        minPrice = searchService.getMinPriceFromBookings(flightPeriod,departureRegion,destinationRegion,getCompanyFromLoginSession(),companyForTravelAdmin);
-        marginAverage = searchService.getAverageMarginFromBookings(flightPeriod,departureRegion,destinationRegion,getCompanyFromLoginSession(),companyForTravelAdmin);
-        averageDiscount =  searchService.getAverageDiscountFromBookings(flightPeriod,departureRegion,destinationRegion,getCompanyFromLoginSession(),companyForTravelAdmin);
+    public void setAllQueriedValuesForFlightAdmin() {
+        bookings = searchService.getAllReportData(flightPeriod, departureRegion, destinationRegion, getCompanyFromLoginSession(), companyForTravelAdmin);
+        averagePrice = searchService.getAveragePriceFromBookings(flightPeriod, departureRegion, destinationRegion, getCompanyFromLoginSession(), companyForTravelAdmin);
+        averagePrice = averagePrice.setScale(2, BigDecimal.ROUND_HALF_UP);
+        maxPrice = searchService.getMaxPriceFromBookings(flightPeriod, departureRegion, destinationRegion, getCompanyFromLoginSession(), companyForTravelAdmin);
+        minPrice = searchService.getMinPriceFromBookings(flightPeriod, departureRegion, destinationRegion, getCompanyFromLoginSession(), companyForTravelAdmin);
+        marginAverage = searchService.getAverageMarginFromBookings(flightPeriod, departureRegion, destinationRegion, getCompanyFromLoginSession(), companyForTravelAdmin);
+        averageDiscount = searchService.getAverageDiscountFromBookings(flightPeriod, departureRegion, destinationRegion, getCompanyFromLoginSession(), companyForTravelAdmin);
 
     }
 
 
-    public Company getCompanyFromLoginSession(){
+
+
+    public Company getCompanyFromLoginSession() {
         return loginSession.getLogin().getCompany();
     }
 
@@ -106,8 +136,6 @@ public class ReportController implements Serializable {
     public void setDestinationRegion(Enums.Region destinationRegion) {
         this.destinationRegion = destinationRegion;
     }
-
-
 
     public List<Booking> getBookings() {
         return bookings;
@@ -164,7 +192,6 @@ public class ReportController implements Serializable {
     public void setCompanyForFlightAdmin(Company companyForFlightAdmin) {
         this.companyForFlightAdmin = companyForFlightAdmin;
     }
-
 
     public BigDecimal getAverageDiscount() {
         return averageDiscount;

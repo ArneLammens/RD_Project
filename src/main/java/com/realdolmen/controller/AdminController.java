@@ -159,8 +159,6 @@ public class AdminController implements Serializable {
         this.countriesToBeRemoved = countriesToBeRemoved;
     }
 
-
-
     public List<Country> getApprovedCountries() {
         return approvedCountries;
     }

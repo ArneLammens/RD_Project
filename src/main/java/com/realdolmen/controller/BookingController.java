@@ -72,7 +72,6 @@ public class BookingController implements Serializable {
             return null;
         }
 
-
     }
 
     public void alterPrice(AjaxBehaviorEvent event)

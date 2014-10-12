@@ -20,8 +20,6 @@
          <p:panelGrid columns="2">
             <p:outputLabel for="flightNumber" value="#{lbl['createFlight.flightNumber']}"/>
             <p:inputText id="flightNumber" value="#{flightAdminController.flight.flightNumber}"/>
-
-
             <p:outputLabel for="departure" value="#{lbl['createFlight.departure']}" />
             <p:selectOneMenu converter="#{locationConverter}"  id="departure" value="#{flightAdminController.flight.departure}">
                 <f:selectItem itemLabel="#{lbl['createFlight.SelectDeparture']}" itemValue="" noSelectionOption="true" />
@@ -32,42 +30,29 @@
                 <f:selectItem itemLabel="#{lbl['createFlight.SelectDestination']}" itemValue="" noSelectionOption="true" />
                 <f:selectItems value="#{flightAdminController.locations}" var="location" itemValue="#{flightAdminController.destinationLocation.id}" itemLabel="#{location.name}"/>
             </p:selectOneMenu>
-
             <p:outputLabel for="seats" value="#{lbl['createFlight.seats']}"/>
              <p:spinner immediate="true" id="seats"  value="#{flightAdminController.flight.seats}" min="0"  />
-
             <p:outputLabel for="discountPercentage" value="#{lbl['createFlight.discountPercentage']}"/>
             <p:spinner immediate="true" id="discountPercentage"  value="#{flightAdminController.flight.discountPercentage}" stepFactor="0.05" min="0.00" max="100" />
-
             <p:outputLabel for="seatThreshold" value="#{lbl['createFlight.seatThreshold']}" />
             <p:spinner immediate="true" id="seatThreshold"  value="#{flightAdminController.flight.seatThreshold}" min="0"  />
-
-
             <p:outputLabel for="price" value="#{lbl['createFlight.price']}"/>
              <p:spinner immediate="true" id="price"  value="#{flightAdminController.flight.price}" stepFactor="50" min="0.00" />
-
             <p:outputLabel for="departuretime" value="#{lbl['createFlight.departureTime']}" />
             <p:calendar immediate="true" id="departuretime" value="#{flightAdminController.flight.departureTime}" pattern="HH:mm a" timeOnly="true"  />
-
             <p:outputLabel for="duration" value="#{lbl['createFlight.duration']}" />
             <p:calendar immediate="true" id="duration" value="#{flightAdminController.duration}" pattern="HH:mm a" timeOnly="true"/>
-
             <p:outputLabel for="startDate" value="#{lbl['createFlight.startDate']}" />
             <p:calendar id="startDate" value="#{flightAdminController.startDate}" pattern="dd/MM/yyyy" mindate="#{flightAdminController.mindate}" immediate="true">
                 <p:ajax event="dateSelect" update="endDate"  />
             </p:calendar>
-
             <p:outputLabel for="endDate" value="#{lbl['createFlight.endDate']}" />
             <p:calendar id="endDate" value="#{flightAdminController.endDate}" pattern="dd/MM/yyyy" mindate="#{flightAdminController.startDate}" immediate="true" />
-
-
-
-            <p:outputLabel for="dayOfTheWeek" value="#{lbl['createFlight.SelectDayOfTheWeek']}"/>
+            <p:outputLabel for="dayOfTheWeek" value=" #{lbl['createFlight.DayOfTheWeek']}"/>
             <p:selectOneMenu id="dayOfTheWeek" value="#{flightAdminController.dayOfTheWeek}" >
-                <f:selectItem itemLabel="#{lbl['createFlight.DayOfTheWeek']}" itemValue="" noSelectionOption="true" />
+                <f:selectItem itemLabel="#{lbl['createFlight.SelectDayOfTheWeek']}" itemValue="" noSelectionOption="true" />
                 <f:selectItems value="#{flightAdminController.getweekDays()}" var="weekday" itemValue="#{weekday}" itemLabel="#{weekday}"/>
             </p:selectOneMenu>
-
             <p:commandButton action="#{flightAdminController.createFlight()}" value="#{lbl['createFlight.Save']}" >
             </p:commandButton>
         </p:panelGrid>

@@ -23,6 +23,7 @@ public class Person implements Serializable {
     private String email;
     private String password;
     private String homeNumber;
+    private String street;
     private String zipCode;
     private String municipality;
     @ManyToOne
@@ -42,12 +43,13 @@ public class Person implements Serializable {
     }
 
 
-    public Person(String email, String password, String homeNumber, String zipCode, String municipality, Country country, Enums.Region region, String name, String lastName, Date dateOfBirth, Enums.Roles role) {
+    public Person(String email, String password, String homeNumber, String zipCode, String municipality,String street, Country country, Enums.Region region, String name, String lastName, Date dateOfBirth, Enums.Roles role) {
         this.email = email;
         this.password = password;
         this.homeNumber = homeNumber;
         this.zipCode = zipCode;
         this.municipality = municipality;
+        this.street= street;
         this.country = country;
         this.region = region;
         this.name = name;
@@ -56,12 +58,13 @@ public class Person implements Serializable {
         this.role = role;
     }
 
-    public Person(String email, String password, String homeNumber, String zipCode, String municipality, Country country, Enums.Region region, String name, String lastName, Date dateOfBirth, Enums.Roles role, Company company) {
+    public Person(String email, String password, String homeNumber, String zipCode, String municipality,String street, Country country, Enums.Region region, String name, String lastName, Date dateOfBirth, Enums.Roles role, Company company) {
         this.email = email;
         this.password = password;
         this.homeNumber = homeNumber;
         this.zipCode = zipCode;
         this.municipality = municipality;
+        this.street=street;
         this.country = country;
         this.region = region;
         this.name = name;
@@ -74,7 +77,7 @@ public class Person implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Person)) return false;
 
         Person person = (Person) o;
 
@@ -90,11 +93,30 @@ public class Person implements Serializable {
         if (!password.equals(person.password)) return false;
         if (region != person.region) return false;
         if (role != person.role) return false;
+        if (!street.equals(person.street)) return false;
         if (!zipCode.equals(person.zipCode)) return false;
 
         return true;
     }
 
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + email.hashCode();
+        result = 31 * result + password.hashCode();
+        result = 31 * result + homeNumber.hashCode();
+        result = 31 * result + street.hashCode();
+        result = 31 * result + zipCode.hashCode();
+        result = 31 * result + municipality.hashCode();
+        result = 31 * result + country.hashCode();
+        result = 31 * result + region.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + dateOfBirth.hashCode();
+        result = 31 * result + role.hashCode();
+        result = 31 * result + (company != null ? company.hashCode() : 0);
+        return result;
+    }
 
     public Integer getId() {
         return id;
@@ -194,5 +216,13 @@ public class Person implements Serializable {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
     }
 }

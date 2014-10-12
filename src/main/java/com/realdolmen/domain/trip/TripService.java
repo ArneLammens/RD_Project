@@ -44,6 +44,7 @@ public class TripService {
     }
     public BigDecimal calculatePriceForTrip(Trip trip,int numberOfSeats)
     {
+        logger.info("calculate price for trip "+trip.getName());
         logger.info("Calculate price for trip: "+trip.getName());
         BigDecimal departureFlightBasePriceWithMargin;
         BigDecimal returnFlightBasePriceWithMargin;

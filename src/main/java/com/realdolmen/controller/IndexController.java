@@ -65,7 +65,7 @@ public class IndexController implements Serializable {
 
     /*Functions for the index page*/
     public void init() {
-        logger.info("IndexController init function"+departureDate);
+        logger.info("IndexController init function");
 
 
     }
@@ -82,8 +82,6 @@ public class IndexController implements Serializable {
 
     public String redirectToTripPage()
     {
-
-
         if(validateForNotNullValues("index.noDestinationRegion", destinationRegion, "index.noDepartureRegion", departureRegion,
                 "index.noDestinationCountry", destinationCountry, "index.noDepartureCountry", departureCountry,
                 "index.noDepartureDate", departureDate, "index.noReturnDate", returnDate,"index.noTicketsDate",numberOfSeats )||validator()) {

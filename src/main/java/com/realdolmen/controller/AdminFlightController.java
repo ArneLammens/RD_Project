@@ -77,8 +77,8 @@ public class AdminFlightController implements Serializable{
            Flight foundFlight = flightService.findById(flight.getId());
         if(flight != null && !flight.equals(foundFlight)) {
             flightService.updateAFlight(flight);
-            eventMessage.fire(new Message().info( "The margin for " + foundFlight.getFlightNumber()  + "with margin" + foundFlight.getMargin() + "has been set to " + flight.getMargin()));
-        }
+            eventMessage.fire( new Message().info("resourceBundle/ValidationMessages", "marginManagement.updateMessage"," ",flight.getMargin()));
+             }
     }
 
 

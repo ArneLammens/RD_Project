@@ -4,6 +4,9 @@ import com.realdolmen.domain.flight.Flight;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.*;
 
 /**
@@ -12,6 +15,9 @@ import java.util.*;
 public class LazyFlightModel extends LazyDataModel<Flight> {
 
     private List<Flight> datasource;
+
+    @PersistenceContext
+    private EntityManager em;
 
     public LazyFlightModel(List<Flight> datasource) {
         this.datasource = datasource;
@@ -66,6 +72,7 @@ public class LazyFlightModel extends LazyDataModel<Flight> {
 
         //sort
         if (sortField != null) {
+
             Collections.sort(data, new LazyFlightSorter(sortField, sortOrder));
         }
 

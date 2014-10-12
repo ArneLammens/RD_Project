@@ -11,6 +11,7 @@ import com.realdolmen.util.RedirectEnum;
 import javax.enterprise.event.Event;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.context.Flash;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -33,6 +34,8 @@ public class
     @Inject
     private Event<FacesMessage> event;
 
+    private FacesContext context = FacesContext.getCurrentInstance();
+
     private List<Company>companies;
 
     public String init()
@@ -43,6 +46,7 @@ public class
     else
     {
        companies =companyService.getAllCompanies(Enums.RolesForACompany.FLIGHT_ADMIN);
+       context.getExternalContext().getFlash().setKeepMessages(true);
         return null;
     }
     }
@@ -50,12 +54,10 @@ public class
     {
       if( companyService.removeCompany(company)){
           companies.remove(company);
-          FacesContext context = FacesContext.getCurrentInstance();
-          context.getExternalContext().getFlash().setKeepMessages(true);
-          context.addMessage(null, new Message().info(company.getName() + " has been removed"));
+          context.addMessage(null, new Message().info("resourceBundle/ValidationMessages", "removeAirline.airlineIsRemoved",company.getName()));
           return RedirectEnum.REDIRECT.REMOVE_AIRLINE.getUrl();
       } else {
-          event.fire(new Message().warning( "You can not remove this company because it is used in a trip"));
+          event.fire(new Message().warning("resourceBundle/ValidationMessages", "removeAirline.canNotRemoveAirline", company.getName()));
           return " ";
       }
     }

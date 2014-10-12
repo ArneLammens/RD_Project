@@ -6,10 +6,11 @@ import com.realdolmen.domain.company.Company;
 import com.realdolmen.domain.company.CompanyService;
 import com.realdolmen.domain.country.Country;
 import com.realdolmen.domain.flight.FlightPeriod;
-import com.realdolmen.domain.search.SearchService;
 import com.realdolmen.session.CountrySession;
 import com.realdolmen.session.LoginSession;
+import com.realdolmen.util.Message;
 import com.realdolmen.util.RedirectEnum;
+import com.realdolmen.util.ValidationUtil;
 
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
@@ -20,6 +21,8 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
+import static com.realdolmen.util.ValidationUtil.validateForNotNullValues;
 
 /**
  * Created by BPTAT47 on 11/10/2014.
@@ -35,6 +38,9 @@ public class SearchController  implements Serializable{
 
     @Inject
     private CompanyService companyService;
+
+    @Inject
+    private LoginSession loginSession;
     private FlightPeriod flightPeriod;
     private Enums.Region departureRegion;
     private Enums.Region destinationRegion;
@@ -47,26 +53,71 @@ public class SearchController  implements Serializable{
     private List<Booking> bookings;
     private Date minDate =new Date();
 
-    public void init(){
+    public String init()
+    {
+        if(loginSession.getLogin() == null)
+        {
+            return RedirectEnum.REDIRECT.INDEX.getUrl();
+        }
+        else if(loginSession.getLogin().getRole()!= Enums.Roles.ADMIN&&loginSession.getLogin().getRole()!= Enums.Roles.FLIGHT_ADMIN)
+        {
+            return RedirectEnum.REDIRECT.INDEX.getUrl();
+        }else
+        {
             companiesForFlightAdmin = companyService.getAllCompanies(Enums.RolesForACompany.FLIGHT_ADMIN);
             companiesForTravelAdmin = companyService.getAllCompanies(Enums.RolesForACompany.TRAVEL_ADMIN);
-        flightPeriod = new FlightPeriod();
+            flightPeriod = new FlightPeriod();
+            return null;
+        }
+
     }
 
     public String getReportData(){
-        flash.put("flightPeriod" ,flightPeriod);
-        flash.put("departureRegion" ,departureRegion);
-        flash.put("destinationRegion" ,destinationRegion);
-        flash.put("companyForFlightAdmin" ,companyForFlightAdmin);
-        flash.put("companyForTravelAdmin" ,companyForTravelAdmin);
-        return RedirectEnum.REDIRECT.REPORT.getUrl();
+        if(validateForNotNullValues("search.noStartDate",flightPeriod.getStartDate(),"search.noEndDate",flightPeriod.getEndDate(),"search.noDepartureRegion",departureRegion,"search.noDestinationRegion",destinationRegion,"search.noCompanyTravelAgent",companyForTravelAdmin)||validator())
+        {
+            return RedirectEnum.REDIRECT.SEARCH.getUrl();
+        }else
+        {
+            flash.put("flightPeriod" ,flightPeriod);
+            flash.put("departureRegion" ,departureRegion);
+            flash.put("destinationRegion" ,destinationRegion);
+            flash.put("companyForFlightAdmin" ,companyForFlightAdmin);
+            flash.put("companyForTravelAdmin" ,companyForTravelAdmin);
+            return RedirectEnum.REDIRECT.REPORT.getUrl();
+        }
+
+    }
+    public boolean validator()
+    {
+        if(flightPeriod!=null && flightPeriod.getStartDate()!=null&& flightPeriod.getEndDate()!=null)
+        {
+            if(loginSession.getLogin().getRole()==Enums.Roles.ADMIN)
+            {
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.getExternalContext().getFlash().setKeepMessages(true);
+                context.addMessage(null, new Message().warning("resourceBundle/ValidationMessages", "search.noFlightCompany"));
+                return true;
+            }else if(flightPeriod.getStartDate().getTime()>flightPeriod.getEndDate().getTime())
+            {
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.getExternalContext().getFlash().setKeepMessages(true);
+                context.addMessage(null, new Message().warning("resourceBundle/ValidationMessages", "search.startDateIsAfterEndDate"));
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }else
+        {
+            return true;
+        }
+
     }
 
     public Enums.Region[] getRegions() {
         return Enums.Region.values();
     }
-
-
 
     public void getCountryOfDepartureRegion(AjaxBehaviorEvent event) {
         departureCountryList = countrySession.getCorrectCountryListForAGivenRegion(departureRegion);
@@ -99,7 +150,6 @@ public class SearchController  implements Serializable{
     public void setFlightPeriod(FlightPeriod flightPeriod) {
         this.flightPeriod = flightPeriod;
     }
-
 
     public Enums.Region getDestinationRegion() {
         return destinationRegion;

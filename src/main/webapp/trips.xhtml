@@ -43,7 +43,7 @@
                 <p:commandButton rendered="#{!loginSession.loggedIn()}" action="#{tripController.toLogin()}" value="Login"/>
             </p:column>
             <p:column rendered="#{loginSession.loggedIn()}" headerText="#{lbl['trips.book']}">
-                <p:commandButton rendered="#{loginSession.loggedIn()}" action="#{tripController.toBooking(trip)}" value="Book"/>
+                <p:commandButton rendered="#{loginSession.loggedIn()}" action="#{tripController.toBooking(trip)}" value="#{lbl['trips.book']}"/>
             </p:column>
         </p:dataTable>
         </h:form>

@@ -15,7 +15,7 @@
     </ui:define>
     <ui:define name="divMain">
         <h:form>
-            <h:panelGrid columns="2" cellpadding="6">
+            <p:panelGrid columns="2">
                 <p:outputLabel for="email" value="#{lbl['person.email']}"/>
                 <p:inputText  id="email" value="#{personController.person.email}"/>
                 <p:outputLabel for="password" value="#{lbl['person.password']}"/>
@@ -25,8 +25,7 @@
                 <p:outputLabel for="lastName" value="#{lbl['person.lastname']}"/>
                 <p:inputText  id="lastName" value="#{personController.person.lastName}"/>
                 <p:outputLabel for="dateOfBirth" value="#{lbl['person.dateOfBirth']}"/>
-                <p:calendar  id="dateOfBirth" yearRange="c-100:c" navigator="true"
-                            value="#{personController.person.dateOfBirth}"/>
+                <p:calendar  id="dateOfBirth" yearRange="c-100:c" navigator="true" value="#{personController.person.dateOfBirth}"/>
                 <p:outputLabel for="PersonRegion" value="#{lbl['person.region']}"/>
                 <p:selectOneMenu id="PersonRegion" value="#{personController.personRegion}" >
                     <f:ajax event="change" execute="PersonRegion" listener="#{personController.getCountryOfPerson}"
@@ -49,12 +48,14 @@
                 <p:inputText  id="homeNumber" value="#{personController.person.homeNumber}"/>
                 <p:outputLabel for="municipality" value="#{lbl['person.municipality']}"/>
                 <p:inputText id="municipality" value="#{personController.person.municipality}"/>
+                <p:outputLabel for="street" value="#{lbl['person.street']}"/>
+                <p:inputText id="street" value="#{personController.person.street}"/>
                 <p:outputLabel  value="#{lbl['person.zipcode']}"/>
-                <p:inputText required="true" id="zipcode" value="#{personController.person.zipCode}"/>
+                <p:inputText id="zipcode" value="#{personController.person.zipCode}"/>
 
-                 <p:commandButton action="#{personController.createAPerson()}"
+                 <p:commandButton  action="#{personController.createAPerson()}"
                                  style="margin-right: 15px" value="#{lbl['person.createAccount']}"/>
-            </h:panelGrid>
+            </p:panelGrid>
         </h:form>
 
     </ui:define>

@@ -22,6 +22,7 @@ public class BookingRepository extends AbstractRepositoy<Booking> {
     private Logger logger;
 
     public List<Booking> getAllReportData(FlightPeriod flightPeriod, Enums.Region departureRegion, Enums.Region destinationRegion, Company companyForFlightAdmin, Company companyForTravelAdmin) {
+
         List<Booking> bookings = entityManager.createNamedQuery("Booking.getAllBookings", Booking.class)
                 .setParameter("startDate", flightPeriod.getStartDate())
                 .setParameter("endDate", flightPeriod.getEndDate())

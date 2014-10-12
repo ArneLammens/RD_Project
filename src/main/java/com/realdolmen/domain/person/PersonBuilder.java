@@ -16,6 +16,7 @@ public class PersonBuilder {
     private String homeNumber;
     private String zipCode;
     private String municipality;
+    private String street;
     private Country country;
     private Enums.Region region;
     private String name;
@@ -53,6 +54,10 @@ public class PersonBuilder {
         this.municipality = municipality;
         return this;
     }
+    public PersonBuilder withStreet( String street) {
+        this.street = street;
+        return this;
+    }
     public PersonBuilder withCountry( Country country) {
         this.country = country;
         return this;
@@ -85,12 +90,13 @@ public class PersonBuilder {
 
 
     public Person build(){
-        Person person = new Person(email,password,homeNumber, zipCode,  municipality,  country, region, name, lastName, dateOfBirth,role);
+        Person person = new Person(email,password,homeNumber, zipCode,  municipality, street,  country, region, name, lastName, dateOfBirth,role);
         person.setEmail(email);
         person.setPassword(password);
         person.setHomeNumber(homeNumber);
         person.setZipCode(zipCode);
         person.setMunicipality(municipality);
+        person.setStreet(street);
         person.setCountry(country);
         person.setRegion(region);
         person.setName(name);

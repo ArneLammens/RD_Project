@@ -195,13 +195,13 @@ public class FlightAdminController implements Serializable
     {
         if(flightService.removeFlight(flight))
         {
-            event.fire(new Message().error("This flight can't be removed because it is used in a trip"));
+            event.fire(new Message().warning("resourceBundle/ValidationMessages", "removeAirline.canNotRemoveAirline",flight.getFlightNumber()));
         }
         else
         {
 
             flights.remove(flight);
-            event.fire(new Message().info("The flight has been removed"));
+            event.fire(new Message().info("resourceBundle/ValidationMessages", "removeAirline.airlineIsRemoved",flight.getFlightNumber()));
         }
 
 

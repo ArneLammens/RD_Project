@@ -65,7 +65,7 @@ public class PersonController implements Serializable {
 
     public String createAPerson() {
         if (validateForNotNullValues("createPeron.region", personRegion, "createPeron.country", person.getCountry(), "createPeron.dateOfBirth", person.getDateOfBirth()) ||
-                validateStingsNotEmpty("createPeron.noName", person.getName(), "createPeron.noLastName", person.getLastName(), "createPeron.homeNumber", person.getHomeNumber(), "createPeron.municipality", person.getMunicipality(), "createPeron.zipCode", person.getZipCode()) ||
+                validateStingsNotEmpty("createPeron.noName", person.getName(), "createPeron.noLastName", person.getLastName(), "createPeron.homeNumber", person.getHomeNumber(), "createPeron.municipality", person.getMunicipality(),"createPerson.street",person.getStreet(), "createPeron.zipCode", person.getZipCode()) ||
                 validator())
         {
             return RedirectEnum.REDIRECT.CREATE_ACCOUNT.getUrl();

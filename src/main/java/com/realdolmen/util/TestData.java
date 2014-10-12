@@ -109,10 +109,10 @@
 //        List<Company> flightCompany=entityManager.createQuery("SELECT c FROM Company c where c.name ='JetAir'").getResultList();
 //        List<Company> travelCompany= entityManager.createQuery("SELECT c FROM Company c where c.name ='Neckermann'").getResultList();
 //        List<Country> countries=entityManager.createQuery("SELECT c FROM Country c WHERE c.name='Belgium'").getResultList();
-//       entityManager.persist(new Person("admin@hotmail.com",new EncryptUtil().encryptPassword("adminProfile"),"126B","9500","Geraardsbergen",countries.get(0), Enums.Region.EUROPE,"administrator","administrator",new Date(),Enums.Roles.ADMIN));
-//       entityManager.persist(new Person("flightadmin@hotmail.com",new EncryptUtil().encryptPassword("flightadmin"),"126B","9500","Arnhem",countries.get(0), Enums.Region.EUROPE,"flightadmin","flightadmin",new Date(),Enums.Roles.FLIGHT_ADMIN,flightCompany.get(0)));
-//       entityManager.persist(new Person("travelagent@hotmail.com",new EncryptUtil().encryptPassword("travelagent"),"126B","9500","Lille",countries.get(0),Enums.Region.EUROPE,"travelagent","travelagent",new Date(),Enums.Roles.TRAVEL_AGENT,travelCompany.get(0)));
-//       entityManager.persist(new Person("user@hotmail.com",new EncryptUtil().encryptPassword("userProfile"),"126B","9500","Haaltert",countries.get(0), Enums.Region.EUROPE,"administrator","administrator",new Date(),Enums.Roles.USER));
+//       entityManager.persist(new Person("admin@hotmail.com",new EncryptUtil().encryptPassword("adminProfile"),"126B","9500","Geraardsbergen","gaffelstraat",countries.get(0), Enums.Region.EUROPE,"administrator","administrator",new Date(),Enums.Roles.ADMIN));
+//       entityManager.persist(new Person("flightadmin@hotmail.com",new EncryptUtil().encryptPassword("flightadmin"),"126B","9500","Arnhem","station",countries.get(0), Enums.Region.EUROPE,"flightadmin","flightadmin",new Date(),Enums.Roles.FLIGHT_ADMIN,flightCompany.get(0)));
+//       entityManager.persist(new Person("travelagent@hotmail.com",new EncryptUtil().encryptPassword("travelagent"),"126B","9500","Lille","kerkstaat",countries.get(0),Enums.Region.EUROPE,"travelagent","travelagent",new Date(),Enums.Roles.TRAVEL_AGENT,travelCompany.get(0)));
+//       entityManager.persist(new Person("user@hotmail.com",new EncryptUtil().encryptPassword("userProfile"),"126B","9500","Haaltert","stationsstraat",countries.get(0), Enums.Region.EUROPE,"administrator","administrator",new Date(),Enums.Roles.USER));
 //    }
 //
 //

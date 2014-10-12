@@ -50,7 +50,7 @@
                     <h:outputText value="#{flight.period.endDate}" />
                 </p:column>
                 <p:column headerText="#{lbl['removeFlight.remove']}">
-                    <p:commandButton  value="remove flight">
+                    <p:commandButton class="btn btn-danger"  value="#{lbl['removeFlight.remove']}">
                         <f:ajax listener="#{flightAdminController.removeFlight(flight)}" render="flights"/>
                     </p:commandButton>
                 </p:column>
