@@ -13,6 +13,7 @@
     </ui:define>
 
     <ui:define name="divMain">
+        <p:panel header="#{lbl['booking.bookATrip']}" styleClass="col-md-9">
         <h:form>
             <div class="col-md-12">
                <div class="col-md-4">
@@ -96,7 +97,6 @@
           <div>
 
             <h2>#{lbl['booking.choosePayment']}</h2>
-
 
                 <p:selectOneRadio id="payment" value="#{bookingController.paymentMethode}" rendered="true" columns="1" >
                     <f:selectItem itemValue="Creditcard" itemLabel="Creditcard"/>

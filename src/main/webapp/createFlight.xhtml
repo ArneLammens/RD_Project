@@ -16,19 +16,18 @@
         <ui:include src='template/left.xhtml'/>
     </ui:define>
     <ui:define name="divMain">
+        <p:panel header="#{lbl['menu.CreateFlights']}" styleClass="col-md-9">
         <h:form>
          <p:panelGrid columns="2">
             <p:outputLabel for="flightNumber" value="#{lbl['createFlight.flightNumber']}"/>
             <p:inputText id="flightNumber" value="#{flightAdminController.flight.flightNumber}"/>
-
-
             <p:outputLabel for="departure" value="#{lbl['createFlight.departure']}" />
-            <p:selectOneMenu converter="#{locationConverter}"  id="departure" value="#{flightAdminController.flight.departure}">
+            <p:selectOneMenu style="width:230px!important;"  converter="#{locationConverter}"  id="departure" value="#{flightAdminController.flight.departure}">
                 <f:selectItem itemLabel="#{lbl['createFlight.SelectDeparture']}" itemValue="" noSelectionOption="true" />
                 <f:selectItems value="#{flightAdminController.locations}" var="location" itemValue="#{flightAdminController.departureLocation.id}" itemLabel="#{location.name}"/>
             </p:selectOneMenu>
             <p:outputLabel for="destination" value="#{lbl['createFlight.destination']}" />
-            <p:selectOneMenu converter="#{locationConverter}"  id="destination" value="#{flightAdminController.flight.destination}" >
+            <p:selectOneMenu style="width:230px!important;"  converter="#{locationConverter}"  id="destination" value="#{flightAdminController.flight.destination}" >
                 <f:selectItem itemLabel="#{lbl['createFlight.SelectDestination']}" itemValue="" noSelectionOption="true" />
                 <f:selectItems value="#{flightAdminController.locations}" var="location" itemValue="#{flightAdminController.destinationLocation.id}" itemLabel="#{location.name}"/>
             </p:selectOneMenu>
@@ -63,7 +62,7 @@
 
 
             <p:outputLabel for="dayOfTheWeek" value="#{lbl['createFlight.SelectDayOfTheWeek']}"/>
-            <p:selectOneMenu id="dayOfTheWeek" value="#{flightAdminController.dayOfTheWeek}" >
+            <p:selectOneMenu style="width:230px!important;"  id="dayOfTheWeek" value="#{flightAdminController.dayOfTheWeek}" >
                 <f:selectItem itemLabel="#{lbl['createFlight.DayOfTheWeek']}" itemValue="" noSelectionOption="true" />
                 <f:selectItems value="#{flightAdminController.getweekDays()}" var="weekday" itemValue="#{weekday}" itemLabel="#{weekday}"/>
             </p:selectOneMenu>
@@ -72,6 +71,7 @@
             </p:commandButton>
         </p:panelGrid>
         </h:form>
+        </p:panel>
     </ui:define>
 
 </ui:composition>

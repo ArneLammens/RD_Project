@@ -37,6 +37,7 @@
 }
 .ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield{
     background: #dfeffc;
+    width: 230px;
 }
 .ui-selectonemenu-label .ui-inputfield .ui-corner-all {
     width: 240px !important;
@@ -54,10 +55,21 @@
  }
 
  .setBold{
-     font: bold;
+     font-weight: bold;
  }
 @media print {
     @page {
         size: landscape;
     }
+}
+
+.fullBackground {
+    background: no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.ui-selectonemenu .ui-selectonemenu-trigger{
+    width: 26px!important;
 }

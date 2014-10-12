@@ -14,8 +14,9 @@
         <ui:include src='template/top.xhtml'/>
     </ui:define>
     <ui:define name="divMain">
+        <p:panel header="#{lbl['menu.ManageFlightMargins']}" styleClass="col-md-9">
         <h:form>
-            <p:selectOneMenu  id="CompanySelection" converter="#{companyConverter}" required="true" value="#{adminFlightController.company}" >
+            <p:selectOneMenu  style="width:230px!important; margin-bottom: 20px;"  id="CompanySelection" converter="#{companyConverter}" required="true" value="#{adminFlightController.company}" >
                 <f:ajax event="change" execute="CompanySelection" listener="#{adminFlightController.getFlightsForGivenCompanyName}"
                         render="flights"/>
                 <f:selectItem itemLabel="#{lbl['marginManagement.selectRegion']}" itemValue=""
@@ -59,6 +60,7 @@
                 </p:column>
             </p:dataTable>
          </h:form>
+        </p:panel>
     </ui:define>
 
 </ui:composition>

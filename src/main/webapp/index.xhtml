@@ -17,10 +17,11 @@
     </ui:define>
 
     <ui:define name="divMain">
+        <p:panel header="#{lbl['index.searchForATrip']}" styleClass="col-md-9">
         <h:form id="form">
             <p:panelGrid columns="2">
                 <p:outputLabel for="DepartureRegion" value="#{lbl['index.departureRegion']}"/>
-                <p:selectOneMenu id="DepartureRegion" value="#{indexController.departureRegion}" >
+                <p:selectOneMenu style="width:230px!important;"  id="DepartureRegion" value="#{indexController.departureRegion}" >
                     <f:ajax event="change" execute="DepartureRegion"
                             listener="#{indexController.getCountryOfDepartureRegion}" render="DepartureCountry"/>
                     <f:selectItem itemLabel="#{lbl['index.selectDepartureRegion']}" itemValue=""/>
@@ -29,15 +30,15 @@
                 </p:selectOneMenu>
 
                 <p:outputLabel for="DepartureCountry" value="#{lbl['index.departureCountry']}"/>
-                <p:selectOneMenu converter="#{countryConverter}" id="DepartureCountry"
-                                 value="#{indexController.departureCountry}">
+                <p:selectOneMenu  style="width:230px!important;" converter="#{countryConverter}" id="DepartureCountry"
+                                  value="#{indexController.departureCountry}">
                     <f:selectItem itemLabel="#{lbl['index.selectDepartureCountry']}" itemValue=""/>
                     <f:selectItems value="#{indexController.departureCountryList}" var="country"
                                    itemValue="#{indexController.departureCountry.id}" itemLabel="#{country.name}"/>
                 </p:selectOneMenu>
 
                 <p:outputLabel for="DestinationRegion" value="#{lbl['index.destinationRegion']}"/>
-                <p:selectOneMenu id="DestinationRegion" value="#{indexController.destinationRegion}">
+                <p:selectOneMenu style="width:230px!important;"  id="DestinationRegion" value="#{indexController.destinationRegion}">
                     <f:ajax event="change" execute="DestinationRegion"
                             listener="#{indexController.getCountryOfDestinationRegion}" render="DestinationCountry"/>
                     <f:selectItem itemLabel="#{lbl['index.selectDestinationRegion']}" itemValue=""
@@ -47,7 +48,7 @@
                 </p:selectOneMenu>
 
                 <p:outputLabel for="DestinationCountry" value="#{lbl['index.destinationCountry']}"/>
-                <p:selectOneMenu converter="#{countryConverter}" id="DestinationCountry"
+                <p:selectOneMenu style="width:230px!important;" converter="#{countryConverter}" id="DestinationCountry"
                                  value="#{indexController.destinationCountry}">
                     <f:selectItem itemLabel="#{lbl['index.selectDestinationCountry']}" itemValue=""
                                   noSelectionOption="true"/>
@@ -68,15 +69,15 @@
                 <p:outputLabel for="amoutSeats" value="#{lbl['index.amountOfSeats']}"/>
                 <p:spinner immediate="true" id="amoutSeats"  value="#{indexController.numberOfSeats}" min="0" max="100" />
 
-
-
+                <p:outputLabel for="button"  value=" "/>
+                <center>
+                <p:commandButton id="button"  action="#{indexController.redirectToTripPage()}" value="#{lbl['index.search']}"/>
+                </center>
             </p:panelGrid>
-            <div class="col-md-offset-3">
-                <p:commandButton action="#{indexController.redirectToTripPage()}" value="#{lbl['index.search']}"/>
-            </div>
 
 
         </h:form>
+        </p:panel>
     </ui:define>
 
 
