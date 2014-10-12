@@ -25,33 +25,39 @@
                                itemLabel="#{company.name}"/>
             </p:selectOneMenu>
 
-            <p:dataTable id="flights"  editable="true" editMode="cell"  value="#{adminFlightController.flights}" var="flight"
-                         paginator="true" rows="10" lazy="true"
+            <p:dataTable id="flights"  editable="true" editMode="cell" widgetVar="flightTable" value="#{adminFlightController.flights}" var="flight"
+                         paginator="true" rows="10" lazy="true"  filteredValue="#{adminFlightController.filteredFlights}"
                          paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
                 <p:ajax event="cellEdit"  listener="#{adminFlightController.onCellEdit(flight)}" />
-                <p:column headerText="#{lbl['marginManagement.flightNumber']}">
+                <f:facet name="header">
+                    <p:outputPanel>
+                        <h:outputText value="Search all fields:" />
+                        <p:inputText id="globalFilter" onkeyup="PF('flightTable').filter()" style="width:150px" placeholder="Enter keyword"/>
+                    </p:outputPanel>
+                </f:facet>
+                <p:column headerText="#{lbl['marginManagement.flightNumber']}"  sortBy="#{flight.flightNumber}" filterBy="#{flight.flightNumber}">
                     <h:outputText value="#{flight.flightNumber}" />
                 </p:column>
-                <p:column headerText="#{lbl['marginManagement.departureTime']}">
+                <p:column headerText="#{lbl['marginManagement.departureTime']}"  >
                     <h:outputText value="#{flight.departureTime}" />
                 </p:column>
                 <p:column headerText="#{lbl['marginManagement.departureCountry']}">
                     <h:outputText value="#{flight.departure.country.name}" />
                 </p:column>
 
-                <p:column headerText="#{lbl['marginManagement.price']}">
+                <p:column headerText="#{lbl['marginManagement.price']}"  >
                     <h:outputText value="#{flight.price}" />
                 </p:column>
-                <p:column headerText="#{lbl['marginManagement.seats']}">
+                <p:column headerText="#{lbl['marginManagement.seats']}" >
                     <h:outputText value="#{flight.seats}" />
                 </p:column>
-                <p:column headerText="#{lbl['marginManagement.periodStartDate']}">
+                <p:column headerText="#{lbl['marginManagement.periodStartDate']}"  >
                     <h:outputText value="#{flight.period.startDate}" />
                 </p:column>
-                <p:column headerText="#{lbl['marginManagement.periodEndDate']}">
+                <p:column headerText="#{lbl['marginManagement.periodEndDate']}"  >
                     <h:outputText value="#{flight.period.endDate}" />
                 </p:column>
-                  <p:column headerText="#{lbl['marginManagement.margin']}">
+                  <p:column headerText="#{lbl['marginManagement.margin']}" >
                     <p:cellEditor>
                         <f:facet name="output"><h:outputText value="#{flight.margin}" /></f:facet>
                         <f:facet name="input"><p:inputText id="modelInput" value="#{flight.margin}"  style="width:96%"/></f:facet>
