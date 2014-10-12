@@ -106,17 +106,17 @@ public class IndexController implements Serializable {
             if (numberOfSeats==0) {
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.getExternalContext().getFlash().setKeepMessages(true);
-                context.addMessage(null, new Message().warning("resourceBundle/ValidationMessages", "index.noTicketsDate"));
+                context.addMessage(null, new Message().warning("resourceBundle/ValidationMessages", "createFlight.departureEqualsDestination"));
                 return true;
             } else if (departureDate.getTime()>returnDate.getTime()) {
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.getExternalContext().getFlash().setKeepMessages(true);
-                context.addMessage(null, new Message().warning("resourceBundle/ValidationMessages", "index.returnDateMustAfterDepartureDate"));
+                context.addMessage(null, new Message().warning("resourceBundle/ValidationMessages", "createFlight.startDateIsAfterEndDate"));
                 return true;
             } else if (departureDate.getTime()+86399999l<new Date().getTime()) {
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.getExternalContext().getFlash().setKeepMessages(true);
-                context.addMessage(null, new Message().warning("resourceBundle/ValidationMessages", "index.DepartureDateMostAfterDateOfToday"));
+                context.addMessage(null, new Message().warning("resourceBundle/ValidationMessages", "createFlight.endDateBeforeToday"));
                 return true;
             } else {
                 return false;

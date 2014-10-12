@@ -26,3 +26,17 @@
     background-color:transparent;
     background-image: none;
 }
+
+ select{
+    color: #000000;
+}
+.ui-panelgrid td, .ui-panelgrid tr
+{
+    border-style: none !important
+}
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield{
+    background: #dfeffc;
+}
+.ui-selectonemenu-label .ui-inputfield .ui-corner-all{
+    width:240px!important;
+}

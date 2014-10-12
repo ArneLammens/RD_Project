@@ -18,5 +18,15 @@ public class PersonService {
 
     public Person findAPerson(int id){return personRepository.find(id);}
 
+    public boolean checkIfEmailAlreadyExists(String email){
+        if(personRepository.checkIfEmailAlreadyExists(email)>0l)
+    {
+        return true;
+    }else
+        {
+            return false;
+        }
+    }
+
 
 }

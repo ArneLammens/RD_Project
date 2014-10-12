@@ -27,7 +27,7 @@
            <p:pickList converter="#{countryConverter}"  id="pickList" value="#{adminController.dualListModel}"  var="country" itemLabel="#{country.name}" itemValue="#{country}" >
                <f:facet name="sourceCaption">Allowed</f:facet>
                <f:facet name="targetCaption">Disallowed</f:facet>
-               <p:ajax event="transfer"   listener="#{adminController.onTransfer}" />
+               <p:ajax event="transfer" update="pickList"   listener="#{adminController.onTransfer}" />
            </p:pickList>
 
             <p:commandButton  value="Save changes">

@@ -80,6 +80,11 @@ public class LoginController implements Serializable {
         return RedirectEnum.REDIRECT.INDEX.getUrl();
     }
 
+    public String redirectToCreateAccount()
+    {
+        return RedirectEnum.REDIRECT.CREATE_ACCOUNT.getUrl();
+    }
+
 
     public Login getLogin() {
         return login;

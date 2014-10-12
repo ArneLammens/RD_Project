@@ -73,4 +73,21 @@ public class ValidationUtil
         }
 
     }
+    public static boolean validateStingsNotEmpty(Object ... parameters)
+    {
+        for (int i = 0; i < parameters.length; i=i+2) {
+            Object message = parameters[i];
+            Object attribute = parameters[i+1];
+            if(attribute.equals("")||attribute.equals(" ")) {
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.getExternalContext().getFlash().setKeepMessages(true);
+                context.addMessage(null, new Message().warning( "resourceBundle/ValidationMessages",  message.toString()));
+                return true;
+            }
+
+
+        }
+        return false;
+
+    }
 }

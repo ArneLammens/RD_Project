@@ -16,9 +16,7 @@
         <ui:include src='template/left.xhtml'/>
     </ui:define>
     <ui:define name="divMain">
-        <p:messages autoUpdate="true"/>
         <h:form>
-
             <p:panelGrid columns="2">
                 <p:dataTable scrollable="true" id="airlines"  value="#{adminAirlineController.companies}" var="company">
                     <p:column headerText="name">

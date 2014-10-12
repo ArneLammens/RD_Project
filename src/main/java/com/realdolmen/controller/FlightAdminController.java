@@ -16,6 +16,7 @@ import com.realdolmen.util.RedirectEnum;
 
 import javax.enterprise.event.Event;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -24,6 +25,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static com.realdolmen.util.ValidationUtil.validateForNotNullValues;
 
 @Named
 @ViewScoped
@@ -98,13 +101,13 @@ public class FlightAdminController implements Serializable
     }
 
     public String createFlight() {
-        if (flight.getDeparture() == flight.getDestination()) {
-            event.fire(new Message().error("you can not destination must differ from departure"));
-            return null;
-        } else if (endDate.getTime() < startDate.getTime()) {
-            event.fire(new Message().error("The end date cant be before the start date"));
-            return null;
-        } else {
+        if(validateForNotNullValues("createFlight.noFlightNumber",flight.getFlightNumber(), "createFlight.noDeparture", flight.getDeparture(),
+                "createFlight.noDestination", flight.getDestination(), "createFlight.noSeats", flight.getSeats(),
+                "createFlight.noDiscountPercentage", flight.getDiscountPercentage(), "createFlight.noSeatThreshold", flight.getSeatThreshold(),"createFlight.noPrice",flight.getPrice(),"createFlight.noDepartureTime",flight.getDeparture(),"createFlight.noDuration",duration,"createFlight.noStartDate",startDate,"createFlight.noEndDate",endDate,"createFlight.noDayOfTheWeek",dayOfTheWeek )||validator()) {
+            return RedirectEnum.REDIRECT.CREATE_FLIGHT.getUrl();
+        }else {
+
+
             flight.setPeriod(new FlightPeriod(startDate, endDate));
             flight.setAvailableSeats(flight.getSeats());
             flight.setFlightAdmin(person);
@@ -118,13 +121,72 @@ public class FlightAdminController implements Serializable
         }
 
     }
+    public boolean validator()
+    {
+        if(flight.getDeparture()!=null||flight.getDestination()!=null||endDate!=null||startDate!=null)
+        {
+            if(flight.getDeparture().getId()==flight.getDestination().getId())
+            {
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.getExternalContext().getFlash().setKeepMessages(true);
+                context.addMessage(null, new Message().warning("resourceBundle/ValidationMessages", "createFlight.departureEqualsDestination"));
+                return true;
+            }else if (endDate.getTime() < startDate.getTime())
+            {
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.getExternalContext().getFlash().setKeepMessages(true);
+                context.addMessage(null, new Message().warning("resourceBundle/ValidationMessages", "createFlight.startDateIsAfterEndDate"));
+                return true;
+            }else if (endDate.getTime()+86399999l<new Date().getTime())
+            {
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.getExternalContext().getFlash().setKeepMessages(true);
+                context.addMessage(null, new Message().warning("resourceBundle/ValidationMessages", "createFlight.endDateBeforeToday"));
+                return true;
+            }else if(flight.getSeats()<2)
+            {
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.getExternalContext().getFlash().setKeepMessages(true);
+                context.addMessage(null, new Message().warning("resourceBundle/ValidationMessages", "createFlight.seatsLessThenTwo"));
+                return true;
 
-    public Enums.DayOfTheWeek[] getweekDays() {
-        return Enums.DayOfTheWeek.values();
+            }else if(flight.getDiscountPercentage()<0.00)
+            {
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.getExternalContext().getFlash().setKeepMessages(true);
+                context.addMessage(null, new Message().warning("resourceBundle/ValidationMessages", "createFlight.discountPercentageNegative"));
+                return true;
+
+            }else if(flight.getSeatThreshold()<0)
+            { FacesContext context = FacesContext.getCurrentInstance();
+                context.getExternalContext().getFlash().setKeepMessages(true);
+                context.addMessage(null, new Message().warning("resourceBundle/ValidationMessages", "createFlight.seatThresholdNegative"));
+                return true;
+
+            }else if(flight.getPrice().signum()==-1)
+            {
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.getExternalContext().getFlash().setKeepMessages(true);
+                context.addMessage(null, new Message().warning("resourceBundle/ValidationMessages", "createFlight.priceNegative"));
+                return true;
+
+            }else if(flight.getFlightNumber().trim().isEmpty())
+            {
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.getExternalContext().getFlash().setKeepMessages(true);
+                context.addMessage(null, new Message().warning("resourceBundle/ValidationMessages", "createFlight.noFlightNumber"));
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }else
+        {
+            return true;
+        }
     }
-    public Enums.Region[] regions() {
-        return Enums.Region.values();
-    }
+
 
     public void getFlightsForGivenCompanyName(AjaxBehaviorEvent event){
         flights = flightService.getAllFlightsForGivenCompanyName(person.getCompany());
@@ -146,6 +208,12 @@ public class FlightAdminController implements Serializable
     }
 
 
+    public Enums.DayOfTheWeek[] getweekDays() {
+        return Enums.DayOfTheWeek.values();
+    }
+    public Enums.Region[] regions() {
+        return Enums.Region.values();
+    }
     public List<Flight> getFlights() {
         return flights;
     }

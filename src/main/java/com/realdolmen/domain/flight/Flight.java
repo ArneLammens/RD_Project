@@ -30,46 +30,40 @@ public class Flight{
     @Id
     @GeneratedValue
     private Integer id;
-    @NotNull
-    @Length(min = 1)
+
     private String flightNumber;
     @ManyToOne
-    @NotNull
+
     private Location departure;
     @ManyToOne
-    @NotNull
+
     private Location destination;
-    @NotNull
-    @Min(value = 2,message = "{person.email}")
+
     private int seats;
-    @NotNull
+
     private int availableSeats;
-    @Min(0)
-    @Max(100)
+
     private double discountPercentage;
-    @Min(0)
+
     private int seatThreshold;
-    @NotNull
-    @Min(0)
+
     private BigDecimal price;
-    @NotNull
-    @Min(0)
-    @Max(100)
+
     private double margin;
     @ManyToOne
-    @NotNull
+
     private Person flightAdmin;
 
     /*dates in flight working with period a flight flies every monday for a year at 12 a.m. for example*/
     @Temporal(TemporalType.TIME)
-    @NotNull
+
     private Date departureTime;
     @Temporal(TemporalType.TIME)
-    @NotNull
+
     private Date dateOfArrival;
 
     @Embedded
-    @NotNull
+
     private FlightPeriod period;
 
     @Enumerated(EnumType.STRING)

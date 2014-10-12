@@ -20,38 +20,19 @@ public class Person implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private Integer id;
-
-    @ValidEmail
-    @Column(unique=true)
     private String email;
-    @NotNull(message ="{resourceBundle/ValidationMessages/creditCard.message}" )
-    @Length(min=5)
     private String password;
-    @NotNull
-    @Length(min=1,max = 8)
     private String homeNumber;
-    @NotNull
-    @Length(min=1, max=9)
     private String zipCode;
-    @NotNull
-    @Length(min=1)
     private String municipality;
     @ManyToOne
-    @NotNull
     private Country country;
-    @NotNull
     @Enumerated(EnumType.STRING)
     private Enums.Region region;
-    @NotNull
-    @Length(min=1)
     private String name;
-    @NotNull
-    @Length(min = 1)
     private String lastName;
     @Temporal(TemporalType.DATE)
-    @NotNull
     private Date dateOfBirth;
-    @NotNull
     @Enumerated(EnumType.STRING)
     private Enums.Roles role;
     @ManyToOne

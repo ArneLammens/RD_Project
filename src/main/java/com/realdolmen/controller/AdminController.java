@@ -99,7 +99,7 @@ public class AdminController implements Serializable {
             List<Flight> flights = flightService.getFlightsForGivenCountry(country);
             if ((approvedCountries.contains(country))) {
                 if (tripService.checkTripsExistForGivenCountry(country)) {
-                    eventMessage.fire(new Message().info("There are already trips for " + country.getName()));
+                    eventMessage.fire(new Message().warning("There are already trips for " + country.getName()));
                     rollbackDualModelList(country);
                 } else if (flights.size() > 0) {
                     transferFromApprovedToDisapprovedFlights(country);

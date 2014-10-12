@@ -14,7 +14,6 @@
 
     <ui:define name="divMain">
         <h:form>
-            <p:messages autoUpdate="true"/>
         <p:dataTable id="mydata"  value="#{tripController.tripsWithPrice}" var="trip">
             <p:column headerText="#{lbl['trips.name']}">
                 <h:outputText value="#{trip.name}" />

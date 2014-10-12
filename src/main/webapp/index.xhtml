@@ -17,11 +17,10 @@
     </ui:define>
 
     <ui:define name="divMain">
-        <p:messages autoUpdate="true"/>
         <h:form id="form">
             <p:panelGrid columns="2">
                 <p:outputLabel for="DepartureRegion" value="#{lbl['index.departureRegion']}"/>
-                <p:selectOneMenu id="DepartureRegion" value="#{indexController.departureRegion}">
+                <p:selectOneMenu id="DepartureRegion" value="#{indexController.departureRegion}" >
                     <f:ajax event="change" execute="DepartureRegion"
                             listener="#{indexController.getCountryOfDepartureRegion}" render="DepartureCountry"/>
                     <f:selectItem itemLabel="#{lbl['index.selectDepartureRegion']}" itemValue=""/>

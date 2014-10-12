@@ -15,7 +15,6 @@
     </ui:define>
     <ui:define name="divMain">
         <h:form>
-            <p:messages id="msg" autoUpdate="true"/>
             <p:selectOneMenu  id="CompanySelection" converter="#{companyConverter}" required="true" value="#{adminFlightController.company}" >
                 <f:ajax event="change" execute="CompanySelection" listener="#{adminFlightController.getFlightsForGivenCompanyName}"
                         render="flights"/>

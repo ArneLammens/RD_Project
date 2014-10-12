@@ -7,7 +7,7 @@
     <h:form rendered="#{loginSession.login.role.label == 'Admin'}">
         <h:panelGrid columns="6" >
         <p:menu >
-            <p:submenu label="Actions">
+            <p:submenu  label="Actions">
                 <p:menuitem value="Manage countries" outcome="#{commonController.redirectToAdminPage()}" />
                 <p:menuitem value="Manage margins" outcome="#{commonController.redirectToAdminPageForMargins()}" />
                 <p:menuitem value="Manage airlines" outcome="#{commonController.redirectToAdminPageForAirlines()}" />

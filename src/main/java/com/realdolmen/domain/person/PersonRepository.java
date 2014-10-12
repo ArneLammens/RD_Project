@@ -19,5 +19,10 @@ public class PersonRepository extends AbstractRepositoy<Person> {
         super.persist(person);
     }
 
+    public long checkIfEmailAlreadyExists(String email)
+    {
+        return (Long)entityManager.createQuery("SELECT COUNT(p) FROM Person p where p.email=:email").setParameter("email",email).getSingleResult();
+    }
+
 
 }
