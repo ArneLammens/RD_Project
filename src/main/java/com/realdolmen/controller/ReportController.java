@@ -60,6 +60,7 @@ public class ReportController implements Serializable {
     public void setAllQueriedValuesForAdmin(){
         bookings = searchService.getAllReportData(flightPeriod,departureRegion,destinationRegion,companyForFlightAdmin,companyForTravelAdmin);
         averagePrice = searchService.getAveragePriceFromBookings(flightPeriod,departureRegion,destinationRegion,companyForFlightAdmin,companyForTravelAdmin);
+        averagePrice=averagePrice.setScale(2,BigDecimal.ROUND_HALF_UP);
         maxPrice = searchService.getMaxPriceFromBookings(flightPeriod,departureRegion,destinationRegion,companyForFlightAdmin,companyForTravelAdmin);
         minPrice = searchService.getMinPriceFromBookings(flightPeriod,departureRegion,destinationRegion,companyForFlightAdmin,companyForTravelAdmin);
         marginAverage = searchService.getAverageMarginFromBookings(flightPeriod,departureRegion,destinationRegion,companyForFlightAdmin,companyForTravelAdmin);
@@ -69,6 +70,7 @@ public class ReportController implements Serializable {
     public void setAllQueriedValuesForFlightAdmin(){
         bookings = searchService.getAllReportData(flightPeriod,departureRegion,destinationRegion, getCompanyFromLoginSession(),companyForTravelAdmin);
         averagePrice = searchService.getAveragePriceFromBookings(flightPeriod,departureRegion,destinationRegion,getCompanyFromLoginSession(),companyForTravelAdmin);
+         averagePrice=averagePrice.setScale(2,BigDecimal.ROUND_HALF_UP);
         maxPrice = searchService.getMaxPriceFromBookings(flightPeriod,departureRegion,destinationRegion,getCompanyFromLoginSession(),companyForTravelAdmin);
         minPrice = searchService.getMinPriceFromBookings(flightPeriod,departureRegion,destinationRegion,getCompanyFromLoginSession(),companyForTravelAdmin);
         marginAverage = searchService.getAverageMarginFromBookings(flightPeriod,departureRegion,destinationRegion,getCompanyFromLoginSession(),companyForTravelAdmin);

@@ -56,3 +56,8 @@
  .setBold{
      font: bold;
  }
+@media print {
+    @page {
+        size: landscape;
+    }
+}

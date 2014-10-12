@@ -14,7 +14,7 @@
         <ui:include src='template/top.xhtml'/>
     </ui:define>
     <ui:define name="divMain">
-        <h:form>
+        <h:form id="printable">
             <p:dataTable scrollable="true" id="flights" value="#{reportController.bookings}" var="book">
                 <p:column headerText="#{lbl['trips.departureDate']}">
                     <h:outputText value="#{book.trip.startDate}"/>
@@ -42,7 +42,7 @@
                 <p:column headerText="#{lbl['trips.price']}">
                     <h:outputText value="#{book.totalPrice}"/>
                 </p:column>
-                <p:column headerText="#{lbl['trips.price']}">
+                <p:column rendered="#{loginSession.login.role.label=='Flight Admin'}" headerText="#{lbl['trips.AverageDiscount']}">
                     <h:outputText value="#{((book.trip.departureFlight.discountPercentage) + (book.trip.returnFlight.discountPercentage))/2} "/>
                 </p:column>
 
@@ -54,8 +54,8 @@
                     <p:column styleClass="setBold">#{lbl['report.AveragePrice']}</p:column>
                     <p:column styleClass="setBold">#{lbl['report.MaxPrice']}</p:column>
                     <p:column styleClass="setBold">#{lbl['report.MinPrice']}</p:column>
-                    <p:column  styleClass="setBold"
-                            rendered="#{loginSession.login.role.label=='Admin'}">#{lbl['report.AverageMargin']}</p:column>
+                    <p:column  styleClass="setBold" rendered="#{loginSession.login.role.label=='Admin'}">#{lbl['report.AverageMargin']}</p:column>
+                    <p:column  styleClass="setBold" rendered="#{loginSession.login.role.label=='Flight Admin'}">#{lbl['report.averageDiscount']}</p:column>
                 </p:row>
                 <p:row>
                     <p:column>
@@ -67,12 +67,18 @@
                     <p:column >
                         <h:outputText value="#{reportController.minPrice}"/>
                     </p:column>
-                    <p:column>
-                        <h:outputText value="#{reportController.marginAverage}"/>
+                    <p:column rendered="#{loginSession.login.role.label=='Admin'}">
+                    <h:outputText value="#{reportController.marginAverage}"/>
+                </p:column>
+                    <p:column rendered="#{loginSession.login.role.label=='Flight Admin'}">
+                        <h:outputText value="#{reportController.averageDiscount}"/>
                     </p:column>
                 </p:row>
             </p:panelGrid>
         </h:form>
+        <p:commandButton value="Print">
+            <p:printer target="printable" />
+        </p:commandButton>
     </ui:define>
 
 
