@@ -61,7 +61,7 @@ public class TripController implements Serializable {
                     numberOfSeats);
 
             if(trips.isEmpty()){
-                event.fire(new Message().warning("There are no trips"));
+                event.fire(new Message().warning("resourceBundle/ValidationMessages","booking.noTrips"));
                 return null;
             }else
             {

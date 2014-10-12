@@ -71,7 +71,7 @@ public class Message {
     private FacesMessage createMessage(String resourceBundle, String key, Object[] parameters, FacesMessage.Severity severity)
     {
         ResourceBundle bundle = ResourceBundle.getBundle(resourceBundle, this.locale);
-        FacesMessage facesMessage = new FacesMessage(MessageFormat.format(bundle.getString(key).replaceAll("'", "''"), parameters));
+        FacesMessage facesMessage = new FacesMessage(MessageFormat.format(bundle.getString(key).replaceAll("'", "''")," ", parameters)," ");
         facesMessage.setSeverity(severity);
         return facesMessage;
     }

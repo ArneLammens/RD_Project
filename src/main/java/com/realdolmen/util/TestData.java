@@ -36,7 +36,7 @@
 //@Startup
 //@Singleton
 //public class TestData {
-
+//
 //    @PersistenceContext(unitName = "users")
 //    private EntityManager entityManager;
 //    @Inject
@@ -146,7 +146,7 @@
 //        logger.info(Enums.Roles.FLIGHT_ADMIN.toString());
 //        List<Person> person =  entityManager.createQuery("SELECT p FROM Person p WHERE p.role =:role").setParameter("role",Enums.Roles.FLIGHT_ADMIN).getResultList();
 //
-//        for (int i = 0; i <200; i++) {
+//        for (int i = 0; i <10000; i++) {
 //
 //        int randomInt = randomGenerator.nextInt(allLocations.size());
 //            Random randomGenerator2 = new Random();

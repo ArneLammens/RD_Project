@@ -23,7 +23,9 @@ import java.util.List;
  */
 @Named
 @ViewScoped
-public class AdminAirlineController implements Serializable {
+public class
+
+        AdminAirlineController implements Serializable {
     @Inject
     private CompanyService companyService;
     @Inject
@@ -51,7 +53,7 @@ public class AdminAirlineController implements Serializable {
           FacesContext context = FacesContext.getCurrentInstance();
           context.getExternalContext().getFlash().setKeepMessages(true);
           context.addMessage(null, new Message().info(company.getName() + " has been removed"));
-          return "removeAirline?faces-redirect=true";
+          return RedirectEnum.REDIRECT.REMOVE_AIRLINE.getUrl();
       } else {
           event.fire(new Message().warning( "You can not remove this company because it is used in a trip"));
           return " ";
