@@ -50,7 +50,10 @@ public class AdminFlightController implements Serializable{
 
     private Flight flight;
 
+    private List<Flight> filteredFlights;
+
     List<Company> companies = new ArrayList<>();
+
     private LazyDataModel<Flight> flights;
 
     public String init() {
@@ -109,5 +112,13 @@ public class AdminFlightController implements Serializable{
 
     public void setFlights(LazyDataModel<Flight> flights) {
         this.flights = flights;
+    }
+
+    public List<Flight> getFilteredFlights() {
+        return filteredFlights;
+    }
+
+    public void setFilteredFlights(List<Flight> filteredFlights) {
+        this.filteredFlights = filteredFlights;
     }
 }
