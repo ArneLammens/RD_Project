@@ -44,7 +44,7 @@ public class LoginRepository extends AbstractRepositoy<Login> {
             event.fire(new Message().warning(RESOURCE_BUNDLE_VALIDATION, "login.emptyEmailAndPassword"));
         } else {
             Person person = persons.get(0);
-            return new Login(person.getId(), person.getName(),person.getEmail(), person.getPassword(), person.getRole(),person.getCountry(),person.getRegion());
+            return new Login(person.getId(), person.getName(),person.getEmail(), person.getPassword(), person.getRole(),person.getCountry(),person.getRegion(),person.getCompany());
         }
 
         return null;

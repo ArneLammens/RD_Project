@@ -25,6 +25,7 @@ public class CommonController implements Serializable{
         return RedirectEnum.REDIRECT.CREATE_FLIGHT.getUrl();
     }
     public String redirectToFlightAdminRemoveFlight(){return RedirectEnum.REDIRECT.REMOVE_FLIGHT.getUrl();}
+    public String redirectToAdminSearch(){return RedirectEnum.REDIRECT.SEARCH.getUrl();}
 
 
 

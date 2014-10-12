@@ -15,6 +15,8 @@
     </ui:define>
         <ui:define name="divMain">
             <h:form>
+                <p:panelGrid columns="2">
+
                 <p:outputLabel for="departureDate" value="#{lbl['index.departureDate']}" />
                 <p:calendar id="departureDate" value="#{searchController.flightPeriod.startDate}" pattern="dd/MM/yyyy" mindate="#{searchController.minDate}"  >
                     <p:ajax event="dateSelect" update="returnDate" />
@@ -35,18 +37,18 @@
                     <f:selectItem itemLabel="#{lbl['index.selectDestinationRegion']}" itemValue="" noSelectionOption="true" />
                     <f:selectItems value="#{searchController.regions}" var="region" itemValue="#{region}" itemLabel="#{enm[region.label]}"/>
                 </p:selectOneMenu>
-
-                <p:selectOneMenu  converter="#{companyConverter}"  value="#{searchController.companyForFlightAdmin}" >
-                    <f:selectItem itemLabel="Select a company" itemValue=""
+                 <p:outputLabel rendered="#{loginSession.login.role.label=='Admin'}" for="companyForFlightAdmin" value="#{lbl['search.companyForFlightAdmin']}" />
+                <p:selectOneMenu rendered="#{loginSession.login.role.label=='Admin'}" id="companyForFlightAdmin" converter="#{companyConverter}"  value="#{searchController.companyForFlightAdmin}" >
+                    <f:selectItem itemLabel="#{lbl['search.selectACompanyForFlightAdmin']}" itemValue=""
                                   noSelectionOption="true" />
                     <f:selectItems  value="#{searchController.companiesForFlightAdmin}" var="companyForFlightAdmin"
                                     itemValue="#{searchController.companyForFlightAdmin.id}"
                                     itemLabel="#{companyForFlightAdmin.name}"/>
                 </p:selectOneMenu>
 
-
-                <p:selectOneMenu   converter="#{companyConverter}"  value="#{searchController.companyForTravelAdmin}" >
-                    <f:selectItem itemLabel="Select a company" itemValue=""
+                    <p:outputLabel for="companyForTravelAdmin" value="#{lbl['search.companyForTravelAdmin']}" />
+                <p:selectOneMenu  id="companyForTravelAdmin" converter="#{companyConverter}"  value="#{searchController.companyForTravelAdmin}" >
+                    <f:selectItem itemLabel="#{lbl['search.selectACompanyForTravelAdmin']}" itemValue=""
                                   noSelectionOption="true" />
                     <f:selectItems  value="#{searchController.companiesForTravelAdmin}" var="companyForTravelAdmin"
                                     itemValue="#{searchController.companyForTravelAdmin.id}"
@@ -54,6 +56,7 @@
                 </p:selectOneMenu>
 
                 <p:commandButton action="#{searchController.getReportData()}" value="#{lbl['index.search']}"/>
+                </p:panelGrid>
             </h:form>
-        </ui:define>
+</ui:define>
 </ui:composition>

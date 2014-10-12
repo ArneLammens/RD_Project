@@ -8,7 +8,7 @@ import com.realdolmen.domain.country.Country;
 import com.realdolmen.domain.flight.FlightPeriod;
 import com.realdolmen.domain.search.SearchService;
 import com.realdolmen.session.CountrySession;
-import com.realdolmen.util.FlashUtil;
+import com.realdolmen.session.LoginSession;
 import com.realdolmen.util.RedirectEnum;
 
 import javax.faces.context.FacesContext;
@@ -48,8 +48,8 @@ public class SearchController  implements Serializable{
     private Date minDate =new Date();
 
     public void init(){
-        companiesForFlightAdmin = companyService.getAllCompanies(Enums.RolesForACompany.FLIGHT_ADMIN);
-        companiesForTravelAdmin = companyService.getAllCompanies(Enums.RolesForACompany.TRAVEL_ADMIN);
+            companiesForFlightAdmin = companyService.getAllCompanies(Enums.RolesForACompany.FLIGHT_ADMIN);
+            companiesForTravelAdmin = companyService.getAllCompanies(Enums.RolesForACompany.TRAVEL_ADMIN);
         flightPeriod = new FlightPeriod();
     }
 

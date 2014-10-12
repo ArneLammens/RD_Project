@@ -13,18 +13,54 @@
     <ui:define name="divTop">
         <ui:include src='template/top.xhtml'/>
     </ui:define>
-    <div class="container-fluid">
         <ui:define name="divMain">
             <h:form>
-
-            <p:dataTable scrollable="true" id="flights"  editable="true" editMode="cell"  value="#{reportController.bookings}" var="book">
-
-                <p:column headerText="Flightnumber">
+            <p:dataTable scrollable="true" id="flights"  value="#{reportController.bookings}" var="book">
+                <p:column headerText="#{lbl['trips.departureDate']}">
+                    <h:outputText value="#{book.trip.startDate}" />
+                </p:column>
+                <p:column headerText="#{lbl['trips.returnDate']}">
+                    <h:outputText value="#{book.trip.endDate}" />
+                </p:column>
+                <p:column headerText="#{lbl['trips.name']}">
+                    <h:outputText value="#{book.trip.name}" />
+                </p:column>
+                <p:column headerText="#{lbl['trips.departureCountry']}">
+                    <h:outputText value="#{book.trip.departureFlight.departure.name}" />
+                </p:column>
+                <p:column headerText="#{lbl['trips.destinationCountry']}">
+                    <h:outputText value="#{book.trip.departureFlight.destination.name}" />
+                </p:column>
+                <p:column headerText="#{lbl['trips.price']}">
                     <h:outputText value="#{book.totalPrice}" />
                 </p:column>
 
             </p:dataTable>
+                <p:dataTable>
+                    <p:column headerText="#{lbl['report.AveragePrice']}">
+                        <h:outputText value="#{reportController.averagePrice}" />
+                    </p:column>
+                    <p:column headerText="#{lbl['report.MaxPrice']}">
+                        <h:outputText value="#{reportController.maxPrice}" />
+                    </p:column>
+                    <p:column headerText="#{lbl['report.MinPrice']}">
+                        <h:outputText value="#{reportController.minPrice}" />
+                    </p:column>
+                    <p:column headerText="#{lbl['report.AverageMargin']}">
+                        <h:outputText value="#{reportController.marginAverage}" />
+                    </p:column>
+                </p:dataTable>
             </h:form>
+
+            <div class="panel col-md-9  panel-primary removePadding">
+                <div class="panel-heading  " >
+                    <h3 class="panel-title " >#{lbl['report.GeneralData']}</h3>
+                </div>
+                <div class=" panel-body" id='divMain'>
+
+                </div>
+            </div>
         </ui:define>
-    </div>
+
+
 </ui:composition>
