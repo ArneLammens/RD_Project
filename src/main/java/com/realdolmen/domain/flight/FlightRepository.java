@@ -39,7 +39,7 @@ public class FlightRepository extends AbstractRepositoy<Flight> {
         FacesContext context = FacesContext.getCurrentInstance();
         context.getExternalContext().getFlash().setKeepMessages(true);
         context.addMessage(null, new Message().warning("resourceBundle/ValidationMessages", "countryManagement.FlightsHaveBeenRemoved"));
-   
+
     }
 
 

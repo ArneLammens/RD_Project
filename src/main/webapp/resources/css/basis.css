@@ -46,3 +46,13 @@
     color: #ffffff;
 
 }
+ .panelStyle{
+     background-color:#5c9ccc!important; ;
+     background: #5c9ccc  url("/RedoAir//javax.faces.resource/images/ui-bg_gloss-wave_55_5c9ccc_500x100.png.xhtml?ln=primefaces-redmond") 50% 50% repeat-x !important;
+     color: #31708f;
+     border-color: #5c9ccc!important;
+ }
+
+ .setBold{
+     font: bold;
+ }
