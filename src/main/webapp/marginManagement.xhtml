@@ -25,7 +25,9 @@
                                itemLabel="#{company.name}"/>
             </p:selectOneMenu>
 
-            <p:dataTable scrollable="true" id="flights"  editable="true" editMode="cell"  value="#{adminFlightController.flights}" var="flight">
+            <p:dataTable id="flights"  editable="true" editMode="cell"  value="#{adminFlightController.flights}" var="flight"
+                         paginator="true" rows="10" lazy="true"
+                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
                 <p:ajax event="cellEdit"  listener="#{adminFlightController.onCellEdit(flight)}" />
                 <p:column headerText="#{lbl['marginManagement.flightNumber']}">
                     <h:outputText value="#{flight.flightNumber}" />

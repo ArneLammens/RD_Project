@@ -1,5 +1,6 @@
 package com.realdolmen.controller;
 
+import com.realdolmen.controller.datamodel.LazyFlightModel;
 import com.realdolmen.domain.Enums;
 import com.realdolmen.domain.company.Company;
 import com.realdolmen.domain.company.CompanyService;
@@ -11,6 +12,7 @@ import com.realdolmen.session.LoginSession;
 import com.realdolmen.util.Message;
 import com.realdolmen.util.RedirectEnum;
 import org.primefaces.event.CellEditEvent;
+import org.primefaces.model.LazyDataModel;
 
 import javax.enterprise.event.Event;
 import javax.faces.application.FacesMessage;
@@ -32,7 +34,6 @@ import java.util.List;
 @ViewScoped
 public class AdminFlightController implements Serializable{
 
-
     @Inject
     private CompanyService companyService;
 
@@ -50,7 +51,7 @@ public class AdminFlightController implements Serializable{
     private Flight flight;
 
     List<Company> companies = new ArrayList<>();
-    List<Flight> flights = new ArrayList<>();
+    private LazyDataModel<Flight> flights;
 
     public String init() {
         if(loginSession.getLogin()==null||loginSession.getLogin().getRole()!= Enums.Roles.ADMIN)
@@ -66,7 +67,7 @@ public class AdminFlightController implements Serializable{
     }
 
     public void getFlightsForGivenCompanyName(AjaxBehaviorEvent event){
-       flights = flightService.getAllFlightsForGivenCompanyName(company);
+        flights = new LazyFlightModel(flightService.getAllFlightsForGivenCompanyName(company));
     }
 
     public void onCellEdit(Flight flight) {
@@ -94,14 +95,6 @@ public class AdminFlightController implements Serializable{
         this.companies = companies;
     }
 
-    public List<Flight> getFlights() {
-        return flights;
-    }
-
-    public void setFlights(List<Flight> flights) {
-        this.flights = flights;
-    }
-
     public Flight getFlight() {
         return flight;
     }
@@ -110,4 +103,11 @@ public class AdminFlightController implements Serializable{
         this.flight = flight;
     }
 
+    public LazyDataModel<Flight> getFlights() {
+        return flights;
+    }
+
+    public void setFlights(LazyDataModel<Flight> flights) {
+        this.flights = flights;
+    }
 }
