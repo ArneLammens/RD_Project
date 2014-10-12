@@ -12,12 +12,15 @@ import java.math.BigDecimal;
  * Created by BPTAT47 on 1/10/2014.
  */
 @Entity
-@NamedQuery(name = "Booking.getAllBookings",query = "SELECT b FROM Booking b where  " +
-        " b.trip.departureFlight.departure.country.region =:departureRegion and b.trip.departureFlight.destination.country.region =:destinationRegion " +
-        " and b.trip.startDate =:startDate and b.trip.endDate =:endDate" +
-        " and b.trip.travelAgent.company =:travelAdmin and " +
-        "b.trip.departureFlight.flightAdmin.company =:flightAdmin or b.trip.returnFlight.flightAdmin.company =:flightAdmin"
+@NamedQueries({
+        @NamedQuery(name = "Booking.getAllBookings",query = "SELECT b FROM Booking b where  " +
+                " b.trip.departureFlight.departure.country.region =:departureRegion and b.trip.departureFlight.destination.country.region =:destinationRegion " +
+                " and b.trip.startDate =:startDate and b.trip.endDate =:endDate" +
+                " and b.trip.travelAgent.company =:travelAdmin and " +
+                "b.trip.departureFlight.flightAdmin.company =:flightAdmin or b.trip.returnFlight.flightAdmin.company =:flightAdmin"
         )
+})
+
 public class Booking {
   @GeneratedValue
   @Id

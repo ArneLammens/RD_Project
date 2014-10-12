@@ -27,6 +27,7 @@
     background-image: none;
 }
 
+
  select{
     color: #000000;
 }
@@ -37,6 +38,11 @@
 .ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield{
     background: #dfeffc;
 }
-.ui-selectonemenu-label .ui-inputfield .ui-corner-all{
-    width:240px!important;
+.ui-selectonemenu-label .ui-inputfield .ui-corner-all {
+    width: 240px !important;
+}
+
+ h3,.h3{
+    color: #ffffff;
+
 }

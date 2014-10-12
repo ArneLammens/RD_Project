@@ -36,7 +36,7 @@
 //@Startup
 //@Singleton
 //public class TestData {
-//
+
 //    @PersistenceContext(unitName = "users")
 //    private EntityManager entityManager;
 //    @Inject

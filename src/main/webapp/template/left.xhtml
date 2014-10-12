@@ -7,10 +7,13 @@
     <h:form rendered="#{loginSession.login.role.label == 'Admin'}">
         <h:panelGrid columns="6" >
         <p:menu >
-            <p:submenu  label="Actions">
-                <p:menuitem value="Manage countries" outcome="#{commonController.redirectToAdminPage()}" />
-                <p:menuitem value="Manage margins" outcome="#{commonController.redirectToAdminPageForMargins()}" />
-                <p:menuitem value="Manage airlines" outcome="#{commonController.redirectToAdminPageForAirlines()}" />
+            <p:submenu  label="#{lbl['menu.Search']}">
+                <p:menuitem value="#{lbl['menu.SearchBookings']}" outcome="#{commonController.redirectToAdminSearch()}" />
+            </p:submenu>
+            <p:submenu label="#{lbl['menu.Action']}">
+                <p:menuitem value="#{lbl['menu.ManageCountries']}" outcome="#{commonController.redirectToAdminPage()}" />
+                <p:menuitem value="#{lbl['menu.ManageFlightMargins']}" outcome="#{commonController.redirectToAdminPageForMargins()}" />
+                <p:menuitem value="#{lbl['menu.ManageAirlines']}" outcome="#{commonController.redirectToAdminPageForAirlines()}" />
             </p:submenu>
         </p:menu>
         </h:panelGrid>
@@ -19,13 +22,15 @@
     <h:form rendered="#{loginSession.login.role.label == 'Flight Admin'}">
         <h:panelGrid columns="6" >
             <p:menu >
-                <p:submenu label="Create">
-                    <p:menuitem value="Create flights" outcome="#{commonController.redirectToFLightAdminCreateFlight()}" />
+                <p:submenu  label="#{lbl['menu.Search']}">
+                    <p:menuitem value="#{lbl['menu.SearchBookings']}" outcome="#{commonController.redirectToAdminSearch()}" />
                 </p:submenu>
-                <p:submenu label="Actions">
-                    <p:menuitem value="Remove flight" outcome="#{commonController.redirectToFlightAdminRemoveFlight()}" />
+                <p:submenu label="#{lbl['menu.Create']}">
+                    <p:menuitem value="#{lbl['menu.CreateFlights']}" outcome="#{commonController.redirectToFLightAdminCreateFlight()}" />
                 </p:submenu>
-
+                <p:submenu label="#{lbl['menu.Action']}">
+                    <p:menuitem value="#{lbl['menu.RemoveFlights']}" outcome="#{commonController.redirectToFlightAdminRemoveFlight()}" />
+                </p:submenu>
             </p:menu>
         </h:panelGrid>
     </h:form>

@@ -75,9 +75,18 @@ public class Enums {
 
     }
     public enum RolesForACompany{
-        FLIGHT_ADMIN,
-        TRAVEL_ADMIN;
+        FLIGHT_ADMIN("Flight Admin"),
+        TRAVEL_ADMIN("Travel Admin");
 
+        private final String label;
+
+        RolesForACompany(String label) {
+            this.label = label;
+        }
+
+        public String getLabel() {
+            return label;
+        }
     }
 
 

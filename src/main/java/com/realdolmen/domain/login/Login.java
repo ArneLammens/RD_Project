@@ -1,6 +1,7 @@
 package com.realdolmen.domain.login;
 
 import com.realdolmen.domain.Enums;
+import com.realdolmen.domain.company.Company;
 import com.realdolmen.domain.country.Country;
 
 import java.io.Serializable;
@@ -15,16 +16,29 @@ public class Login implements Serializable {
     private Enums.Roles role;
     private Country country;
     private Enums.Region region;
+    private Company company;
 
     public Login() {
     }
 
-    public Login(Integer id, String name, String email, String password, Enums.Roles role) {
+    public Login(Integer id, String name, String email, String password, Enums.Roles role, Company company) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.role = role;
+        this.company = company;
+    }
+
+    public Login(Integer id, String name, String email, String password, Enums.Roles role, Country country, Enums.Region region, Company company) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.country = country;
+        this.region = region;
+        this.company = company;
     }
 
     public Login(Integer id, String name, String email, String password, Enums.Roles role, Country country, Enums.Region region) {
@@ -92,5 +106,13 @@ public class Login implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 }
