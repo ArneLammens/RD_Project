@@ -90,9 +90,9 @@ public class BookingController implements Serializable {
 
     public String redirectToThankYouPage()
     {
-        if(paymentMethode.equals(""))
+        if(paymentMethode.trim().equals(""))
         {
-            event.fire(new Message().error("You must choose a payment methode"));
+            event.fire(new Message().warning("resourceBundle/ValidationMessages","booking.mostSelectPaymentMethode"));
             return null;
         }
         else
