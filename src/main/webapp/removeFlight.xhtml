@@ -19,31 +19,31 @@
             <p:selectOneMenu  id="regions" required="true" value="#{flightAdminController.region}" >
                 <f:ajax event="change" execute="regions" listener="#{flightAdminController.getFlightForRegionAndCompany}"
                         render="flights"/>
-                <f:selectItem itemLabel="Select a region" itemValue=""
+                <f:selectItem itemLabel="#{lbl['removeFlight.selectRegion']}" itemValue=""
                               noSelectionOption="true" />
                 <f:selectItems  value="#{flightAdminController.regions()}" var="region"
                                 itemValue="#{region}" itemLabel="#{enm[region.label]}"/>
             </p:selectOneMenu>
             <p:dataTable scrollable="true" id="flights"  value="#{flightAdminController.flights}" var="flight">
-                <p:column headerText="Flightnumber">
+                <p:column headerText="#{lbl['removeFlight.flightNumber']}">
                     <h:outputText value="#{flight.flightNumber}" />
                 </p:column>
-                <p:column headerText="departureTIme">
+                <p:column headerText="#{lbl['removeFlight.departureTime']}">
                     <h:outputText value="#{flight.departureTime}" />
                 </p:column>
-                <p:column headerText="country">
+                <p:column headerText="#{lbl['removeFlight.departureCountry']}">
                     <h:outputText value="#{flight.departure.country.name}" />
                 </p:column>
-                <p:column headerText="destination">
+                <p:column headerText="#{lbl['removeFlight.destinationCountry']}">
                     <h:outputText value="#{flight.destination.country.name}" />
                 </p:column>
-                 <p:column headerText="price">
+                 <p:column headerText="#{lbl['removeFlight.price']}">
                     <h:outputText value="#{flight.price}" />
                 </p:column>
-                <p:column headerText="seats">
+                <p:column headerText="#{lbl['removeFlight.seats']}">
                     <h:outputText value="#{flight.seats}" />
                 </p:column>
-                <p:column headerText="period start">
+                <p:column headerText="#{lbl['removeFlight.startDate']}">
                     <h:outputText value="#{flight.period.startDate}" />
                 </p:column>
                 <p:column headerText="period end">
