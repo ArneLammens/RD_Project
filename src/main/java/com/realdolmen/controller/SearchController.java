@@ -51,7 +51,6 @@ public class SearchController  implements Serializable{
     private Company companyForFlightAdmin;
     private Company companyForTravelAdmin;
     private List<Booking> bookings;
-    private Date minDate =new Date();
 
     public String init()
     {
@@ -173,14 +172,6 @@ public class SearchController  implements Serializable{
 
     public void setBookings(List<Booking> bookings) {
         this.bookings = bookings;
-    }
-
-    public Date getMinDate() {
-        return minDate;
-    }
-
-    public void setMinDate(Date minDate) {
-        this.minDate = minDate;
     }
 
     public List<Country> getDepartureCountryList() {

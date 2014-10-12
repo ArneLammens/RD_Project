@@ -50,7 +50,7 @@ public class FlightAdminController implements Serializable
     @Inject
     Event<FacesMessage> event;
 
-
+    private List<Flight> filteredFlights;
     private Location departureLocation;
     private Location destinationLocation;
     private Person person;
@@ -207,6 +207,13 @@ public class FlightAdminController implements Serializable
 
     }
 
+    public List<Flight> getFilteredFlights() {
+        return filteredFlights;
+    }
+
+    public void setFilteredFlights(List<Flight> filteredFlights) {
+        this.filteredFlights = filteredFlights;
+    }
 
     public Enums.DayOfTheWeek[] getweekDays() {
         return Enums.DayOfTheWeek.values();

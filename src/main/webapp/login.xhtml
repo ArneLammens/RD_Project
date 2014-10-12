@@ -11,6 +11,7 @@
         <ui:include src='template/top.xhtml'/>
     </ui:define>
     <ui:define name="divMain">
+        <p:panel header="#{lbl['login.loginButton']}" styleClass="col-md-9">
         <div class="panelGridCenter">
         <h:form>
             <p:panelGrid columns="2" cellpadding="6" styleClass="panelGridCenter">
@@ -20,16 +21,12 @@
                 <p:password id="password" value="#{loginController.login.password}"/>
             </p:panelGrid>
             <h:panelGrid columns="2" styleClass="panelGridCenter">
-                <p:commandButton action="#{loginController.loginTo()}" value="#{lbl['login.loginButton']}"/>
+                <p:commandButton style="margin: 50px;" action="#{loginController.loginTo()}" value="#{lbl['login.loginButton']}"/>
                 <p:commandButton action="#{loginController.redirectToCreateAccount()}" value="#{lbl['login.createAccount']}"/>
             </h:panelGrid>
-
-
-
-
-
         </h:form>
         </div>
+        </p:panel>
     </ui:define>
 
 </ui:composition>

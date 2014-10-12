@@ -14,8 +14,11 @@
         <ui:include src='template/top.xhtml'/>
     </ui:define>
     <ui:define name="divMain">
+        <p:panel header="#{lbl['menu.ManageFlightMargins']}" styleClass="col-md-9">
         <h:form>
+
             <p:panelGrid columns="2">
+
                 <p:outputLabel for="email" value="#{lbl['person.email']}"/>
                 <p:inputText  id="email" value="#{personController.person.email}"/>
                 <p:outputLabel for="password" value="#{lbl['person.password']}"/>
@@ -57,7 +60,7 @@
                                  style="margin-right: 15px" value="#{lbl['person.createAccount']}"/>
             </p:panelGrid>
         </h:form>
-
+        </p:panel>
     </ui:define>
 
 

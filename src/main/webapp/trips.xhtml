@@ -13,6 +13,7 @@
     </ui:define>
 
     <ui:define name="divMain">
+        <p:panel header="#{lbl['trips.foundTrips']}" styleClass="col-md-9">
         <h:form>
         <p:dataTable id="mydata"  value="#{tripController.tripsWithPrice}" var="trip">
             <p:column headerText="#{lbl['trips.name']}">
@@ -47,5 +48,6 @@
             </p:column>
         </p:dataTable>
         </h:form>
+        </p:panel>
     </ui:define>
 </ui:composition>

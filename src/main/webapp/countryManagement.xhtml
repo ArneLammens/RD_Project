@@ -15,6 +15,7 @@
     </ui:define>
     <div class="container-fluid">
     <ui:define name="divMain">
+        <p:panel header="#{lbl['menu.ManageCountries']}" styleClass="col-md-9">
         <h:form>
             <p:selectOneMenu id="PersonRegion" value="#{adminController.region}">
                 <f:ajax event="change" execute="PersonRegion" listener="#{adminController.getCountryOfDepartureRegion}"
@@ -39,6 +40,7 @@
                              action="#{adminController.saveCountryList}" />
             <p:commandButton value="#{lbl['countryManagement.cancel']}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
         </p:confirmDialog>
+        </p:panel>
     </ui:define>
     </div>
 </ui:composition>

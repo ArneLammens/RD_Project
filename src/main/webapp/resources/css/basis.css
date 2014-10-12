@@ -37,6 +37,7 @@
 }
 .ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield{
     background: #dfeffc;
+    width: 230px;
 }
 .ui-selectonemenu-label .ui-inputfield .ui-corner-all {
     width: 240px !important;
@@ -54,13 +55,14 @@
  }
 
  .setBold{
-     font: bold;
+     font-weight: bold;
  }
 @media print {
     @page {
         size: landscape;
     }
 }
+
 .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight{
     border: 1px solid #2d7acc;
     background: #5c9ccc -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,0.25)), to(rgba(0,0,0,0)));
@@ -73,3 +75,16 @@
     color: #31708f;
     border-color: #5c9ccc!important;
 }
+
+
+.fullBackground {
+    background: no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.ui-selectonemenu .ui-selectonemenu-trigger{
+    width: 26px!important;
+}
+

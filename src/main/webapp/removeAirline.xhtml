@@ -16,6 +16,7 @@
         <ui:include src='template/left.xhtml'/>
     </ui:define>
     <ui:define name="divMain">
+        <p:panel header="#{lbl['menu.ManageAirlines']}" styleClass="col-md-9">
         <h:form>
             <p:panelGrid columns="2">
                 <p:dataTable scrollable="true" id="airlines"  value="#{adminAirlineController.companies}" var="company">
@@ -28,6 +29,7 @@
                 </p:dataTable>
             </p:panelGrid>
         </h:form>
+        </p:panel>
     </ui:define>
 
 </ui:composition>

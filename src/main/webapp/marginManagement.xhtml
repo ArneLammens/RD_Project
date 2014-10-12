@@ -14,8 +14,9 @@
         <ui:include src='template/top.xhtml'/>
     </ui:define>
     <ui:define name="divMain">
+        <p:panel header="#{lbl['menu.ManageFlightMargins']}" styleClass="col-md-9">
         <h:form>
-            <p:selectOneMenu  id="CompanySelection" converter="#{companyConverter}" required="true" value="#{adminFlightController.company}" >
+            <p:selectOneMenu  style="width:230px!important; margin-bottom: 20px;"  id="CompanySelection" converter="#{companyConverter}" required="true" value="#{adminFlightController.company}" >
                 <f:ajax event="change" execute="CompanySelection" listener="#{adminFlightController.getFlightsForGivenCompanyName}"
                         render="flights"/>
                 <f:selectItem itemLabel="#{lbl['marginManagement.selectRegion']}" itemValue=""
@@ -25,20 +26,16 @@
                                itemLabel="#{company.name}"/>
             </p:selectOneMenu>
 
-            <p:dataTable  id="flights"  editable="true" editMode="cell" widgetVar="flightTable" value="#{adminFlightController.flights}" var="flight"
-                         paginator="true" rows="10" lazy="true"  filteredValue="#{adminFlightController.filteredFlights}"
-                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}">
+
+            <p:dataTable id="flights" rowsPerPageTemplate="5,10,15"  editable="true" editMode="cell" widgetVar="flightTable" value="#{adminFlightController.flights}" var="flight"
+                         paginator="true" rows="10" lazy="true"
+                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"  >
+
                 <p:ajax event="cellEdit"  listener="#{adminFlightController.onCellEdit(flight)}" />
-                <f:facet name="header">
-                    <p:outputPanel>
-                        <h:outputText value="Search all fields:" />
-                        <p:inputText id="globalFilter" onkeyup="PF('flightTable').filter()" style="width:150px" placeholder="Enter keyword"/>
-                    </p:outputPanel>
-                </f:facet>
-                <p:column headerText="#{lbl['marginManagement.flightNumber']}"  sortBy="#{flight.flightNumber}" filterBy="#{flight.flightNumber}">
+                <p:column headerText="#{lbl['marginManagement.flightNumber']}">
                     <h:outputText value="#{flight.flightNumber}" />
                 </p:column>
-                <p:column headerText="#{lbl['marginManagement.departureTime']}"  >
+                <p:column headerText="#{lbl['marginManagement.departureTime']}" >
                     <h:outputText value="#{flight.departureTime}" />
                 </p:column>
                 <p:column headerText="#{lbl['marginManagement.departureCountry']}">
@@ -65,6 +62,7 @@
                 </p:column>
             </p:dataTable>
          </h:form>
+        </p:panel>
     </ui:define>
 
 </ui:composition>
