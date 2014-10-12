@@ -39,10 +39,15 @@ public class SearchService {
     public BigDecimal getMinPriceFromBookings(FlightPeriod flightPeriod,Enums.Region departureRegion,Enums.Region destinationRegion,Company companyForFlightAdmin,Company companyForTravelAdmin ){
         return bookingRepository.getMinPriceFromBookings(flightPeriod, departureRegion, destinationRegion, companyForFlightAdmin, companyForTravelAdmin);
     }
+
     public BigDecimal getAverageMarginFromBookings(FlightPeriod flightPeriod,Enums.Region departureRegion,Enums.Region destinationRegion,Company companyForFlightAdmin,Company companyForTravelAdmin ){
         BigDecimal averageMarginFromBookingsForDepartureFlight =  bookingRepository.getAverageMarginFromBookingsForDepartureFlight(flightPeriod, departureRegion, destinationRegion, companyForFlightAdmin, companyForTravelAdmin);
         BigDecimal averageMarginFromBookingsForReturnFlight   = bookingRepository.getAverageMarginFromBookingsForReturnFlight(flightPeriod, departureRegion, destinationRegion, companyForFlightAdmin, companyForTravelAdmin);
         return  averageMarginFromBookingsForDepartureFlight.add(averageMarginFromBookingsForReturnFlight).divide(new BigDecimal(2)) ;
+    }
+
+    public BigDecimal getAverageDiscountFromBookings(FlightPeriod flightPeriod,Enums.Region departureRegion,Enums.Region destinationRegion,Company companyForFlightAdmin,Company companyForTravelAdmin ){
+          return bookingRepository.getAverageDiscountFromBookings(flightPeriod, departureRegion, destinationRegion, companyForFlightAdmin, companyForTravelAdmin);
     }
 
 }

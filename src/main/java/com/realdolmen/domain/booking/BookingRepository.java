@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.awt.print.Book;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -96,6 +97,20 @@ public class BookingRepository extends AbstractRepositoy<Booking> {
                 .setParameter("destinationRegion", destinationRegion)
                 .getSingleResult());
 
+    }
+
+    public BigDecimal getAverageDiscountFromBookings(FlightPeriod flightPeriod, Enums.Region departureRegion, Enums.Region destinationRegion, Company companyForFlightAdmin, Company companyForTravelAdmin) {
+
+        Object [] results = (Object []) entityManager.createQuery("SELECT AVG(b.trip.departureFlight.discountPercentage),AVG (b.trip.returnFlight.discountPercentage)FROM Booking b  " + GET_ALL_BOOKINGS)
+                .setParameter("startDate", flightPeriod.getStartDate())
+                .setParameter("endDate", flightPeriod.getEndDate())
+                .setParameter("flightAdmin", companyForFlightAdmin)
+                .setParameter("travelAdmin", companyForTravelAdmin)
+                .setParameter("departureRegion", departureRegion)
+                .setParameter("destinationRegion", destinationRegion)
+                .getSingleResult();
+
+       return  (new BigDecimal((Double)results[0]).add(new BigDecimal((Double)results[1]))).divide(new BigDecimal(2)).setScale(2,BigDecimal.ROUND_HALF_UP);
     }
 
 }

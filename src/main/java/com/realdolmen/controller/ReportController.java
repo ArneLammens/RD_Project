@@ -37,6 +37,7 @@ public class ReportController implements Serializable {
     private BigDecimal maxPrice;
     private BigDecimal minPrice;
     private BigDecimal marginAverage;
+    private BigDecimal averageDiscount;
 
     public void init(){
         getAllValuesFromFlash();
@@ -62,6 +63,7 @@ public class ReportController implements Serializable {
         maxPrice = searchService.getMaxPriceFromBookings(flightPeriod,departureRegion,destinationRegion,companyForFlightAdmin,companyForTravelAdmin);
         minPrice = searchService.getMinPriceFromBookings(flightPeriod,departureRegion,destinationRegion,companyForFlightAdmin,companyForTravelAdmin);
         marginAverage = searchService.getAverageMarginFromBookings(flightPeriod,departureRegion,destinationRegion,companyForFlightAdmin,companyForTravelAdmin);
+        averageDiscount =  searchService.getAverageDiscountFromBookings(flightPeriod,departureRegion,destinationRegion,companyForFlightAdmin,companyForTravelAdmin);
     }
 
     public void setAllQueriedValuesForFlightAdmin(){
@@ -70,10 +72,13 @@ public class ReportController implements Serializable {
         maxPrice = searchService.getMaxPriceFromBookings(flightPeriod,departureRegion,destinationRegion,getCompanyFromLoginSession(),companyForTravelAdmin);
         minPrice = searchService.getMinPriceFromBookings(flightPeriod,departureRegion,destinationRegion,getCompanyFromLoginSession(),companyForTravelAdmin);
         marginAverage = searchService.getAverageMarginFromBookings(flightPeriod,departureRegion,destinationRegion,getCompanyFromLoginSession(),companyForTravelAdmin);
+        averageDiscount =  searchService.getAverageDiscountFromBookings(flightPeriod,departureRegion,destinationRegion,getCompanyFromLoginSession(),companyForTravelAdmin);
+
     }
 
+
     public Company getCompanyFromLoginSession(){
-       return loginSession.getLogin().getCompany();
+        return loginSession.getLogin().getCompany();
     }
 
     public FlightPeriod getFlightPeriod() {
@@ -156,5 +161,14 @@ public class ReportController implements Serializable {
 
     public void setCompanyForFlightAdmin(Company companyForFlightAdmin) {
         this.companyForFlightAdmin = companyForFlightAdmin;
+    }
+
+
+    public BigDecimal getAverageDiscount() {
+        return averageDiscount;
+    }
+
+    public void setAverageDiscount(BigDecimal averageDiscount) {
+        this.averageDiscount = averageDiscount;
     }
 }
