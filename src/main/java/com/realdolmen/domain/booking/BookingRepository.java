@@ -74,27 +74,27 @@ public class BookingRepository extends AbstractRepositoy<Booking> {
 
     public BigDecimal getAverageMarginFromBookingsForDepartureFlight(FlightPeriod flightPeriod, Enums.Region departureRegion, Enums.Region destinationRegion, Company companyForFlightAdmin, Company companyForTravelAdmin) {
 
-        return  (BigDecimal)  entityManager.createQuery("SELECT MIN (b.totalPrice)FROM Booking b " + GET_ALL_BOOKINGS)
+        return new BigDecimal ((Double)  entityManager.createQuery("SELECT AVG (b.trip.departureFlight.margin)FROM Booking b " + GET_ALL_BOOKINGS)
                 .setParameter("startDate", flightPeriod.getStartDate())
                 .setParameter("endDate", flightPeriod.getEndDate())
                 .setParameter("flightAdmin", companyForFlightAdmin)
                 .setParameter("travelAdmin", companyForTravelAdmin)
                 .setParameter("departureRegion", departureRegion)
                 .setParameter("destinationRegion", destinationRegion)
-                .getSingleResult();
+                .getSingleResult());
 
     }
 
   public BigDecimal getAverageMarginFromBookingsForReturnFlight(FlightPeriod flightPeriod, Enums.Region departureRegion, Enums.Region destinationRegion, Company companyForFlightAdmin, Company companyForTravelAdmin) {
 
-        return (BigDecimal) entityManager.createQuery("SELECT MIN (b.totalPrice)FROM Booking b " + GET_ALL_BOOKINGS)
+        return new BigDecimal((Double) entityManager.createQuery("SELECT AVG (b.trip.returnFlight.margin)FROM Booking b " + GET_ALL_BOOKINGS)
                 .setParameter("startDate", flightPeriod.getStartDate())
                 .setParameter("endDate", flightPeriod.getEndDate())
                 .setParameter("flightAdmin", companyForFlightAdmin)
                 .setParameter("travelAdmin", companyForTravelAdmin)
                 .setParameter("departureRegion", departureRegion)
                 .setParameter("destinationRegion", destinationRegion)
-                .getSingleResult();
+                .getSingleResult());
 
     }
 
