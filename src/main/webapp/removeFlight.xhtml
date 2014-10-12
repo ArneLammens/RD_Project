@@ -24,7 +24,10 @@
                 <f:selectItems  value="#{flightAdminController.regions()}" var="region"
                                 itemValue="#{region}" itemLabel="#{enm[region.label]}"/>
             </p:selectOneMenu>
-            <p:dataTable scrollable="true" id="flights"  value="#{flightAdminController.flights}" var="flight">
+
+             <p:dataTable id="flights" rowsPerPageTemplate="5,10,15"  editable="true" editMode="cell" widgetVar="flightTable" value="#{flightAdminController.flights}" var="flight"
+                          paginator="true" rows="10" lazy="true"
+                          paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"  >
                 <p:column headerText="#{lbl['removeFlight.flightNumber']}">
                     <h:outputText value="#{flight.flightNumber}" />
                 </p:column>
