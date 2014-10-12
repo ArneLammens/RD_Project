@@ -36,7 +36,7 @@
                 </p:column>
 
             </p:dataTable>
-                <p:dataTable>
+                <p:dataTable value="#{reportController.bookings}" var="book">
                     <p:column headerText="#{lbl['report.AveragePrice']}">
                         <h:outputText value="#{reportController.averagePrice}" />
                     </p:column>

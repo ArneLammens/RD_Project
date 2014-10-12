@@ -99,7 +99,7 @@ public class AdminController implements Serializable {
             List<Flight> flights = flightService.getFlightsForGivenCountry(country);
             if ((approvedCountries.contains(country))) {
                 if (tripService.checkTripsExistForGivenCountry(country)) {
-                    eventMessage.fire(new Message().warning("There are already trips for " + country.getName()));
+                    eventMessage.fire(new Message().warning("resourceBundle/ValidationMessages", "countryManagement.tripForCountry",country.getName()));
                     rollbackDualModelList(country);
                 } else if (flights.size() > 0) {
                     transferFromApprovedToDisapprovedFlights(country);
@@ -122,7 +122,7 @@ public class AdminController implements Serializable {
         approvedCountries.remove(country);
         country.setApproved(false);
         disapprovedCountries.add(country);
-        eventMessage.fire(new Message().info("It is disallowed for " + country.getName()+ " to create flights and book trips"));
+        eventMessage.fire(new Message().info("resourceBundle/ValidationMessages", "countryManagement.disallowedMessage",country.getName()));
     }
 
     public void transferFromApprovedToDisapprovedFlights(Country country){
@@ -131,13 +131,13 @@ public class AdminController implements Serializable {
         approvedCountries.remove(country);
         country.setApproved(false);
         disapprovedCountries.add(country);
-        eventMessage.fire(new Message().info("It is disallowed for " + country.getName()+ " to create flights and book trips"));
+        eventMessage.fire(new Message().info("resourceBundle/ValidationMessages", "countryManagement.disallowedMessage",country.getName()));
     }
     public void transferFromDisapprovedToApproved(Country country){
         disapprovedCountries.remove(country);
         country.setApproved(true);
         approvedCountries.add(country);
-        eventMessage.fire(new Message().info("It is allowed for " + country.getName()+ " to create flights and book trips"));
+        eventMessage.fire(new Message().info("resourceBundle/ValidationMessages", "countryManagement.allowedMessage",country.getName()));
     }
     public String saveCountryList() {
         if(countriesToBeRemoved.size() > 0){

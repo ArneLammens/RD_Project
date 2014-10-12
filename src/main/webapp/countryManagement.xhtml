@@ -19,25 +19,25 @@
             <p:selectOneMenu id="PersonRegion" value="#{adminController.region}">
                 <f:ajax event="change" execute="PersonRegion" listener="#{adminController.getCountryOfDepartureRegion}"
                         render="pickList"/>
-                <f:selectItem itemLabel="#{lbl['index.selectDepartureRegion']}" itemValue=""
+                <f:selectItem itemLabel="#{lbl['countryManagement.selectRegion']}" itemValue=""
                               noSelectionOption="true"/>
                 <f:selectItems value="#{adminController.regions}" var="region" itemValue="#{region}"
                                itemLabel="#{enm[region.label]}"/>
             </p:selectOneMenu>
            <p:pickList converter="#{countryConverter}"  id="pickList" value="#{adminController.dualListModel}"  var="country" itemLabel="#{country.name}" itemValue="#{country}" >
-               <f:facet name="sourceCaption">Allowed</f:facet>
-               <f:facet name="targetCaption">Disallowed</f:facet>
+               <f:facet name="sourceCaption">#{lbl['countryManagement.allowed']}</f:facet>
+               <f:facet name="targetCaption">#{lbl['countryManagement.disallowed']}</f:facet>
                <p:ajax event="transfer" update="pickList"   listener="#{adminController.onTransfer}" />
            </p:pickList>
 
-            <p:commandButton  value="Save changes">
-                <p:confirm  message="Countries you dissalow that have flights will be removed"/>
+            <p:commandButton  value="#{lbl['countryManagement.saveChanges']}">
+                <p:confirm  message="#{lbl['countryManagement.confirmationMessage']}"/>
             </p:commandButton>
            </h:form>
         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" widgetVar="confirmation">
-            <p:commandButton value="OK"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+            <p:commandButton value="#{lbl['countryManagement.ok']}"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
                              action="#{adminController.saveCountryList}" />
-            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+            <p:commandButton value="#{lbl['countryManagement.cancel']}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
         </p:confirmDialog>
     </ui:define>
     </div>

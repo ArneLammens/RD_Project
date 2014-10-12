@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
@@ -35,8 +36,12 @@ public class FlightRepository extends AbstractRepositoy<Flight> {
                   .setParameter("id",country.getId()).executeUpdate();
 
         }
-        event.fire(new Message().info("Flights have been removed"));
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getExternalContext().getFlash().setKeepMessages(true);
+        context.addMessage(null, new Message().warning("resourceBundle/ValidationMessages", "countryManagement.FlightsHaveBeenRemoved"));
+   
     }
+
 
     public List<Flight> getAllFlightsForGivenCompanyName(Company company) {
       return   entityManager.createNamedQuery("Flight.getAllFlightsForGivenCompanyName",Flight.class)

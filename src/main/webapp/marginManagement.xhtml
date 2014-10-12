@@ -18,7 +18,7 @@
             <p:selectOneMenu  id="CompanySelection" converter="#{companyConverter}" required="true" value="#{adminFlightController.company}" >
                 <f:ajax event="change" execute="CompanySelection" listener="#{adminFlightController.getFlightsForGivenCompanyName}"
                         render="flights"/>
-                <f:selectItem itemLabel="Select a company" itemValue=""
+                <f:selectItem itemLabel="#{lbl['marginManagement.selectRegion']}" itemValue=""
                               noSelectionOption="true" />
                 <f:selectItems  value="#{adminFlightController.companies}" var="company"
                                itemValue="#{adminFlightController.company.id}"
@@ -27,32 +27,29 @@
 
             <p:dataTable scrollable="true" id="flights"  editable="true" editMode="cell"  value="#{adminFlightController.flights}" var="flight">
                 <p:ajax event="cellEdit"  listener="#{adminFlightController.onCellEdit(flight)}" />
-                <p:column headerText="Flightnumber">
+                <p:column headerText="#{lbl['marginManagement.flightNumber']}">
                     <h:outputText value="#{flight.flightNumber}" />
                 </p:column>
-                <p:column headerText="Flightnumber">
+                <p:column headerText="#{lbl['marginManagement.departureTime']}">
                     <h:outputText value="#{flight.departureTime}" />
                 </p:column>
-                <p:column headerText="Flightnumber">
+                <p:column headerText="#{lbl['marginManagement.departureCountry']}">
                     <h:outputText value="#{flight.departure.country.name}" />
                 </p:column>
 
-                <p:column headerText="Flightnumber">
+                <p:column headerText="#{lbl['marginManagement.price']}">
                     <h:outputText value="#{flight.price}" />
                 </p:column>
-                <p:column headerText="Flightnumber">
+                <p:column headerText="#{lbl['marginManagement.seats']}">
                     <h:outputText value="#{flight.seats}" />
                 </p:column>
-                <p:column headerText="Flightnumber">
+                <p:column headerText="#{lbl['marginManagement.periodStartDate']}">
                     <h:outputText value="#{flight.period.startDate}" />
                 </p:column>
-                <p:column headerText="Flightnumber">
+                <p:column headerText="#{lbl['marginManagement.periodEndDate']}">
                     <h:outputText value="#{flight.period.endDate}" />
                 </p:column>
-                <p:column headerText="Flightnumber">
-                    <h:outputText value="#{flight.period.endDate}" />
-                </p:column>
-                <p:column headerText="Flightnumber">
+                  <p:column headerText="#{lbl['marginManagement.margin']}">
                     <p:cellEditor>
                         <f:facet name="output"><h:outputText value="#{flight.margin}" /></f:facet>
                         <f:facet name="input"><p:inputText id="modelInput" value="#{flight.margin}"  style="width:96%"/></f:facet>
